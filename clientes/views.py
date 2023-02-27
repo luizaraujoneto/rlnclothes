@@ -1,8 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
-
-def clientesView(request):
-    return HttpResponse("Clientes App!")
+class ClientesView(TemplateView):
+    template_name="clientes.html"
