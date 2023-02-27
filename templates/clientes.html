@@ -6,4 +6,10 @@
     Welcome to Clientes Page
 </h1>
 
+<ul>
+    {% for cliente in cliente_list %}
+    <li>{{cliente.codigo}} - {{cliente.nome}}</li>
+    {% endfor %}
+</ul>
+
 {% endblock content %}
