@@ -1,9 +1,26 @@
-<header>
-    <a href="{% url 'home' %}">Início</a>
-    <a href="{% url 'clientes' %}">Clientes</a>
-    <a href="{% url 'about' %}">Sobre</a>
-</header>
+<!--templates/base.html-->
+{% load static %}
+<html>
 
-{% block content %}
+<head>
+    <title>RLNClothes</title>
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+</head>
 
-{% endblock content %}
+<body>
+    <div>
+        <header>
+            <a href="{% url 'home' %}">Início</a>
+            <a href="{% url 'clientes' %}">Clientes</a>
+            <a href="{% url 'about' %}">Sobre</a>
+        </header>
+    </div>
+
+    <div>
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+
+</html>
