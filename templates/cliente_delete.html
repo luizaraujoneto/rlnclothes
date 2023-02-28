@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+    Clientes detail Page
+</h1>
+
+<form action="" method="post"> {% csrf_token %}
+    <p>Confirma a exclusão do Cliente: {{cliente.nome}} </p>
+
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock content %}
