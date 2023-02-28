@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+    Clientes detail Page
+</h1>
+
+<p>
+<h2>{{cliente.codigo}}</h2>
+<h2>{{cliente.nome}}</h2>
+</p>
+<a href="{% url 'clientes' %}">voltar</a>
+
+{% endblock content %}

@@ -8,7 +8,7 @@
 
 <ul>
     {% for cliente in cliente_list %}
-    <li>{{cliente.codigo}} - {{cliente.nome}}</li>
+    <li>{{cliente.codigo}} - {{cliente.nome}}<a href="{% url 'cliente_detail' cliente.pk %}">edit</a></li>
     {% endfor %}
 </ul>
 

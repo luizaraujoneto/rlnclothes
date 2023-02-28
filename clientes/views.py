@@ -9,3 +9,8 @@ from .models import Cliente
 class ClientesListView(ListView):
     model = Cliente
     template_name = "clientes.html"
+
+
+class ClientesDetailView(DetailView):
+    model = Cliente
+    template_name = "cliente_detail.html"
