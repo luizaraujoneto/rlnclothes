@@ -21,14 +21,14 @@ class ClientesDetailView(DetailView):
 class ClientesCreateView(CreateView):
     model = Cliente
     template_name = "cliente_new.html"
-    fields = ["codigo", "nome"]
+    fields = ["codcliente", "cliente", "telefone"]
     success_url = "/clientes/"
 
 
 class ClientesUpdateView(UpdateView):
     model = Cliente
     template_name = "cliente_edit.html"
-    fields = ["nome"]
+    fields = ["cliente", "telefone"]
     success_url = "/clientes/"
 
 

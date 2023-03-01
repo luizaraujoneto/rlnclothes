@@ -3,11 +3,11 @@
 {% block content %}
 
 <h1>
-    Clientes detail Page
+    Apagar Cliente
 </h1>
 
 <form action="" method="post"> {% csrf_token %}
-    <p>Confirma a exclusão do Cliente: {{cliente.nome}} </p>
+    <p>Confirma a exclusão do Cliente: {{cliente.cliente}} </p>
 
     <input type="submit" value="Confirm">
 </form>

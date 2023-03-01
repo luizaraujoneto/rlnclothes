@@ -10,7 +10,7 @@
 
 <ul>
     {% for cliente in cliente_list %}
-    <li>{{cliente.codigo}} - {{cliente.nome}}
+    <li>{{cliente.codcliente}} - {{cliente.cliente}}
         <a href="{% url 'cliente_detail' cliente.pk %}">view</a>|
         <a href="{% url 'cliente_edit' cliente.pk %}">edit</a>|
         <a href="{% url 'cliente_delete' cliente.pk %}">delete</a>
