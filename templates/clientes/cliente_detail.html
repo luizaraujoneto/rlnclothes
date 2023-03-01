@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<main role="main">
+
+    <div class="jumbotron">
+        <h2 class="display-5"> Visualizar Cliente: {{cliente.codcliente}} </h2>
+    </div>
+
+    <div class="container">
+        <div class="columns">
+
+            <p>
+            <h2>Código - {{cliente.codcliente}}</h2>
+            </p>
+            <p>
+            <h2>Nome - {{cliente.cliente}}</h2>
+            </p>
+            <p>
+            <h2>Telefone - {{cliente.telefone}}</h2>
+            </p>
+
+            <p><a class="btn btn-secondary" href="{% url 'clientes' %}" role="button">Voltar</a></p>
+
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
+
+
+{% endblock content %}

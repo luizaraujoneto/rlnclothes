@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<h1>
-    Welcome to Clientes Page
-</h1>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Clientes Page</h1>
+</div>
 
-<a href="{% url 'cliente_new' %}">Novo Cliente</a>
+<p><a class="btn btn-secondary" href="{% url 'cliente_new' %}" role="button">Novo Cliente</a></p>
 
 <ul>
     {% for cliente in cliente_list %}
