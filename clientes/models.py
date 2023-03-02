@@ -12,17 +12,17 @@ from django.db import models
 
 class Cliente(models.Model):
     codcliente = models.IntegerField(
-        db_column="CodCliente", blank=True, null=False, primary_key=True
+        db_column="codcliente", blank=True, null=False, primary_key=True
     )
     cliente = models.CharField(
-        db_column="Cliente", max_length=255, blank=True, null=True
+        db_column="nomecliente", max_length=255, blank=True, null=True
     )
     telefone = models.CharField(
-        db_column="Telefone", max_length=255, blank=True, null=True
+        db_column="telefone", max_length=255, blank=True, null=True
     )
 
     def __str__(self):
         return self.cliente[:50]
 
     class Meta:
-        db_table = "Clientes"
+        db_table = "clientes"
