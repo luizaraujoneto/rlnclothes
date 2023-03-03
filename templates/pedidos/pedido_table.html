@@ -2,14 +2,55 @@
 
 {% load django_tables2 %}
 
+{% load humanize %}
+
 {% block content %}
+<main role="main">
+    <div class="jumbotron">
+        <h1 class="display-4">Pedidos</h1>
+    </div>
 
-<div class="jumbotron">
-    <h1 class="display-4">Pedidos</h1>
-</div>
+    <div class="container">
+        <div class="row">
 
-<p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
+            <p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
 
-{% render_table pedido_list %}
+            <div class="container">
+                <table class="table table-striped orderable">
+                    {% for column in table.columns %}
+                    <th>{{ column.header }}</th>
+                    {% endfor %}
+                    <th>
+                        Acoes
+                    </th>
+                    {% for row in table.page %}
+
+                    <tr>
+
+                        {% for column, cell in row.items %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                        {% endfor %}
+                        <td>
+                            {{ row.record.valorpedido|floatformat:2|intcomma|localize }}
+                        </td>
+                        <td>
+                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn"><i
+                                        class="bi bi-eye-fill"></i> View </a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            {% render_table pedido_list %}
+
+            <hr>
+
+        </div> <!-- /container -->
+    </div>
+</main>
 
 {% endblock content %}

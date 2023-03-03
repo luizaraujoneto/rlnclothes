@@ -1,5 +1,4 @@
 from django.db import models
-
 import django_tables2 as tables
 
 
@@ -17,11 +16,11 @@ class Pedido(models.Model):
     codnotafiscal = models.IntegerField(
         db_column="codnotafiscal", blank=True, null=True
     )  # Field name made lowercase.
-    datapedido = models.DateTimeField(
+    datapedido = models.DateField(
         db_column="datapedido", blank=True, null=True
     )  # Field name made lowercase.
-    valorpedido = models.FloatField(
-        db_column="valorpedido", blank=True, null=True
+    valorpedido = models.DecimalField(
+        db_column="valorpedido", blank=True, null=True, max_digits=15, decimal_places=2
     )  # Field name made lowercase.
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True

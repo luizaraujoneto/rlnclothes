@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls import include
 from django.urls import path
 from .views import (
     PedidosListView,
@@ -14,5 +16,12 @@ urlpatterns = [
     path("edit/<int:pk>/", PedidosUpdateView.as_view(), name="pedido_edit"),
     path("delete/<int:pk>/", PedidosDeleteView.as_view(), name="pedido_delete"),
     path("table/", PedidosTableView.as_view(), name="pedido_table"),
-    path("", PedidosListView.as_view(), name="pedidos"),
+    path("", PedidosTableView.as_view(), name="pedidos"),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ] + urlpatterns

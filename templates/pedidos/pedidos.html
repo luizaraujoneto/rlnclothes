@@ -4,12 +4,15 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1 class="display-4">Pedidos</h1>
-</div>
+<main role="main">
+    <div class="jumbotron">
+        <h1 class="display-4">Pedidos</h1>
+    </div>
+    <div class="container">
+        <div class="row">
 
-<p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
-
+            <p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
+            <!--
 <ul>
     {% for pedido in pedido_list %}
     <li>{{pedido.codpedido}}
@@ -19,11 +22,19 @@
         {{pedido.observacao}}
         <a href="{% url 'pedido_detail' pedido.pk %}">view</a> |
         <a href="{% url 'pedido_edit' pedido.pk %}">edit</a> |
-        <!--<a href="{% url 'pedido_delete' pedido.pk %}">delete</a>-->
+        <!- -<a href="{% url 'pedido_delete' pedido.pk %}">delete</a>- ->
     </li>
     {% endfor %}
 </ul>
+-->
+            {% render_table pedido_list %}
 
-{% render_table pedido_list %}
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
 
 {% endblock content %}

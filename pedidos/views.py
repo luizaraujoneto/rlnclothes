@@ -14,12 +14,6 @@ class PedidosListView(ListView):
     template_name = "pedidos\pedidos.html"
 
 
-class PedidosTableView(tables.SingleTableView):
-    table_class = PedidoTable
-    queryset = Pedido.objects.all()
-    template_name = "pedidos\pedido_table.html"
-
-
 class PedidosDetailView(DetailView):
     model = Pedido
     template_name = "pedidos\pedido_detail.html"
@@ -58,3 +52,22 @@ class PedidosDeleteView(DeleteView):
     model = Pedido
     template_name = "pedidos\pedido_delete.html"
     success_url = reverse_lazy("pedidos")
+
+
+class PedidosTableView(tables.SingleTableView):
+    table_class = PedidoTable
+    queryset = Pedido.objects.all()
+    template_name = "pedidos\pedido_table.html"
+    fields = [
+        "codpedido",
+        "numeropedido",
+        "codfornecedor",
+        "codnotafiscal",
+        "datapedido",
+        "valorpedido",
+        "observacao",
+    ]   
+
+
+
+table = PedidosTableView()
