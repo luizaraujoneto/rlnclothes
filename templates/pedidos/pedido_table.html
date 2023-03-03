@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="display-4">Pedidos</h1>
+</div>
+
+<p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
+
+{% render_table pedido_list %}
+
+{% endblock content %}

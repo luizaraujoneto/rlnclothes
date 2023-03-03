@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "clientes.apps.ClientesConfig",
+    "pedidos.apps.PedidosConfig",
+    "django_tables2",
 ]
 
 MIDDLEWARE = [
