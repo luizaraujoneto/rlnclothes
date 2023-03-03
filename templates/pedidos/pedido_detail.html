@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<main role="main">
+
+    <div class="jumbotron">
+        <h2 class="display-5"> Visualizar Cliente: {{pedido.codpedido}} </h2>
+    </div>
+
+    <div class="container">
+        <div class="columns">
+
+            <p>
+            <h2>Código Pedido - {{pedido.codpedido}}</h2>
+            </p>
+            <p>
+            <h2>Número Pedido - {{pedido.numeropedido}}</h2>
+            </p>
+            <p>
+            <h2>Data - {{pedido.datapedido}}</h2>
+            </p>
+            <p>
+            <h2>Valor - {{pedido.valorpedido}}</h2>
+            </p>
+
+            <p><a class="btn btn-secondary" href="{% url 'pedidos' %}" role="button">Voltar</a></p>
+
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
+
+
+{% endblock content %}
