@@ -13,7 +13,8 @@
     <div class="container">
         <div class="row">
 
-            <p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button">Novo Pedido</a></p>
+            <p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button"><i
+                        class="bi bi-calendar-plus"></i>&nbsp;Novo Pedido</a></p>
 
             <div class="container">
                 <table class="table table-striped orderable">
@@ -33,15 +34,19 @@
                         </td>
                         {% endfor %}
                         <td>
-                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}"
-                                    class="btn btn-sm btn-info"><span class="bi bi-file-earmark-ruled">Detalhes</span>
+                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn btn-info"><i
+                                        class="bi bi-file-earmark-ruled" title="Detalhes"></i>
                                 </a>
                             </p>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
-
+                {% block pagination.allpages %}
+                {% for p in table.paginator.page_range %}
+                <a href="{% querystring table.prefixed_page_field=p %}">{{ p }}</a>
+                {% endfor %}
+                {% endblock pagination.allpages %}
             </div>
 
             <hr>

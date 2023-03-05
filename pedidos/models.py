@@ -6,7 +6,7 @@ from notasfiscais.models import NotasFiscais
 
 
 # Create your models here.
-class Pedido(models.Model):
+class Pedidos(models.Model):
     codpedido = models.AutoField(
         db_column="codpedido", blank=True, null=False, primary_key=True
     )
@@ -51,4 +51,4 @@ class Pedido(models.Model):
 
 class PedidoTable(tables.Table):
     class Meta:
-        model = Pedido
+        model = Pedidos

@@ -22,7 +22,7 @@ urlpatterns = [
     # path("edit/<int:pk>/", PedidosUpdateView.as_view(), name="pedido_edit"),
     path("edit/<int:pk>/", views.pedido_edit, name="pedido_edit"),
     path("delete/<int:pk>/", PedidosDeleteView.as_view(), name="pedido_delete"),
-    path("table/", PedidosTableView.as_view(), name="pedido_table"),
+    path("table/", views.pedido_table, name="pedido_table"),
     path("", PedidosTableView.as_view(), name="pedidos"),
 ]
 

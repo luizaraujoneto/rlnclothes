@@ -11,23 +11,23 @@ from .forms import PedidosForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Pedido, PedidoTable
+from .models import Pedidos, PedidoTable
 
 
 class PedidosListView(ListView):
-    model = Pedido
+    model = Pedidos
     template_name = "pedidos\pedidos.html"
 
 
 class PedidosDeleteView(DeleteView):
-    model = Pedido
+    model = Pedidos
     template_name = "pedidos\pedido_delete.html"
     success_url = reverse_lazy("pedidos")
 
 
 class PedidosTableView(tables.SingleTableView):
     table_class = PedidoTable
-    queryset = Pedido.objects.all()
+    queryset = Pedidos.objects.all()
     template_name = "pedidos\pedido_table.html"
     fields = [
         "codpedido",
@@ -44,8 +44,14 @@ table = PedidosTableView()
 # table.paginate(page=request.GET.get("page", 1), per_page=25)
 
 
+def pedido_table(request):
+    table = PedidoTable(Pedidos.objects.all())
+    table.paginate(page=request.GET.get("page", 1), per_page=25)
+    return render(request, "pedidos\pedido_table.html", {"table": table})
+
+
 def pedido_edit(request, pk):
-    pedido = get_object_or_404(Pedido, codpedido=pk)
+    pedido = get_object_or_404(Pedidos, codpedido=pk)
 
     # If this is a POST request then process the Form data
     if request.method == "POST":
