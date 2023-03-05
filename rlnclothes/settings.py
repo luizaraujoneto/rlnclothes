@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_tables2",
+    # "debug_toolbar",
+    "django.contrib.humanize",
     "clientes.apps.ClientesConfig",
     "pedidos.apps.PedidosConfig",
-    "django_tables2",
-    "debug_toolbar",
-    "django.contrib.humanize",
+    "fornecedores.apps.FornecedoresConfig",
+    "notasfiscais.apps.NotasfiscaisConfig",
 ]
 
 MIDDLEWARE = [
@@ -119,10 +121,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = "pt_br"
+
+LOCALE_NAME = "pt_BR"
 
 TIME_ZONE = "UTC"
 
-USE_I18N = True
+USE_I18N = False
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -141,9 +148,12 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # enable Django debug toolbar
+
+"""
 if DEBUG:
     INTERNAL_IPS = ["127.0.0.1"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
     DEBUG_TOOLBAR_CONFIG = {
         "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     }
+"""

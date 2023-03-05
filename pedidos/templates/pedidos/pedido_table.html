@@ -21,7 +21,7 @@
                     <th>{{ column.header }}</th>
                     {% endfor %}
                     <th>
-                        Acoes
+                        A&ccedil;&otilde;es
                     </th>
                     {% for row in table.page %}
 
@@ -33,19 +33,16 @@
                         </td>
                         {% endfor %}
                         <td>
-                            {{ row.record.valorpedido|floatformat:2|intcomma|localize }}
-                        </td>
-                        <td>
-                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn"><i
-                                        class="bi bi-eye-fill"></i> View </a>
+                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}"
+                                    class="btn btn-sm btn-info"><span class="bi bi-file-earmark-ruled">Detalhes</span>
+                                </a>
                             </p>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
-            </div>
 
-            {% render_table pedido_list %}
+            </div>
 
             <hr>
 
