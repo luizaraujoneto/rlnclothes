@@ -2,36 +2,94 @@
 
 {% block content %}
 
-
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Visualizar Cliente: {{pedido.codpedido}} </h2>
+        <h2 class="display-5"> Detalhes do Pedido {{pedido.numeropedido}} </h2>
     </div>
 
     <div class="container">
-        <div class="columns">
 
-            <p>
-            <h2>Código Pedido - {{pedido.codpedido}}</h2>
-            </p>
-            <p>
-            <h2>Número Pedido - {{pedido.numeropedido}}</h2>
-            </p>
-            <p>
-            <h2>Data - {{pedido.datapedido}}</h2>
-            </p>
-            <p>
-            <h2>Valor - {{pedido.valorpedido}}</h2>
-            </p>
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:60%;">
+                <h5 class="card-title text-bold">Pedido: {{pedido.numeropedido}} </h5>
+                <p class="card-text">
+                <table class="table" style="width:100%">
+                    <tr>
+                        <td>Código</td>
+                        <td>{{pedido.codpedido}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fornecedor</td>
+                        <td>{{pedido.fornecedor}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nota Fiscal</td>
+                        <td>{{pedido.notafiscal}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data </td>
+                        <td>{{pedido.datapedido|date:"d/m/Y"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor</td>
+                        <td>{{pedido.valorpedido|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observação</td>
+                        <td>{{pedido.observacao}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button">
+                                    <i class="bi bi-list-columns-reverse" title="Detalhes"></i>
+                                    Pedidos</a></p>
+                        </td>
+                        <td class="text-right">
+                            <p>
+                                <a class="btn btn-outline-warning my-2 my-sm-0"
+                                    href="{% url 'pedido_edit' pedido.codpedido %}" role="button">
+                                    <i class="bi bi-pencil-square" title="Detalhes"></i>
+                                    Alterar</a>
+                                <a class="btn btn-outline-danger my-2 my-sm-0" href="{% url 'pedidos' %}" role="button">
+                                    <i class="bi bi-trash" title="Detalhes"></i>
+                                    Apagar</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
 
-            <p><a class="btn btn-secondary" href="{% url 'pedidos' %}" role="button">Voltar</a></p>
+        <h5 class="text-left bg-dark text-light">Lista de produtos:</h5>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Cód. Fornecedor</th>
+                    <th>Referência</th>
+                    <th>Descrição</th>
+                    <th>Valor Custo</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        </div>
+                {% for produto in pedido.produtos_set.all %}
+                <tr>
+                    <td>{{produto.codproduto}}</td>
+                    <td>{{produto.codprodutofornecedor}}</td>
+                    <td>{{produto.referencia}}</td>
+                    <td>{{produto.descricao}}</td>
+                    <td class="text-right">{{produto.valorcusto|floatformat:2}}</td>
 
-        <hr>
+                </tr>
 
-    </div> <!-- /container -->
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div> <!-- container -->
 
 </main>
 

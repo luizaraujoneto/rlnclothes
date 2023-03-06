@@ -13,11 +13,11 @@
     <div class="container">
         <div class="row">
 
-            <p><a class="btn btn-primary" href="{% url 'pedido_new' %}" role="button"><i
+            <p><a class="btn btn-primary" href="{% url 'pedido_create' %}" role="button"><i
                         class="bi bi-calendar-plus"></i>&nbsp;Novo Pedido</a></p>
 
             <div class="container">
-                <table class="table table-striped orderable">
+                <table class="table table-striped table-sm orderable">
                     {% for column in table.columns %}
                     <th>{{ column.header }}</th>
                     {% endfor %}
@@ -33,23 +33,27 @@
                             {{ cell }}
                         </td>
                         {% endfor %}
-                        <td>
-                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn btn-info"><i
-                                        class="bi bi-file-earmark-ruled" title="Detalhes"></i>
-                                </a>
+                        <td style="min-width: 90px;">
+                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn btn-outline-info"><i
+                                        class="bi bi-file-ruled" title="Detalhes"></i> </a>
                             </p>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
-                {% block pagination.allpages %}
-                {% for p in table.paginator.page_range %}
-                <a href="{% querystring table.prefixed_page_field=p %}">{{ p }}</a>
-                {% endfor %}
-                {% endblock pagination.allpages %}
-            </div>
 
-            <hr>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        {% block pagination.allpages %}
+                        {% for p in table.paginator.page_range %}
+                        <li class="page-item"><a class="page-item"
+                                href="{% querystring table.prefixed_page_field=p %}">{{ p }}</a></li>
+                        {% endfor %}
+                        {% endblock pagination.allpages %}
+                    </ul>
+                </nav>
+
+            </div>
 
         </div> <!-- /container -->
     </div>

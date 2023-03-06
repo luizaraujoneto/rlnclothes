@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "pedidos.apps.PedidosConfig",
     "fornecedores.apps.FornecedoresConfig",
     "notasfiscais.apps.NotasfiscaisConfig",
+    "produtos.apps.ProdutosConfig",
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+DECIMAL_SEPARATOR = ","
+
+USE_DECIMAL_SEPARATOR = True
+
+THOUSAND_SEPARATOR = "."
+
+USE_THOUSAND_SEPARATOR = True
+
+NUMBER_GROUPING = 3
+
+DATETIME_FORMAT = "%d/%m/%Y"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

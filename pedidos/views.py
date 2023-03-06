@@ -12,8 +12,9 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Pedidos, PedidoTable
+from produtos.models import Produtos
 
-
+"""
 class PedidosListView(ListView):
     model = Pedidos
     template_name = "pedidos\pedidos.html"
@@ -38,16 +39,21 @@ class PedidosTableView(tables.SingleTableView):
         "valorpedido",
         "observacao",
     ]
+"""
 
 
-table = PedidosTableView()
-# table.paginate(page=request.GET.get("page", 1), per_page=25)
-
-
-def pedido_table(request):
+def pedido_list(request):
     table = PedidoTable(Pedidos.objects.all())
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     return render(request, "pedidos\pedido_table.html", {"table": table})
+
+
+def pedido_detail(request, pk):
+    pedido = get_object_or_404(Pedidos, codpedido=pk)
+
+    context = {"pedido": pedido}
+
+    return render(request, "pedidos\pedido_detail.html", context)
 
 
 def pedido_edit(request, pk):
