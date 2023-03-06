@@ -16,7 +16,7 @@
                 <p class="card-text">
                 <table class="table" style="width:100%">
                     <tr>
-                        <td>Código</td>
+                        <td style="width: 25%; min-width: 25%;">Código</td>
                         <td>{{pedido.codpedido}}</td>
                     </tr>
                     <tr>
@@ -41,18 +41,22 @@
                     </tr>
                     <tr>
                         <td class="text-left">
-                            <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button">
-                                    <i class="bi bi-list-columns-reverse" title="Detalhes"></i>
+                            <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button"
+                                    title="Listagem de pedidos">
+                                    <i class="bi bi-list-columns-reverse"></i>
                                     Pedidos</a></p>
                         </td>
                         <td class="text-right">
                             <p>
                                 <a class="btn btn-outline-warning my-2 my-sm-0"
-                                    href="{% url 'pedido_edit' pedido.codpedido %}" role="button">
-                                    <i class="bi bi-pencil-square" title="Detalhes"></i>
+                                    href="{% url 'pedido_edit' pedido.codpedido %}" role="button"
+                                    title="Alterar pedido">
+                                    <i class="bi bi-pencil-square"></i>
                                     Alterar</a>
-                                <a class="btn btn-outline-danger my-2 my-sm-0" href="{% url 'pedidos' %}" role="button">
-                                    <i class="bi bi-trash" title="Detalhes"></i>
+                                <a class="btn btn-outline-danger my-2 my-sm-0"
+                                    href="{% url 'pedido_delete' pedido.codpedido %}" role="button"
+                                    title="Apagar pedido">
+                                    <i class="bi bi-trash"></i>
                                     Apagar</a>
                             </p>
                         </td>
@@ -71,6 +75,7 @@
                     <th>Referência</th>
                     <th>Descrição</th>
                     <th>Valor Custo</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +87,12 @@
                     <td>{{produto.referencia}}</td>
                     <td>{{produto.descricao}}</td>
                     <td class="text-right">{{produto.valorcusto|floatformat:2}}</td>
-
+                    <td class="text-right">
+                        <a class="btn btn-outline-warning bt-sm" href="#" role="button">
+                            <i class="bi bi-pencil-square bi-sm" title="Alterar produto"></i></a>
+                        <a class="btn btn-outline-danger bt-sm " href="#" role="button">
+                            <i class="bi bi-trash bi-sm" title="Apagar produto"></i></a>
+                    </td>
                 </tr>
 
                 {% endfor %}

@@ -5,8 +5,22 @@ from notasfiscais.models import NotasFiscais
 from pedidos.models import Pedidos
 
 
-class PedidosForm(forms.Form):
-    codpedido = forms.IntegerField(label="Código", disabled=True)
+class PedidosForm(forms.ModelForm):
+    class Meta:
+        model = Pedidos
+        fields = [
+            "codpedido",
+            "numeropedido",
+            "fornecedor",
+            "notafiscal",
+            "datapedido",
+            "valorpedido",
+            "observacao",
+        ]
+
+
+"""    
+    codpedido = forms.IntegerField(label="Código")
     numeropedido = forms.CharField(label="Número")
     # codfornecedor = forms.IntegerField(label="Cód. Fornecedor")
     fornecedor = forms.ModelChoiceField(
@@ -27,15 +41,4 @@ class PedidosForm(forms.Form):
     observacao = forms.CharField(
         label="Observacao", widget=forms.Textarea(attrs={"cols": 50, "rows": 4})
     )
-
-    class Meta:
-        model = Pedidos
-        fields = [
-            "codigopedido",
-            "numeropedido",
-            "fornecedor",
-            "codnotafiscal",
-            "datapedido",
-            "valorpedido",
-            "observacao",
-        ]
+"""

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -11,8 +11,7 @@ from .forms import PedidosForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Pedidos, PedidoTable
-from produtos.models import Produtos
+from .models import Pedidos, PedidoTable, Produtos
 
 """
 class PedidosListView(ListView):
@@ -45,7 +44,49 @@ class PedidosTableView(tables.SingleTableView):
 def pedido_list(request):
     table = PedidoTable(Pedidos.objects.all())
     table.paginate(page=request.GET.get("page", 1), per_page=25)
-    return render(request, "pedidos\pedido_table.html", {"table": table})
+    return render(request, "pedidos\pedido_list.html", {"table": table})
+
+
+def pedido_create(request):
+    if request.method == "POST":
+        form = PedidosForm(request.POST)
+
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+
+            form.save()
+
+            # d = form.cleaned_data
+
+            # pedido = Pedidos()
+            # pedido.codpedido = d.get("codpedido", 500)
+            # pedido.numeropedido = d.get("numeropedido")
+            # pedido.fornecedor = d.get("fornecedor")
+            # pedido.notafiscal = d.get("notafiscal")
+            # pedido.datapedido = d.get("datapedido")
+            # pedido.valorpedido = d.get("valorpedido")
+            # pedido.observacao = d.get("observacao")
+
+            # pedido.save()
+
+            return HttpResponseRedirect(reverse("/"))
+
+        return redirect("pedidos")
+
+    else:
+        form = PedidosForm(
+            initial={
+                "codpedido": 500,
+            }
+        )
+
+    context = {"form": form}
+
+    return render(request, "pedidos\pedido_create.html", context)
+
+
+def pedido_delete(request):
+    return pedido_list(request)
 
 
 def pedido_detail(request, pk):

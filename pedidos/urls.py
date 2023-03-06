@@ -1,23 +1,11 @@
 from django.conf import settings
 from django.conf.urls import include
 from django.urls import path
-from .views import (
-    # PedidosListView,
-    #    PedidosDetailView,
-    #    PedidosCreateView,
-    # PedidosDeleteView,
-    #    PedidosUpdateView,
-    # PedidosTableView,
-    pedido_edit,
-    pedido_list,
-    pedido_detail,
-)
 
 from . import views
 
-
 urlpatterns = [
-    path("create", views.pedido_edit, name="pedido_create"),
+    path("create", views.pedido_create, name="pedido_create"),
     path("<int:pk>/detail/", views.pedido_detail, name="pedido_detail"),
     # path("new/", PedidosCreateView.as_view(), name="pedido_new"),
     # path("view/<int:pk>/", PedidosDetailView.as_view(), name="pedido_detail"),
