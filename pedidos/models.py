@@ -86,3 +86,14 @@ class Produtos(models.Model):
     class Meta:
         managed = False
         db_table = "produtos"
+
+    def save(self, *args, **kwargs):
+        if not self.codproduto:
+            max = Produtos.objects.aggregate(models.Max("codproduto"))[
+                "codproduto__max"
+            ]
+            self.codproduto = max + 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.descricao[:20]

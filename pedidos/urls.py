@@ -5,14 +5,16 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("", views.pedido_list, name="pedidos"),
     path("create", views.pedido_create, name="pedido_create"),
     path("<int:pk>/detail/", views.pedido_detail, name="pedido_detail"),
-    # path("new/", PedidosCreateView.as_view(), name="pedido_new"),
-    # path("view/<int:pk>/", PedidosDetailView.as_view(), name="pedido_detail"),
-    # path("edit/<int:pk>/", PedidosUpdateView.as_view(), name="pedido_edit"),
     path("<int:pk>/edit/", views.pedido_edit, name="pedido_edit"),
     path("<int:pk>/delete/", views.pedido_delete, name="pedido_delete"),
-    path("", views.pedido_list, name="pedidos"),
+    path("<int:codpedido>/create_produto", views.produto_create, name="produto_create"),
+    path("edit_produto/<int:codproduto>", views.produto_edit, name="produto_edit"),
+    path(
+        "delete_produto/<int:codproduto>", views.produto_delete, name="produto_delete"
+    ),
 ]
 
 """

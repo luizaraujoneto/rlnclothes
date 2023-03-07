@@ -39,6 +39,7 @@
                         <td>Observação</td>
                         <td>{{pedido.observacao}}</td>
                     </tr>
+                    {% if view_name == "list_produtos" %}
                     <tr>
                         <td class="text-left">
                             <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button"
@@ -61,11 +62,41 @@
                             </p>
                         </td>
                     </tr>
+                    {% endif %}
                 </table>
                 </p>
             </div> <!-- card-body -->
         </div> <!-- card -->
 
+        {% if view_name == "create_produto" %}
+        <div class="card" style="align-items: center;">
+            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
+                <h5>Criar Produto:</h5>
+            </div>
+            <div class="card-body" style="align-items: center;width:60%;">
+                <p class="card-text">
+                    {% include 'pedidos/produto_edit.html'%}
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+        {% endif %}
+
+        {% if view_name == "edit_produto" %}
+        <div class="card" style="align-items: center;">
+            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
+                <h5>Alterar Produto:</h5>
+            </div>
+            <div class="card-body" style="align-items: center;width:60%;">
+                <p class="card-text">
+                    {% include 'pedidos/produto_edit.html'%}
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+        {% endif %}
+
+        {% if view_name == "list_produtos" %}
+        <p><a class="btn btn-outline-primary btn-sm" href="{% url 'produto_create' pedido.codpedido %}" role="button"><i
+                    class="bi bi-calendar-plus"></i>&nbsp;Novo Produto</a></p>
         <h5 class="text-left bg-dark text-light">Lista de produtos:</h5>
         <table class="table table-striped table-sm">
             <thead>
@@ -88,7 +119,8 @@
                     <td>{{produto.descricao}}</td>
                     <td class="text-right">{{produto.valorcusto|floatformat:2}}</td>
                     <td class="text-right">
-                        <a class="btn btn-outline-warning bt-sm" href="#" role="button">
+                        <a class="btn btn-outline-warning bt-sm" href="{% url 'produto_edit' produto.codproduto %}"
+                            role="button">
                             <i class="bi bi-pencil-square bi-sm" title="Alterar produto"></i></a>
                         <a class="btn btn-outline-danger bt-sm " href="#" role="button">
                             <i class="bi bi-trash bi-sm" title="Apagar produto"></i></a>
@@ -98,6 +130,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
 
     </div> <!-- container -->
 

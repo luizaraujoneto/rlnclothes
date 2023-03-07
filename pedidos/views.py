@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+
+# from django.http import HttpResponseRedirect
+# from django.urls import reverse
 
 import django_tables2 as tables
 
 # Forms
-from .forms import PedidosForm
+from .forms import PedidosForm, ProdutosForm
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
@@ -87,7 +88,7 @@ def pedido_delete(request, pk):
 def pedido_detail(request, pk):
     pedido = get_object_or_404(Pedidos, codpedido=pk)
 
-    context = {"pedido": pedido}
+    context = {"pedido": pedido, "view_name": "list_produtos"}
 
     return render(request, "pedidos\pedido_detail.html", context)
 
@@ -101,7 +102,7 @@ def pedido_edit(request, pk):
         if form.is_valid():
             form.save()
 
-            return redirect("pedidos")
+            return redirect("pedido_detail", pedido.codpedido)
 
     else:
         form = PedidosForm(
@@ -116,6 +117,74 @@ def pedido_edit(request, pk):
             }
         )
 
-    context = {"form": form}  # , "view_name": request.resolver_match.view_name}
+    context = {"form": form}
 
     return render(request, "pedidos/pedido_edit.html", context)
+
+
+def produto_edit(request, codproduto):
+    produto = get_object_or_404(Produtos, codproduto=codproduto)
+
+    pedido = get_object_or_404(Pedidos, codpedido=produto.pedido.codpedido)
+
+    if request.method == "POST":
+        form = ProdutosForm(request.POST, instance=produto)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("pedido_detail", produto.pedido.codpedido)
+
+    else:
+        form = ProdutosForm(instance=produto)
+
+    context = {
+        "form": form,
+        "pedido": pedido,
+        "view_name": "edit_produto",
+    }
+
+    return render(request, "pedidos/pedido_detail.html", context)
+
+
+def produto_create(request, codpedido):
+    pedido = get_object_or_404(Pedidos, codpedido=codpedido)
+
+    if request.method == "POST":
+        form = ProdutosForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("pedido_detail", codpedido)
+
+    else:
+        form = ProdutosForm(initial={"pedido": pedido})
+
+    context = {
+        "form": form,
+        "pedido": pedido,
+        "view_name": "create_produto",
+    }
+
+    return render(request, "pedidos\pedido_detail.html", context)
+
+
+def produto_delete(request, codproduto):
+    produto = get_object_or_404(Produtos, codproduto=codproduto)
+
+    if request.method == "POST":
+        if produto.codproduto:
+            try:
+                produto.delete()
+            except Exception as e:
+                error_message = str(e)
+        #                return render(
+        #                    request,
+        #                    "pedidos\pedido_delete.html",
+        #                    {"pedido": pedido, "error_message": error_message},
+        #                )
+
+        return redirect("pedidos")
+
+    return render(request, "pedidos\pedido_delete.html", {"pedido": pedido})

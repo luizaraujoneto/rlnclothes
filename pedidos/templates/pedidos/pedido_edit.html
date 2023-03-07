@@ -22,7 +22,8 @@
                             <p>
                                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save">
                                 <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
-                                    onclick="location.href='{% url 'pedidos' %}'" name="cancel" value="Cancelar">
+                                    onclick="location.href='{% url 'pedido_detail' form.codpedido.value %}'"
+                                    name="cancel" value="Cancelar">
 
                             </p>
                         </td>
