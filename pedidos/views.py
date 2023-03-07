@@ -52,41 +52,36 @@ def pedido_create(request):
         form = PedidosForm(request.POST)
 
         if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-
             form.save()
-
-            # d = form.cleaned_data
-
-            # pedido = Pedidos()
-            # pedido.codpedido = d.get("codpedido", 500)
-            # pedido.numeropedido = d.get("numeropedido")
-            # pedido.fornecedor = d.get("fornecedor")
-            # pedido.notafiscal = d.get("notafiscal")
-            # pedido.datapedido = d.get("datapedido")
-            # pedido.valorpedido = d.get("valorpedido")
-            # pedido.observacao = d.get("observacao")
-
-            # pedido.save()
-
-            return HttpResponseRedirect(reverse("/"))
 
         return redirect("pedidos")
 
     else:
-        form = PedidosForm(
-            initial={
-                "codpedido": 500,
-            }
-        )
+        form = PedidosForm(initial={})
 
     context = {"form": form}
 
     return render(request, "pedidos\pedido_create.html", context)
 
 
-def pedido_delete(request):
-    return pedido_list(request)
+def pedido_delete(request, pk):
+    pedido = get_object_or_404(Pedidos, codpedido=pk)
+
+    if request.method == "POST":
+        if pedido.codpedido:
+            try:
+                pedido.delete()
+            except Exception as e:
+                error_message = str(e)
+                return render(
+                    request,
+                    "pedidos\pedido_delete.html",
+                    {"pedido": pedido, "error_message": error_message},
+                )
+
+        return redirect("pedidos")
+
+    return render(request, "pedidos\pedido_delete.html", {"pedido": pedido})
 
 
 def pedido_detail(request, pk):
@@ -100,20 +95,14 @@ def pedido_detail(request, pk):
 def pedido_edit(request, pk):
     pedido = get_object_or_404(Pedidos, codpedido=pk)
 
-    # If this is a POST request then process the Form data
     if request.method == "POST":
-        # Create a form instance and populate it with data from the request (binding):
-        form = PedidosForm(request.POST)
+        form = PedidosForm(request.POST, instance=pedido)
 
-        # Check if the form is valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-            pedido.save()
+            form.save()
 
-            # redirect to a new URL:
-            return HttpResponseRedirect(reverse("/pedidos/"))
+            return redirect("pedidos")
 
-    # If this is a GET (or any other method) create the default form.
     else:
         form = PedidosForm(
             initial={
@@ -127,6 +116,6 @@ def pedido_edit(request, pk):
             }
         )
 
-    context = {"form": form, "view_name": request.resolver_match.view_name}
+    context = {"form": form}  # , "view_name": request.resolver_match.view_name}
 
     return render(request, "pedidos/pedido_edit.html", context)

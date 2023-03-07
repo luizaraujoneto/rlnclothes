@@ -7,7 +7,9 @@ from notasfiscais.models import NotasFiscais
 
 # Create your models here.
 class Pedidos(models.Model):
-    codpedido = models.AutoField(db_column="codpedido", primary_key=True)
+    codpedido = models.IntegerField(
+        db_column="codpedido", blank=True, null=False, primary_key=True
+    )
     numeropedido = models.CharField(
         db_column="numeropedido", max_length=255, blank=True, null=True
     )
@@ -19,8 +21,6 @@ class Pedidos(models.Model):
         blank=True,
         null=True,
     )
-
-    #    codnotafiscal = models.IntegerField( db_column="codnotafiscal", blank=True, null=True  )
 
     notafiscal = models.ForeignKey(
         NotasFiscais,
@@ -39,6 +39,12 @@ class Pedidos(models.Model):
         db_column="observacao", max_length=255, blank=True, null=True
     )
 
+    def save(self, *args, **kwargs):
+        if not self.codpedido:
+            max = Pedidos.objects.aggregate(models.Max("codpedido"))["codpedido__max"]
+            self.codpedido = max + 1
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.numeropedido[:20]
 
@@ -56,7 +62,6 @@ class Produtos(models.Model):
     codproduto = models.IntegerField(
         db_column="codproduto", blank=True, null=False, primary_key=True
     )
-    # codpedido = models.IntegerField(db_column="codpedido", blank=True, null=True)
 
     pedido = models.ForeignKey(
         Pedidos,

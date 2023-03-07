@@ -18,6 +18,12 @@ class PedidosForm(forms.ModelForm):
             "observacao",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["codpedido"].widget.attrs["disabled"] = "disabled"
+        self.fields["datapedido"].widget = forms.DateInput(attrs={"type": "date"})
+        self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
+
 
 """    
     codpedido = forms.IntegerField(label="Código")

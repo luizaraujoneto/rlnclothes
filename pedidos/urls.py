@@ -11,7 +11,7 @@ urlpatterns = [
     # path("view/<int:pk>/", PedidosDetailView.as_view(), name="pedido_detail"),
     # path("edit/<int:pk>/", PedidosUpdateView.as_view(), name="pedido_edit"),
     path("<int:pk>/edit/", views.pedido_edit, name="pedido_edit"),
-    path("<int:pk>/delete/", views.pedido_edit, name="pedido_delete"),
+    path("<int:pk>/delete/", views.pedido_delete, name="pedido_delete"),
     path("", views.pedido_list, name="pedidos"),
 ]
 

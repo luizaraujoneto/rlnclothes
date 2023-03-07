@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %} Editar pedido: {{pedido.numeropedido}} {% endblock %}
+{% block title %} Editar pedido: {{form.numeropedido.value}} {% endblock %}
 
 {% block content %}
 
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Editar Pedido: {{pedido.numeropedido}} </h2>
+        <h2 class="display-5"> Editar Pedido: {{form.numeropedido.value}} </h2>
     </div>
 
     <div class="container">
@@ -17,12 +17,13 @@
                     {{form.as_table}}
 
                     <tr>
-                        <td class="justify-content-end">
-                        </td>
-                        <td class="justify-content-end">
+                        <td>&nbsp;</td>
+                        <td class="text-right">
                             <p>
                                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save">
-                                <input class="btn btn-outline-danger my-2 my-sm-0" type="submit" value="Cancel">
+                                <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
+                                    onclick="location.href='{% url 'pedidos' %}'" name="cancel" value="Cancelar">
+
                             </p>
                         </td>
                     </tr>
