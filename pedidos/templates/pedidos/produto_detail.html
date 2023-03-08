@@ -1,0 +1,50 @@
+<div class="card-body" style="align-items: center;width:60%;">
+    <p class="card-text">
+
+    <table class="table" style="width:100%">
+        <tr>
+            <td style="width: 25%; min-width: 25%;">Código</td>
+            <td>{{produto.codproduto}}</td>
+        </tr>
+        <tr>
+            <td>Cód.Fornecedor</td>
+            <td>{{produto.codprodutofornecedor}}</td>
+        </tr>
+        <tr>
+            <td>Referência</td>
+            <td>{{produto.referencia}}</td>
+        </tr>
+        <tr>
+            <td>Descrição</td>
+            <td>{{produto.descricao}} datapedido|date:"d/m/Y"}}</td>
+        </tr>
+        <tr>
+            <td>Valor Custo</td>
+            <td>{{produto.valorcusto|floatformat:2}}</td>
+        </tr>
+        <tr>
+            <td>Observação</td>
+            <td>{{produto.observacao}}</td>
+        </tr>
+        <tr>
+            <td>Cód.Venda</td>
+            <td>itemvenda.codvenda</td>
+        </tr>
+        <tr>
+            <td>Data Venda</td>
+            <td>itemvenda.venda.datavenda</td>
+        </tr>
+        <tr>
+            <td>Cliente</td>
+            <td>itemvenda.venda.cliente.nomecliente</td>
+        </tr>
+        <tr>
+            <td>Valor Venda</td>
+            <td>itemvenda.valorvenda</td>
+        </tr>
+
+    </table>
+    </p>
+
+    </p>
+</div> <!-- card-body -->

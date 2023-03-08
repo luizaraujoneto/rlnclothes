@@ -147,6 +147,18 @@ def produto_edit(request, codproduto):
     return render(request, "pedidos/pedido_detail.html", context)
 
 
+def produto_detail(request, codproduto):
+    produto = get_object_or_404(Produtos, codproduto=codproduto)
+
+    context = {
+        "produto": produto,
+        "pedido": produto.pedido,
+        "view_name": "detail_produto",
+    }
+
+    return render(request, "pedidos/pedido_detail.html", context)
+
+
 def produto_create(request, codpedido):
     pedido = get_object_or_404(Pedidos, codpedido=codpedido)
 
@@ -179,12 +191,24 @@ def produto_delete(request, codproduto):
                 produto.delete()
             except Exception as e:
                 error_message = str(e)
-        #                return render(
-        #                    request,
-        #                    "pedidos\pedido_delete.html",
-        #                    {"pedido": pedido, "error_message": error_message},
-        #                )
+                return render(
+                    request,
+                    "pedidos\pedido_detail.html",
+                    {
+                        "pedido": produto.pedido,
+                        "produto": produto,
+                        "view_name": "delete_produto",
+                        "error_message": error_message,
+                    },
+                )
 
-        return redirect("pedidos")
+        return redirect("pedido_detail", produto.pedido.codpedido)
 
-    return render(request, "pedidos\pedido_delete.html", {"pedido": pedido})
+    context = {
+        "produto": produto,
+        "pedido": produto.pedido,
+        "view_name": "delete_produto",
+        "error_message": "",
+    }
+
+    return render(request, "pedidos\pedido_detail.html", context)
