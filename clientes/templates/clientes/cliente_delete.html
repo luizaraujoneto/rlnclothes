@@ -1,15 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main role="main">
 
-<h1>
-    Apagar Cliente
-</h1>
+    <div class="jumbotron">
+        <h2 class="display-5"> Apagar Cliente: {{cliente.nomecliente}} </h2>
+    </div>
 
-<form action="" method="post"> {% csrf_token %}
-    <p>Confirma a exclusão do Cliente: {{cliente.cliente}} </p>
+    <div class="container">
+        <div class="row">
 
-    <input type="submit" value="Confirm">
-</form>
+            {% if error_message %}
+            <div class="alert alert-danger">
+                <strong>Erro:</strong>
+                {{error_message}}
+                </ul>
+            </div>
+            <input class="btn btn-outline-info my-2 my-sm-0" type="button"
+                onclick="location.href='{% url 'cliente_detail' cliente.codcliente %}'" name="voltar" value="Voltar">
+            {% else %}
+
+            <form action="" method="post"> {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <td>
+                            <p class="text-center">Confirma a exclusão do cliente:
+                            <h6 class="text-bold">{{cliente.codcliente}} - {{cliente.nomecliente}}</h6>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">
+                            <p>
+                                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Sim">
+                                <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
+                                    onclick="location.href='{% url 'cliente_detail' cliente.codcliente %}'"
+                                    name="cancel" value="Não">
+
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            {% endif %}
+        </div>
+
+        <hr>
+
+    </div> <!-- /container -->
+
+</main>
 
 {% endblock content %}

@@ -1,5 +1,7 @@
 from django.db import models
 
+import django_tables2 as tables
+
 # Create your models here.
 
 # class Cliente(models.Model):
@@ -21,8 +23,21 @@ class Clientes(models.Model):
         db_column="telefone", max_length=255, blank=True, null=True
     )
 
+    class Meta:
+        db_table = "clientes"
+
     def __str__(self):
         return self.nomecliente[:50]
 
+    def save(self, *args, **kwargs):
+        if not self.codcliente:
+            max = Clientes.objects.aggregate(models.Max("codcliente"))[
+                "codcliente__max"
+            ]
+            self.codcliente = max + 1
+        super().save(*args, **kwargs)
+
+
+class ClienteTable(tables.Table):
     class Meta:
-        db_table = "clientes"
+        model = Clientes

@@ -22,8 +22,9 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color: #900C3F;">
+        <span class=" navbar-brand mb-0 h1" style="color:#ffe484">RLNClothes</span>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,13 +33,14 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}">Início <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'home' %}" style="color:#ffe484">Início <span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'clientes' %}">Clientes</a>
+                    <a class="nav-link" href="{% url 'clientes' %}" style="color:#ffe484">Clientes</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'pedidos' %}">Pedidos</a>
+                    <a class="nav-link" href="{% url 'pedidos' %}" style="color:#ffe484">Pedidos</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
@@ -50,7 +52,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'about' %}">Sobre</a>
+                    <a class="nav-link active" href="{% url 'about' %}" style="color:#ffe484">Sobre</a>
                 </li>
             </ul>
             <!--

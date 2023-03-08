@@ -11,23 +11,49 @@
     </div>
 
     <div class="container">
-        <div class="columns">
 
-            <p>
-            <h2>Código - {{cliente.codcliente}}</h2>
-            </p>
-            <p>
-            <h2>Nome - {{cliente.cliente}}</h2>
-            </p>
-            <p>
-            <h2>Telefone - {{cliente.telefone}}</h2>
-            </p>
+        <p><a class="btn btn-outline-info" href="{% url 'clientes' %}" role="button" title="Listagem de Clientes">
+                <i class="bi bi-list-columns-reverse"></i>
+                Clientes</a></p>
 
-            <p><a class="btn btn-secondary" href="{% url 'clientes' %}" role="button">Voltar</a></p>
-
-        </div>
-
-        <hr>
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:60%;">
+                <h5 class="card-title text-bold">Cliente: {{cliente.nomecliente}} </h5>
+                <p class="card-text">
+                <table class="table" style="width:100%">
+                    <tr>
+                        <td style="width: 25%; min-width: 25%;">Código</td>
+                        <td>{{cliente.codcliente}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nome</td>
+                        <td>{{cliente.nomecliente}}</td>
+                    </tr>
+                    <tr>
+                        <td>Telefone</td>
+                        <td>{{cliente.telefone}}</td>
+                    </tr>
+                    <tr>
+                        <td> &nbsp;</td>
+                        <td class="text-right">
+                            <p>
+                                <a class="btn btn-outline-warning my-2 my-sm-0"
+                                    href="{% url 'cliente_edit' cliente.codcliente %}" role="button"
+                                    title="Alterar pedido">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Alterar</a>
+                                <a class="btn btn-outline-danger my-2 my-sm-0"
+                                    href="{% url 'cliente_delete' cliente.codcliente %}" role="button"
+                                    title="Apagar pedido">
+                                    <i class="bi bi-trash"></i>
+                                    Apagar</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
 
     </div> <!-- /container -->
 
