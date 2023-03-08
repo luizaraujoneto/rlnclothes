@@ -1,22 +1,19 @@
 <div class="card-body" style="align-items: center;width:60%;">
     <p class="card-text">
+    <h5 class="text-left bg-dark text-light">Detalhes do produto:</h5>
 
-    <table class="table" style="width:100%">
+    <table class="table tb-sm" style="width:100%">
         <tr>
-            <td style="width: 25%; min-width: 25%;">Código</td>
-            <td>{{produto.codproduto}}</td>
+            <td style="width: 25%; min-width: 25%;">Produto</td>
+            <td>{{produto.codproduto}} - {{produto.descricao}}</td>
         </tr>
         <tr>
-            <td>Cód.Fornecedor</td>
+            <td>Código</td>
             <td>{{produto.codprodutofornecedor}}</td>
         </tr>
         <tr>
             <td>Referência</td>
             <td>{{produto.referencia}}</td>
-        </tr>
-        <tr>
-            <td>Descrição</td>
-            <td>{{produto.descricao}} datapedido|date:"d/m/Y"}}</td>
         </tr>
         <tr>
             <td>Valor Custo</td>
@@ -26,23 +23,42 @@
             <td>Observação</td>
             <td>{{produto.observacao}}</td>
         </tr>
+        {% if itemvenda %}
+        <tr>
+            <td colspan="2">
+                <h5 class="text-left bg-dark text-light">Detalhes da venda:</h5>
+            </td>
+        </tr>
         <tr>
             <td>Cód.Venda</td>
             <td>{{itemvenda.venda.codvenda}}</td>
         </tr>
         <tr>
             <td>Data Venda</td>
-            <td>{{itemvenda.venda.datavenda}}</td>
+            <td>{{itemvenda.venda.datavenda|date:"d/m/Y"}}</td>
         </tr>
         <tr>
             <td>Cliente</td>
-            <td>{{itemvenda.venda.cliente.nomecliente}}</td>
+            <td>{{itemvenda.venda.cliente.codcliente}} - {{itemvenda.venda.cliente.nomecliente}}</td>
         </tr>
         <tr>
             <td>Valor Venda</td>
-            <td>{{itemvenda.valorvenda}}</td>
+            <td>{{itemvenda.valorvenda|floatformat:2}}</td>
         </tr>
-
+        {% else %}
+        <tr>
+            <td colspan="2">
+                <h5 class="text-left bg-light">Não foram encontradas informações de venda para esse produto.
+                </h5>
+            </td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td colspan="2">
+                <input class="btn btn-outline-info my-2 my-sm-0" type="button"
+                    onclick="location.href='{% url 'pedido_detail' pedido.codpedido %}'" name="voltar" value="Voltar">
+            </td>
+        </tr>
     </table>
     </p>
 

@@ -5,34 +5,34 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Cliente
+from .models import Clientes
 
 
 class ClientesListView(ListView):
-    model = Cliente
+    model = Clientes
     template_name = "clientes\clientes.html"
 
 
 class ClientesDetailView(DetailView):
-    model = Cliente
+    model = Clientes
     template_name = "clientes\cliente_detail.html"
 
 
 class ClientesCreateView(CreateView):
-    model = Cliente
+    model = Clientes
     template_name = "clientes\cliente_new.html"
     fields = ["codcliente", "cliente", "telefone"]
     success_url = "/clientes/"
 
 
 class ClientesUpdateView(UpdateView):
-    model = Cliente
+    model = Clientes
     template_name = "clientes\cliente_edit.html"
     fields = ["cliente", "telefone"]
     success_url = "/clientes/"
 
 
 class ClientesDeleteView(DeleteView):
-    model = Cliente
+    model = Clientes
     template_name = "clientes\cliente_delete.html"
     success_url = reverse_lazy("clientes")

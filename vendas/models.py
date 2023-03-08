@@ -1,6 +1,6 @@
 from django.db import models
 
-from clientes.models import Cliente
+from clientes.models import Clientes
 from pedidos.models import Produtos
 
 # Create your models here.
@@ -12,7 +12,7 @@ class Vendas(models.Model):
     )
 
     cliente = models.ForeignKey(
-        Cliente,
+        Clientes,
         on_delete=models.PROTECT,
         db_column="codcliente",
         to_field="codcliente",

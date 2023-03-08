@@ -29,24 +29,24 @@
                     <tr>
 
                         {% for column, cell in row.items %}
-                        <td>
+                        <td class="align-middle">
                             {{ cell }}
                         </td>
                         {% endfor %}
-                        <td style="min-width: 90px;">
-                            <p><a href="{% url 'pedido_detail' row.record.codpedido %}" class="btn btn-outline-info"><i
-                                        class="bi bi-file-ruled" title="Detalhes"></i> </a>
-                            </p>
+                        <td style="min-width: 90px;" class="align-middle text-center">
+                            <a href="{% url 'pedido_detail' row.record.codpedido %}"
+                                class="btn btn-outline-info px-2 py-1"><i class="bi bi-file-ruled bi-sm"
+                                    title="Detalhes"></i> </a>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
 
                 <nav>
-                    <ul class="pagination justify-content-center">
+                    <ul class="pagination justify-content-center mb-5">
                         {% block pagination.allpages %}
                         {% for p in table.paginator.page_range %}
-                        <li class="page-item"><a class="page-item"
+                        <li class="page-item"><a class="page-link"
                                 href="{% querystring table.prefixed_page_field=p %}">{{ p }}</a></li>
                         {% endfor %}
                         {% endblock pagination.allpages %}

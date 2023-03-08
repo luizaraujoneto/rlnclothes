@@ -152,7 +152,10 @@ def produto_edit(request, codproduto):
 def produto_detail(request, codproduto):
     produto = get_object_or_404(Produtos, codproduto=codproduto)
 
-    itemvenda = ItemVenda.objects.get(produto=produto)
+    try:
+        itemvenda = ItemVenda.objects.get(produto=produto)
+    except:
+        itemvenda = None
 
     context = {
         "produto": produto,
