@@ -21,7 +21,9 @@ class Vendas(models.Model):
     )
 
     datavenda = models.DateTimeField(db_column="datavenda", blank=True, null=True)
-    valorvenda = models.DecimalField(db_column="valorvenda", blank=True, null=True)
+    valorvenda = models.DecimalField(
+        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
+    )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True
     )
@@ -34,7 +36,7 @@ class Vendas(models.Model):
         db_table = "vendas"
 
 
-class Itemvenda(models.Model):
+class ItemVenda(models.Model):
     coditemvenda = models.IntegerField(
         db_column="coditemvenda", blank=True, null=False, primary_key=True
     )
@@ -57,7 +59,9 @@ class Itemvenda(models.Model):
         null=True,
     )
 
-    valorvenda = models.DecimalField(db_column="valorvenda", blank=True, null=True)
+    valorvenda = models.DecimalField(
+        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
+    )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True
     )

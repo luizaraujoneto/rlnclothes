@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "pedidos.apps.PedidosConfig",
     "fornecedores.apps.FornecedoresConfig",
     "notasfiscais.apps.NotasfiscaisConfig",
+    "vendas.apps.VendasConfig",
 ]
 
 MIDDLEWARE = [

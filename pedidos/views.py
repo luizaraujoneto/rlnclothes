@@ -14,6 +14,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Pedidos, PedidoTable, Produtos
 
+from vendas.models import ItemVenda
+
 """
 class PedidosListView(ListView):
     model = Pedidos
@@ -150,8 +152,11 @@ def produto_edit(request, codproduto):
 def produto_detail(request, codproduto):
     produto = get_object_or_404(Produtos, codproduto=codproduto)
 
+    itemvenda = ItemVenda.objects.get(produto=produto)
+
     context = {
         "produto": produto,
+        "itemvenda": itemvenda,
         "pedido": produto.pedido,
         "view_name": "detail_produto",
     }
