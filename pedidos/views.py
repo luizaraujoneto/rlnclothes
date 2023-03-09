@@ -16,33 +16,6 @@ from .models import Pedidos, PedidoTable, Produtos
 
 from vendas.models import ItemVenda
 
-"""
-class PedidosListView(ListView):
-    model = Pedidos
-    template_name = "pedidos\pedidos.html"
-
-
-class PedidosDeleteView(DeleteView):
-    model = Pedidos
-    template_name = "pedidos\pedido_delete.html"
-    success_url = reverse_lazy("pedidos")
-
-
-class PedidosTableView(tables.SingleTableView):
-    table_class = PedidoTable
-    queryset = Pedidos.objects.all()
-    template_name = "pedidos\pedido_table.html"
-    fields = [
-        "codpedido",
-        "numeropedido",
-        "codfornecedor",
-        "codnotafiscal",
-        "datapedido",
-        "valorpedido",
-        "observacao",
-    ]
-"""
-
 
 def pedido_list(request):
     table = PedidoTable(Pedidos.objects.all())

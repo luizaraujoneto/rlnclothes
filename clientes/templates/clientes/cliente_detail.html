@@ -34,6 +34,10 @@
                         <td>{{cliente.telefone}}</td>
                     </tr>
                     <tr>
+                        <td>Saldo</td>
+                        <td>{{cliente.saldocliente}}</td>
+                    </tr>
+                    <tr>
                         <td> &nbsp;</td>
                         <td class="text-right">
                             <p>
@@ -55,7 +59,27 @@
             </div> <!-- card-body -->
         </div> <!-- card -->
 
-    </div> <!-- /container -->
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:80%;">
+                <h5 class="card-title text-bold bg-dark text-light">Histórico:</h5>
+                <p class="card-text">
+                <table class="table" style="width:100%">
+
+                    {% for h in historicocliente %}
+                    <tr>
+                        <td>{{h.tipooperacao}}</td>
+                        <td>{{h.data|date:"d/m/Y"}}</td>
+                        <td>{{h.descricao}}</td>
+                        <td>{{h.valor}}</td>
+                        <td>{{h.observacao}}</td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+                </p>
+            </div> <!-- card -->
+
+        </div> <!-- /container -->
 
 </main>
 

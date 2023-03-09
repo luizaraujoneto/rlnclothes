@@ -2,16 +2,9 @@ from django.db import models
 
 import django_tables2 as tables
 
-from vendas.models import Vendas
+from vendas.models import Vendas, ContasReceber
 
 # Create your models here.
-
-# class Cliente(models.Model):
-#    codigo = models.IntegerField()
-#    nome = models.TextField()
-#
-#    def __str__(self):
-#        return self.nome[:50]
 
 
 class Clientes(models.Model):
@@ -29,14 +22,25 @@ class Clientes(models.Model):
         db_table = "clientes"
 
     def saldocliente(self):
-        totalvendas = (
+        vendas = (
             Vendas.objects.filter(cliente=self).aggregate(
                 vendas=models.Sum("valorvenda")
             )["vendas"]
             or 0
         )
 
-        return float(totalvendas)
+        codvenda_list = []
+        for v in Vendas.objects.filter(cliente=self):
+            codvenda_list.append(v.codvenda)
+
+        recebido = (
+            ContasReceber.objects.filter(venda__in=codvenda_list).aggregate(
+                recebido=models.Sum("valorpago")
+            )["recebido"]
+            or 0
+        )
+
+        return float(vendas - recebido)
 
     def __str__(self):
         return self.nomecliente[:50]
@@ -53,3 +57,33 @@ class Clientes(models.Model):
 class ClienteTable(tables.Table):
     class Meta:
         model = Clientes
+
+
+class HistoricoCliente(models.Model):
+    cliente = models.ForeignKey(
+        Clientes,
+        on_delete=models.DO_NOTHING,
+        db_column="codcliente",
+        to_field="codcliente",
+        blank=True,
+        null=True,
+    )
+
+    tipooperacao = models.CharField(
+        db_column="tipooperacao", max_length=1, blank=True, null=True
+    )
+    codoperacao = models.IntegerField(db_column="codoperacao", blank=True, null=True)
+    data = models.DateField(db_column="data", blank=True, null=True)
+    descricao = models.CharField(
+        db_column="descricao", max_length=255, blank=True, null=True
+    )
+    valor = models.DecimalField(
+        db_column="valor", blank=True, null=True, max_digits=6, decimal_places=2
+    )
+    observacao = models.CharField(
+        db_column="observacao", max_length=255, blank=True, null=True
+    )
+
+    class Meta:
+        managed = False
+        db_table = "vw_historicocliente"

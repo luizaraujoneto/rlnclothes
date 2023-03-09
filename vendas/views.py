@@ -7,7 +7,7 @@ import django_tables2 as tables
 from django.urls import reverse_lazy
 
 from .models import Vendas, VendaTable, ItemVenda
-from .forms import VendasForm, ItemvendaForm
+from .forms import VendasForm, ItemVendaForm
 
 
 def venda_list(request):
@@ -30,7 +30,7 @@ def venda_create(request):
 
     context = {"form": form}
 
-    return render(request, "vendas\vendas_create.html", context)
+    return render(request, "vendas/venda_create.html", context)
 
 
 def venda_delete(request, pk):
@@ -44,13 +44,13 @@ def venda_delete(request, pk):
                 error_message = str(e)
                 return render(
                     request,
-                    "vendas\venda_delete.html",
+                    "vendas/venda_delete.html",
                     {"venda": venda, "error_message": error_message},
                 )
 
         return redirect("vendas")
 
-    return render(request, "vendas\venda_delete.html", {"venda": venda})
+    return render(request, "vendas/venda_delete.html", {"venda": venda})
 
 
 def venda_detail(request, pk):
@@ -58,7 +58,7 @@ def venda_detail(request, pk):
 
     context = {"venda": venda, "view_name": "list_itemvendas"}
 
-    return render(request, "vendas\venda_detail.html", context)
+    return render(request, "vendas/venda_detail.html", context)
 
 
 def venda_edit(request, pk):
@@ -86,7 +86,7 @@ def itemvenda_edit(request, coditemvenda):
     venda = get_object_or_404(Vendas, codpedido=itemvenda.venda.codvenda)
 
     if request.method == "POST":
-        form = ItemvendaForm(request.POST, instance=itemvenda)
+        form = ItemVendaForm(request.POST, instance=itemvenda)
 
         if form.is_valid():
             form.save()
@@ -94,7 +94,7 @@ def itemvenda_edit(request, coditemvenda):
             return redirect("venda_detail", itemvenda.venda.codvenda)
 
     else:
-        form = ItemvendaForm(instance=itemvenda)
+        form = ItemVendaForm(instance=itemvenda)
 
     context = {
         "form": form,
@@ -121,7 +121,7 @@ def itemvenda_create(request, codvenda):
     venda = get_object_or_404(Vendas, codpedido=codvenda)
 
     if request.method == "POST":
-        form = ItemvendaForm(request.POST)
+        form = ItemVendaForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -129,7 +129,7 @@ def itemvenda_create(request, codvenda):
             return redirect("venda_detail", codvenda)
 
     else:
-        form = ItemvendaForm(initial={"venda": venda})
+        form = ItemVendaForm(initial={"venda": venda})
 
     context = {
         "form": form,
@@ -151,7 +151,7 @@ def itemvenda_delete(request, coditemvenda):
                 error_message = str(e)
                 return render(
                     request,
-                    "vendas\venda_detail.html",
+                    "vendas/venda_detail.html",
                     {
                         "vendas": itemvenda.venda,
                         "itemvenda": itemvenda,
@@ -169,4 +169,4 @@ def itemvenda_delete(request, coditemvenda):
         "error_message": "",
     }
 
-    return render(request, "vendas\venda_detail.html", context)
+    return render(request, "vendas/venda_detail.html", context)

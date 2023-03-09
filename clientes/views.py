@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from .models import Clientes, ClienteTable
+from .models import Clientes, ClienteTable, HistoricoCliente
 from .forms import ClientesForm
 
 
@@ -56,7 +56,13 @@ def cliente_delete(request, pk):
 def cliente_detail(request, pk):
     cliente = get_object_or_404(Clientes, codcliente=pk)
 
-    context = {"cliente": cliente, "view_name": "cliente_detail"}
+    historicocliente = HistoricoCliente.objects.filter(cliente=cliente)
+
+    context = {
+        "cliente": cliente,
+        "view_name": "cliente_detail",
+        "historicocliente": historicocliente,
+    }
 
     return render(request, "clientes\cliente_detail.html", context)
 
@@ -78,36 +84,3 @@ def cliente_edit(request, pk):
     context = {"form": form}
 
     return render(request, "clientes/cliente_edit.html", context)
-
-
-"""
-class ClientesListView(ListView):
-    model = Clientes
-    template_name = "clientes\clientes.html"
-
-
-class ClientesDetailView(DetailView):
-    model = Clientes
-    template_name = "clientes\cliente_detail.html"
-
-
-class ClientesCreateView(CreateView):
-    model = Clientes
-    template_name = "clientes\cliente_new.html"
-    fields = ["codcliente", "cliente", "telefone"]
-    success_url = "/clientes/"
-
-
-class ClientesUpdateView(UpdateView):
-    model = Clientes
-    template_name = "clientes\cliente_edit.html"
-    fields = ["cliente", "telefone"]
-    success_url = "/clientes/"
-
-
-class ClientesDeleteView(DeleteView):
-    model = Clientes
-    template_name = "clientes\cliente_delete.html"
-    success_url = reverse_lazy("clientes")
-
-"""
