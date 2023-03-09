@@ -2,6 +2,8 @@ from django.db import models
 
 import django_tables2 as tables
 
+from vendas.models import Vendas
+
 # Create your models here.
 
 # class Cliente(models.Model):
@@ -25,6 +27,16 @@ class Clientes(models.Model):
 
     class Meta:
         db_table = "clientes"
+
+    def saldocliente(self):
+        totalvendas = (
+            Vendas.objects.filter(cliente=self).aggregate(
+                vendas=models.Sum("valorvenda")
+            )["vendas"]
+            or 0
+        )
+
+        return float(totalvendas)
 
     def __str__(self):
         return self.nomecliente[:50]

@@ -14,13 +14,16 @@
         <div class="row">
 
             <p><a class="btn btn-outline-primary" href="{% url 'cliente_create' %}" role="button"><i
-                        class="bi bi-calendar-plus"></i>&nbsp;Novo Cliente</a></p>
+                        class="bi bi-person-plus"></i>&nbsp;Novo Cliente</a></p>
 
             <div class="container">
                 <table class="table table-striped table-sm orderable">
                     {% for column in table.columns %}
                     <th>{{ column.header }}</th>
                     {% endfor %}
+                    <th>
+                        Vendas Totais
+                    </th>
                     <th>
                         A&ccedil;&otilde;es
                     </th>
@@ -33,10 +36,19 @@
                             {{ cell }}
                         </td>
                         {% endfor %}
+                        <td class="text-right">
+                            {{row.record.saldocliente|floatformat:2}}
+                        </td>
                         <td style="min-width: 90px;" class="align-middle text-center">
                             <a href="{% url 'cliente_detail' row.record.codcliente %}"
                                 class="btn btn-outline-info px-2 py-1"><i class="bi bi-file-ruled bi-sm"
                                     title="Detalhes"></i> </a>
+                            <a href="{% url 'cliente_edit' row.record.codcliente %}"
+                                class="btn btn-outline-warning px-2 py-1"><i class="bi bi-pencil-square bi-sm"
+                                    title="Alterar"></i> </a>
+                            <a href="{% url 'cliente_delete' row.record.codcliente %}"
+                                class="btn btn-outline-danger px-2 py-1"><i class="bi bi-trash bi-sm"
+                                    title="Apagar"></i> </a>
                         </td>
                     </tr>
                     {% endfor %}
