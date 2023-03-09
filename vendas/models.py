@@ -1,4 +1,6 @@
 from django.db import models
+import django_tables2 as tables
+
 
 # from clientes.models import Clientes
 from pedidos.models import Produtos
@@ -69,3 +71,8 @@ class ItemVenda(models.Model):
     class Meta:
         managed = False
         db_table = "itemvenda"
+
+
+class VendaTable(tables.Table):
+    class Meta:
+        model = Vendas
