@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 <main role="main">
 
     <div class="jumbotron">
@@ -17,10 +15,10 @@
                 Clientes</a></p>
 
         <div class="card" style="align-items: center;">
-            <div class="card-body" style="align-items: center;width:60%;">
+            <div class="card-body" style="align-items: center;width:80%;">
                 <h5 class="card-title text-bold">Cliente: {{cliente.nomecliente}} </h5>
                 <p class="card-text">
-                <table class="table" style="width:100%">
+                <table class="table table-sm" style="width:100%">
                     <tr>
                         <td style="width: 25%; min-width: 25%;">Código</td>
                         <td>{{cliente.codcliente}}</td>
@@ -38,8 +36,7 @@
                         <td>{{cliente.saldocliente}}</td>
                     </tr>
                     <tr>
-                        <td> &nbsp;</td>
-                        <td class="text-right">
+                        <td class="text-right" colspan="2">
                             <p>
                                 <a class="btn btn-outline-warning my-2 my-sm-0"
                                     href="{% url 'cliente_edit' cliente.codcliente %}" role="button"
@@ -53,6 +50,24 @@
                                     Apagar</a>
                             </p>
                         </td>
+                    <tr>
+                        <td colspan="2">
+                            <a class="btn btn-outline-info my-2 my-sm-0"
+                                href="{% url 'cliente_edit' cliente.codcliente %}" role="button" title="Vendas">
+                                <i class="bi bi-pencil-square"></i>
+                                Vendas</a>
+                            <a class="btn btn-outline-info my-2 my-sm-0"
+                                href="{% url 'cliente_edit' cliente.codcliente %}" role="button" title="Pagamentos">
+                                <i class="bi bi-pencil-square"></i>
+                                Pagamentos</a>
+                            <a class="btn btn-outline-info my-2 my-sm-0"
+                                href="{% url 'cliente_edit' cliente.codcliente %}" role="button" title="Histórico">
+                                <i class="bi bi-pencil-square"></i>
+                                Histórico</a>
+                            </p>
+                        </td>
+
+                    </tr>
                     </tr>
                 </table>
                 </p>
@@ -61,17 +76,43 @@
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:80%;">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">..1.
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.2..</div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.3..</div>
+                </div>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+
+
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:80%;">
                 <h5 class="card-title text-bold bg-dark text-light">Histórico:</h5>
                 <p class="card-text">
-                <table class="table" style="width:100%">
+                <table class="table table-sm" style="width:100%">
 
                     {% for h in historicocliente %}
                     <tr>
                         <td>{{h.tipooperacao}}</td>
                         <td>{{h.data|date:"d/m/Y"}}</td>
                         <td>{{h.descricao}}</td>
-                        <td>{{h.valor}}</td>
-                        <td>{{h.observacao}}</td>
+                        <td class="text-right">{{h.valor|floatformat:2}}</td>
+                        <td>{{h.observacao|default_if_none:"---"}}</td>
                     </tr>
                     {% endfor %}
 
