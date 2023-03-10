@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.functions import Trunc, Cast
+from django.db.models import CharField, Value
 
 import django_tables2 as tables
 
@@ -41,6 +43,34 @@ class Clientes(models.Model):
         )
 
         return float(vendas - recebido)
+
+    def vendas(self):
+        v = (
+            Vendas.objects.filter(cliente=self)
+            .select_related("cliente")
+            .values_list("codvenda", "datavenda", "valorvenda")
+        )
+
+        v.annotate(
+            fdatavenda=Cast(
+                Trunc("datavenda", "day"), output_field=CharField("%Y-%m-%d")
+            )
+        )
+
+        vendas_do_cliente = v
+        return vendas_do_cliente
+
+    def pagamentos(self):
+        codvenda_list = []
+        for v in Vendas.objects.filter(cliente=self):
+            codvenda_list.append(v.codvenda)
+
+        vendas_do_cliente = (
+            ContasReceber.objects.filter(venda__in=codvenda_list)
+            .select_related("cliente")
+            .values_list("codcontareceber", "datapagamento", "valorpago")
+        )
+        return vendas_do_cliente
 
     def __str__(self):
         return self.nomecliente[:50]

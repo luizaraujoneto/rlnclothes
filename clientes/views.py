@@ -53,15 +53,21 @@ def cliente_delete(request, pk):
     return render(request, "clientes\cliente_delete.html", {"cliente": cliente})
 
 
-def cliente_detail(request, pk):
+def cliente_detail(request, pk, subview="historico_cliente"):
     cliente = get_object_or_404(Clientes, codcliente=pk)
 
-    historicocliente = HistoricoCliente.objects.filter(cliente=cliente)
+    if subview == "historico_cliente":
+        table = HistoricoCliente.objects.filter(cliente=cliente).values_list()
+    elif subview == "vendas_cliente":
+        table = cliente.vendas()
+    elif subview == "pagamentos_cliente":
+        table = cliente.pagamentos()
 
     context = {
         "cliente": cliente,
         "view_name": "cliente_detail",
-        "historicocliente": historicocliente,
+        "subview_name": subview,
+        "table": table,
     }
 
     return render(request, "clientes\cliente_detail.html", context)
