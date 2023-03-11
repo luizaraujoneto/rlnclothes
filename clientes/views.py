@@ -58,7 +58,7 @@ def cliente_detail(request, pk, subview="historico_cliente"):
     table = []
 
     if subview == "historico_cliente":
-        table = HistoricoCliente.objects.filter(cliente=cliente).values()
+        table = cliente.historico()
     elif subview == "vendas_cliente":
         table = cliente.vendas()
     elif subview == "pagamentos_efetivos":

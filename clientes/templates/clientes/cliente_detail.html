@@ -6,9 +6,12 @@
 
     <div class="container">
 
-        <p><a class="btn btn-outline-info" href="{% url 'clientes' %}" role="button" title="Listagem de Clientes">
+        <p>
+            <a class="btn btn-outline-info" href="{% url 'clientes' %}" role="button" title="Listagem de Clientes">
                 <i class="bi bi-arrow-left-square-fill"></i>
-                Clientes</a></p>
+                Clientes
+            </a>
+        </p>
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:80%;">
@@ -73,6 +76,12 @@
                         Pagamentos Previstos</a>
                 </p>
 
+                {% if subview_name == 'historico_cliente' %}
+                {% include "clientes/cliente_detail_historico.html" %}
+                {% elif subview_name == 'vendas_cliente' %}
+                {% include "clientes/cliente_detail_vendas.html" %}
+                {% endif %}
+
                 <h5 class="card-title text-bold bg-dark text-light">
                     {% if subview_name == 'historico_cliente' %} Histórico:{% endif %}
                     {% if subview_name == 'vendas_cliente' %} Vendas:{% endif %}
@@ -106,14 +115,16 @@
                         <td class="text-right">{{h.valor|floatformat:2}}</td>
                         <td>{{h.observacao|default_if_none:"---"}}</td>
                     </tr> 
-                    { % endfor   }
--->
+                    { % endfor   }-->
 
                 </table>
                 <h5 class="card-title text-bold bg-dark text-light text-right">{{table.valor|floatformat:2}}</h5>
                 </p>
+
             </div> <!-- card -->
-        </div> <!-- /container -->
+        </div>
+
+    </div> <!-- /container -->
 
 </main>
 

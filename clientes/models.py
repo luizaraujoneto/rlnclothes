@@ -4,7 +4,7 @@ from django.db.models import CharField
 
 import django_tables2 as tables
 
-from vendas.models import Vendas, ContasReceber
+from vendas.models import Vendas, ContasReceber, ItemVenda
 
 # Create your models here.
 
@@ -31,9 +31,7 @@ class Clientes(models.Model):
             or 0
         )
 
-        codvenda_list = []
-        for v in Vendas.objects.filter(cliente=self):
-            codvenda_list.append(v.codvenda)
+        codvenda_list = Vendas.objects.filter(cliente=self).values("codvenda")
 
         recebido = (
             ContasReceber.objects.filter(venda__in=codvenda_list).aggregate(
@@ -44,24 +42,36 @@ class Clientes(models.Model):
 
         return float(vendas - recebido)
 
-    def vendas(self):
-        colunas = [
-            "codvenda",
-            "datavenda",
-            "valorvenda",
-        ]
-        dados = (
-            Vendas.objects.filter(cliente=self)
-            .select_related("cliente")
-            .values_list(
-                "codvenda",
-                "datavenda",
-                "valorvenda",
-            )
-        )
+    def historico(self):
+        colunas = []
+        for f in HistoricoCliente()._meta.get_fields():
+            colunas.append(f.name)
+
+        dados = HistoricoCliente.objects.filter(cliente=self).values_list()
+
         valor = 0
         for v in dados:
-            valor = valor + v[2]
+            if v[2] == "V":
+                valor = valor + v[6]
+            else:
+                valor = valor - v[6]
+
+        table = {"colunas": colunas, "dados": dados, "valor": valor}
+
+        return table
+
+    def vendas(self):
+        colunas = ["codvenda", "datavenda", "descricao", "valorvenda", "observacao"]
+
+        dados = (
+            HistoricoCliente.objects.filter(cliente=self)
+            .filter(tipooperacao="V")
+            .values_list("codoperacao", "data", "descricao", "valor", "observacao")
+        )
+
+        valor = 0
+        for v in dados:
+            valor = valor + v[3]
 
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 
