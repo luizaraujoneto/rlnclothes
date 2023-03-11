@@ -2,21 +2,17 @@
 
 {% block content %}
 
-<main role="main">
-
-    <div class="jumbotron">
-        <h2 class="display-5"> Visualizar Cliente: {{cliente.codcliente}} </h2>
-    </div>
+<main role="main" style="padding-top: 60px;">
 
     <div class="container">
 
         <p><a class="btn btn-outline-info" href="{% url 'clientes' %}" role="button" title="Listagem de Clientes">
-                <i class="bi bi-list-columns-reverse"></i>
+                <i class="bi bi-arrow-left-square-fill"></i>
                 Clientes</a></p>
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:80%;">
-                <h5 class="card-title text-bold">Cliente: {{cliente.nomecliente}} </h5>
+                <h4 class="card-title text-bold">Cliente: {{cliente.nomecliente}} </h4>
                 <p class="card-text">
                 <table class="table table-sm" style="width:100%">
                     <tr>
@@ -24,12 +20,8 @@
                         <td>{{cliente.codcliente}}</td>
                     </tr>
                     <tr>
-                        <td>Nome</td>
-                        <td>{{cliente.nomecliente}}</td>
-                    </tr>
-                    <tr>
                         <td>Telefone</td>
-                        <td>{{cliente.telefone}}</td>
+                        <td>{{cliente.telefone|default_if_none:'---'}}</td>
                     </tr>
                     <tr>
                         <td>Saldo</td>
@@ -59,27 +51,33 @@
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:80%;">
                 <p>
-                    <a class="btn {% if subview_name == 'historico_cliente' %} btn-info {% else %} btn-outline-info {% endif %}my-2 my-sm-0 "
+                    <a class="btn {% if subview_name == 'historico_cliente' %} btn-success {% else %} btn-outline-info {% endif %}my-2 my-sm-0 "
                         href="{% url 'cliente_detail' cliente.codcliente 'historico_cliente' %}" role="button"
                         title="Histórico">
-                        <i class="bi bi-pencil-square"></i>
+                        <i class="bi bi-list-columns"></i>
                         Histórico</a>
-                    <a class="btn {% if subview_name == 'vendas_cliente' %} btn-info {% else %} btn-outline-info {% endif %}  my-2 my-sm-0 {% if view_name == 'vendas_cliente' %}active{% endif %}"
+                    <a class="btn {% if subview_name == 'vendas_cliente' %} btn-success {% else %} btn-outline-info {% endif %}  my-2 my-sm-0 {% if view_name == 'vendas_cliente' %}active{% endif %}"
                         href="{% url 'cliente_detail' cliente.codcliente 'vendas_cliente' %}" role="button"
                         title="Vendas">
-                        <i class="bi bi-pencil-square"></i>
+                        <i class="bi bi-handbag"></i>
                         Vendas</a>
-                    <a class="btn  {% if subview_name == 'pagamentos_cliente' %} btn-info {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
-                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_cliente' %}" role="button"
+                    <a class="btn  {% if subview_name == 'pagamentos_efetivos' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
+                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_efetivos' %}" role="button"
                         title="Pagamentos">
-                        <i class="bi bi-pencil-square"></i>
-                        Pagamentos</a>
+                        <i class="bi bi-currency-dollar"></i>
+                        Pagamentos Efetivos</a>
+                    <a class="btn  {% if subview_name == 'pagamentos_previstos' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
+                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_previstos' %}" role="button"
+                        title="Pagamentos">
+                        <i class="bi bi-currency-dollar"></i>
+                        Pagamentos Previstos</a>
                 </p>
 
                 <h5 class="card-title text-bold bg-dark text-light">
                     {% if subview_name == 'historico_cliente' %} Histórico:{% endif %}
                     {% if subview_name == 'vendas_cliente' %} Vendas:{% endif %}
-                    {% if subview_name == 'pagamentos_cliente' %} Pagamentos:{% endif %}
+                    {% if subview_name == 'pagamentos_efetivos' %} Pagamentos Efetivos:{% endif %}
+                    {% if subview_name == 'pagamentos_previstos' %} Pagamentos Previstos:{% endif %}
                 </h5>
 
 
@@ -88,15 +86,15 @@
                 <table class="table table-sm" style="width:100%">
 
                     <tr>
-                        {% for c in table.columns %}
+                        {% for c in table.colunas %}
                         <th>{{c}} </th>
                         {% endfor %}
                     </tr>
 
-                    {% for row in table %}
+                    {% for row in table.dados %}
                     <tr>
-                        {% for cell in row %}
-                        <td>{{cell}}</td>
+                        {% for value in row %}
+                        <td>{{value}}</td>
                         {% endfor %}
                     </tr>
                     {% endfor %}
@@ -110,12 +108,11 @@
                     </tr> 
                     { % endfor   }
 -->
+
                 </table>
+                <h5 class="card-title text-bold bg-dark text-light text-right">{{table.valor|floatformat:2}}</h5>
                 </p>
             </div> <!-- card -->
-
-
-
         </div> <!-- /container -->
 
 </main>

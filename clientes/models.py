@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models.functions import Trunc, Cast
-from django.db.models import CharField, Value
+from django.db.models.functions import Cast
+from django.db.models import CharField
 
 import django_tables2 as tables
 
@@ -45,31 +45,48 @@ class Clientes(models.Model):
         return float(vendas - recebido)
 
     def vendas(self):
-        v = (
+        colunas = [
+            "codvenda",
+            "datavenda",
+            "valorvenda",
+        ]
+        dados = (
             Vendas.objects.filter(cliente=self)
             .select_related("cliente")
-            .values_list("codvenda", "datavenda", "valorvenda")
-        )
-
-        v.annotate(
-            fdatavenda=Cast(
-                Trunc("datavenda", "day"), output_field=CharField("%Y-%m-%d")
+            .values_list(
+                "codvenda",
+                "datavenda",
+                "valorvenda",
             )
         )
+        valor = 0
+        for v in dados:
+            valor = valor + v[2]
 
-        vendas_do_cliente = v
-        return vendas_do_cliente
+        table = {"colunas": colunas, "dados": dados, "valor": valor}
 
-    def pagamentos(self):
+        return table
+
+    def pagamentos(self, tipo):
         codvenda_list = []
         for v in Vendas.objects.filter(cliente=self):
             codvenda_list.append(v.codvenda)
 
-        vendas_do_cliente = (
-            ContasReceber.objects.filter(venda__in=codvenda_list)
-            .select_related("cliente")
-            .values_list("codcontareceber", "datapagamento", "valorpago")
-        )
+        if tipo == "E":  # Pagamentos "E"fetivados
+            vendas_do_cliente = (
+                ContasReceber.objects.filter(venda__in=codvenda_list)
+                .filter(datapagamento__isnull=False)
+                .select_related("cliente")
+                .values("codcontareceber", "datapagamento", "valorpago")
+            )
+        elif tipo == "P":  # Pagamentos "P"revistos
+            vendas_do_cliente = (
+                ContasReceber.objects.filter(venda__in=codvenda_list)
+                .filter(datapagamento__isnull=True)
+                .select_related("cliente")
+                .values("codcontareceber", "datavencimento", "valorparcela")
+            )
+
         return vendas_do_cliente
 
     def __str__(self):

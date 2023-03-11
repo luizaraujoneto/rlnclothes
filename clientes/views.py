@@ -55,13 +55,16 @@ def cliente_delete(request, pk):
 
 def cliente_detail(request, pk, subview="historico_cliente"):
     cliente = get_object_or_404(Clientes, codcliente=pk)
+    table = []
 
     if subview == "historico_cliente":
-        table = HistoricoCliente.objects.filter(cliente=cliente).values_list()
+        table = HistoricoCliente.objects.filter(cliente=cliente).values()
     elif subview == "vendas_cliente":
         table = cliente.vendas()
-    elif subview == "pagamentos_cliente":
-        table = cliente.pagamentos()
+    elif subview == "pagamentos_efetivos":
+        table = cliente.pagamentos("E")
+    elif subview == "pagamentos_previstos":
+        table = cliente.pagamentos("P")
 
     context = {
         "cliente": cliente,

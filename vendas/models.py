@@ -94,7 +94,7 @@ class ContasReceber(models.Model):
     )
     datavencimento = models.DateField(db_column="datavencimento", blank=True, null=True)
     valorparcela = models.DecimalField(
-        db_column="ValorParcela", blank=True, null=True, max_digits=6, decimal_places=2
+        db_column="valorparcela", blank=True, null=True, max_digits=6, decimal_places=2
     )
     formapagamento = models.CharField(
         db_column="formapagamento", max_length=255, blank=True, null=True
