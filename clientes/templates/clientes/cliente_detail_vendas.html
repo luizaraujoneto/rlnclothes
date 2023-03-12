@@ -1,0 +1,27 @@
+<h5 class="card-title text-bold bg-dark text-light">Vendas:</h5>
+
+<p class="card-text">
+
+<table class="table table-sm" style="width:100%">
+
+    <tr>
+        <th>Id</th>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Observacao</th>
+    </tr>
+
+    {% for v in table.dados %}
+    <tr>
+        <td>{{v.0}}</td>
+        <td>{{v.1|date:"d/m/Y"}}</td>
+        <td>{{v.2}}</td>
+        <td>{{v.3|floatformat:2}}</td>
+        <td>{{v.4|default_if_none:"---"}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<h5 class="card-title text-bold bg-dark text-light text-right">Total de vendas: {{table.valor|floatformat:2}}</h5>
+</p>

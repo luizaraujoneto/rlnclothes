@@ -1,0 +1,27 @@
+<h5 class="card-title text-bold bg-dark text-light">Pagamentos recebidos: </h5>
+
+<div class="card-text">
+
+    <table class="table table-sm" style="width:100%">
+
+        <tr>
+            <th>Id</th>
+            <th>Data Pgto.</th>
+            <th>Forma Pgto.</th>
+            <th class="text-right">Valor Pago</th>
+            <th>Observação</th>
+        </tr>
+
+        {% for h in table.dados %}
+        <tr>
+            <td>{{h.0}}</td>
+            <td>{{h.1|date:"d/m/Y"}}</td>
+            <td>{{h.2|default_if_none:"---"}}</td>
+            <td class="text-right" style="color:blue">R$ {{h.3|floatformat:2}}</td>
+            <td>{{h.4|default_if_none:"---"}} </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <h5 class="card-title text-bold bg-dark text-light text-right">Total pagamentos: {{table.valor|floatformat:2}}</h5>
+</div>

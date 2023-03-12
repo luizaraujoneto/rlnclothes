@@ -1,0 +1,27 @@
+<h5 class="card-title text-bold bg-dark text-light">Valores a Receber: </h5>
+
+<div class="card-text">
+
+    <table class="table table-sm" style="width:100%">
+
+        <tr>
+            <th>Id Venda</th>
+            <th>Data Venda</th>
+            <th>Id</th>
+            <th>Data Vcto.</th>
+            <th class="text-right">Valor Previsto</th>
+        </tr>
+
+        {% for h in table.dados %}
+        <tr>
+            <td>{{h.0}}</td>
+            <td>{{h.1|date:"d/m/Y"}}</td>
+            <td>{{h.2}}</td>
+            <td>{{h.3|date:"d/m/Y"}}</td>
+            <td class="text-right" style="color:blue">R$ {{h.4|floatformat:2}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <h5 class="card-title text-bold bg-dark text-light text-right">Total a receber: {{table.valor|floatformat:2}}</h5>
+</div>

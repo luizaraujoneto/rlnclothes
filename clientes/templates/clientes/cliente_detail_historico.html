@@ -1,0 +1,35 @@
+<h5 class="card-title text-bold bg-dark text-light">Histórico: </h5>
+
+<div class="card-text">
+
+    <table class="table table-sm" style="width:100%">
+
+        <tr>
+            <th>Tipo</th>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Observacao</th>
+        </tr>
+
+        {% for h in table.dados %}
+        <tr>
+            <td>{%if h.2 == 'P' %}Pagamento{% else %} Venda {% endif %}</td>
+            <td>{{h.4|date:"d/m/Y"}}</td>
+            <td>{{h.5|default_if_none:"---"}}</td>
+            {%if h.2 == 'P' %}
+            <td class="text-right" style="color:red">
+                (R$ {{h.6|floatformat:2}})
+            </td>
+            {% else %}
+            <td class="text-right" style="color:blue">
+                R$ {{h.6|floatformat:2}}
+            </td>
+            {% endif %}
+            <td>{{h.7|default_if_none:"---"}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <h5 class="card-title text-bold bg-dark text-light text-right">Saldo: {{table.valor|floatformat:2}}</h5>
+</div>
