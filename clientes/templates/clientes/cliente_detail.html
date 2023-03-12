@@ -48,12 +48,8 @@
                     </tr>
                 </table>
                 </p>
-            </div> <!-- card-body -->
-        </div> <!-- card -->
 
-        <div class="card" style="align-items: center;">
-            <div class="card-body" style="align-items: center;width:80%;">
-                <p>
+                <div>
                     <a class="btn {% if subview_name == 'historico_cliente' %} btn-success {% else %} btn-outline-info {% endif %}my-2 my-sm-0 "
                         href="{% url 'cliente_detail' cliente.codcliente 'historico_cliente' %}" role="button"
                         title="Histórico">
@@ -64,65 +60,65 @@
                         title="Vendas">
                         <i class="bi bi-handbag"></i>
                         Vendas</a>
-                    <a class="btn  {% if subview_name == 'pagamentos_efetivos' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
-                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_efetivos' %}" role="button"
+                    <a class="btn  {% if subview_name == 'pagamentos_cliente' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
+                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_cliente' %}" role="button"
                         title="Pagamentos">
                         <i class="bi bi-currency-dollar"></i>
                         Pagamentos Efetivos</a>
-                    <a class="btn  {% if subview_name == 'pagamentos_previstos' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
-                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_previstos' %}" role="button"
+                    <a class="btn  {% if subview_name == 'areceber_cliente' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
+                        href="{% url 'cliente_detail' cliente.codcliente 'areceber_cliente' %}" role="button"
                         title="Pagamentos">
                         <i class="bi bi-currency-dollar"></i>
-                        Pagamentos Previstos</a>
-                </p>
+                        Contas a Receber</a>
+                </div>
+
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:80%;">
+
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link {% if subview_name == 'historico_cliente' %} active  bg-secondary text-light {% endif %}"
+                            aria-current="page"
+                            href="{% url 'cliente_detail' cliente.codcliente 'historico_cliente' %}">
+                            <i class="bi bi-list-columns"></i>
+                            Histórico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if subview_name == 'vendas_cliente' %}active  bg-secondary text-light {% endif %}"
+                            href="{% url 'cliente_detail' cliente.codcliente 'vendas_cliente' %}">
+                            <i class="bi bi-handbag"></i>
+                            Vendas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if subview_name == 'pagamentos_cliente' %}active bg-secondary text-light {% endif %}"
+                            href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_cliente' %}">
+                            <i class="bi bi-currency-dollar"></i>
+                            Pagamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if subview_name == 'areceber_cliente' %}active bg-secondary text-light {% endif %}"
+                            href="{% url 'cliente_detail' cliente.codcliente 'areceber_cliente' %}">
+                            <i class="bi bi-currency-dollar"></i>
+                            Contas a Receber</a>
+                    </li>
+                </ul>
 
                 {% if subview_name == 'historico_cliente' %}
                 {% include "clientes/cliente_detail_historico.html" %}
                 {% elif subview_name == 'vendas_cliente' %}
                 {% include "clientes/cliente_detail_vendas.html" %}
+                {% elif subview_name == 'pagamentos_cliente' %}
+                {% include "clientes/cliente_detail_pagamentos.html" %}
+                {% elif subview_name == 'areceber_cliente' %}
+                {% include "clientes/cliente_detail_areceber.html" %}
                 {% endif %}
 
-                <h5 class="card-title text-bold bg-dark text-light">
-                    {% if subview_name == 'historico_cliente' %} Histórico:{% endif %}
-                    {% if subview_name == 'vendas_cliente' %} Vendas:{% endif %}
-                    {% if subview_name == 'pagamentos_efetivos' %} Pagamentos Efetivos:{% endif %}
-                    {% if subview_name == 'pagamentos_previstos' %} Pagamentos Previstos:{% endif %}
-                </h5>
 
-
-                <p class="card-text">
-
-                <table class="table table-sm" style="width:100%">
-
-                    <tr>
-                        {% for c in table.colunas %}
-                        <th>{{c}} </th>
-                        {% endfor %}
-                    </tr>
-
-                    {% for row in table.dados %}
-                    <tr>
-                        {% for value in row %}
-                        <td>{{value}}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                    <!--
-                    <tr>
-                        <td>{{h.tipooperacao}}</td>
-                        <td>{{h.data|date:"d/m/Y"}}</td>
-                        <td>{{h.descricao}}</td>
-                        <td class="text-right">{{h.valor|floatformat:2}}</td>
-                        <td>{{h.observacao|default_if_none:"---"}}</td>
-                    </tr> 
-                    { % endfor   }-->
-
-                </table>
-                <h5 class="card-title text-bold bg-dark text-light text-right">{{table.valor|floatformat:2}}</h5>
-                </p>
-
-            </div> <!-- card -->
-        </div>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
 
     </div> <!-- /container -->
 

@@ -78,26 +78,44 @@ class Clientes(models.Model):
         return table
 
     def pagamentos(self, tipo):
-        codvenda_list = []
-        for v in Vendas.objects.filter(cliente=self):
-            codvenda_list.append(v.codvenda)
-
         if tipo == "E":  # Pagamentos "E"fetivados
-            vendas_do_cliente = (
-                ContasReceber.objects.filter(venda__in=codvenda_list)
-                .filter(datapagamento__isnull=False)
-                .select_related("cliente")
-                .values("codcontareceber", "datapagamento", "valorpago")
+            colunas = ["Id", "Data Pgto.", "Forma Pgto.", "Valor Pago", "Observação"]
+
+            dados = (
+                HistoricoCliente.objects.filter(cliente=self)
+                .filter(tipooperacao="P")
+                .values_list("codoperacao", "data", "descricao", "valor", "observacao")
             )
+
+            valor = 0
+            for v in dados:
+                valor = valor + v[3]
+
         elif tipo == "P":  # Pagamentos "P"revistos
-            vendas_do_cliente = (
+            colunas = ["Id Venda", "Data Venda", "Id", "Data Vcto.", "Valor Previsto"]
+
+            codvenda_list = Vendas.objects.filter(cliente=self).values_list("codvenda")
+
+            dados = (
                 ContasReceber.objects.filter(venda__in=codvenda_list)
                 .filter(datapagamento__isnull=True)
-                .select_related("cliente")
-                .values("codcontareceber", "datavencimento", "valorparcela")
+                .select_related("venda")
+                .values_list(
+                    "venda__codvenda",
+                    "venda__datavenda",
+                    "codcontareceber",
+                    "datavencimento",
+                    "valorparcela",
+                )
             )
 
-        return vendas_do_cliente
+            valor = 0
+            for v in dados:
+                valor = valor + v[4]
+
+        table = {"colunas": colunas, "dados": dados, "valor": valor}
+
+        return table
 
     def __str__(self):
         return self.nomecliente[:50]

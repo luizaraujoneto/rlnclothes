@@ -61,9 +61,9 @@ def cliente_detail(request, pk, subview="historico_cliente"):
         table = cliente.historico()
     elif subview == "vendas_cliente":
         table = cliente.vendas()
-    elif subview == "pagamentos_efetivos":
+    elif subview == "pagamentos_cliente":
         table = cliente.pagamentos("E")
-    elif subview == "pagamentos_previstos":
+    elif subview == "areceber_cliente":
         table = cliente.pagamentos("P")
 
     context = {
