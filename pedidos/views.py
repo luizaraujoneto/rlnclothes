@@ -14,7 +14,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Pedidos, PedidoTable, Produtos
 
-from vendas.models import ItemVenda
+# from vendas.models import ItemVenda
 
 
 def pedido_list(request):

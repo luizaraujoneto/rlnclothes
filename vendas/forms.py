@@ -2,7 +2,7 @@ from django import forms
 
 from fornecedores.models import Fornecedores
 from notasfiscais.models import NotasFiscais
-from vendas.models import Vendas, ItemVenda
+from vendas.models import Vendas  # , ItemVenda
 
 
 class VendasForm(forms.ModelForm):
@@ -12,9 +12,9 @@ class VendasForm(forms.ModelForm):
             "codvenda",
             "cliente",
             "datavenda",
+            "produto",
             "valorvenda",
             "observacao",
-            "condicaopagamento",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -22,8 +22,9 @@ class VendasForm(forms.ModelForm):
         self.fields["codvenda"].widget.attrs["readonly"] = "readonly"
         self.fields["datavenda"].widget = forms.DateInput(attrs={"type": "date"})
         self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
-        self.fields["condicaopagamento"].widget.attrs["width"] = 50
 
+
+"""
 
 class ItemVendaForm(forms.ModelForm):
     class Meta:
@@ -35,3 +36,5 @@ class ItemVendaForm(forms.ModelForm):
         self.fields["coditemvenda"].widget.attrs["readonly"] = "readonly"
         self.fields["venda"].widget = forms.HiddenInput()
         # self.fields["descricao"].widget.attrs["width"] = "50"
+
+"""

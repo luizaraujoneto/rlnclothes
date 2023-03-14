@@ -4,7 +4,8 @@ from django.db.models import CharField
 
 import django_tables2 as tables
 
-from vendas.models import Vendas, ContasReceber, ItemVenda
+from vendas.models import Vendas
+from pagamentos.models import Pagamentos
 
 # Create your models here.
 
@@ -26,17 +27,17 @@ class Clientes(models.Model):
     def saldocliente(self):
         vendas = (
             Vendas.objects.filter(cliente=self).aggregate(
-                vendas=models.Sum("valorvenda")
-            )["vendas"]
+                totalvendas=models.Sum("valorvenda")
+            )["totalvendas"]
             or 0
         )
 
-        codvenda_list = Vendas.objects.filter(cliente=self).values("codvenda")
-
         recebido = (
-            ContasReceber.objects.filter(venda__in=codvenda_list).aggregate(
-                recebido=models.Sum("valorpago")
-            )["recebido"]
+            Pagamentos.objects.filter(cliente=self)
+            .filter(tipopagamento="C")
+            .aggregate(totalpagamentoconfirmado=models.Sum("valorpagamento"))[
+                "totalpagamentoconfirmado"
+            ]
             or 0
         )
 
@@ -92,26 +93,23 @@ class Clientes(models.Model):
                 valor = valor + v[3]
 
         elif tipo == "P":  # Pagamentos "P"revistos
-            colunas = ["Id Venda", "Data Venda", "Id", "Data Vcto.", "Valor Previsto"]
-
-            codvenda_list = Vendas.objects.filter(cliente=self).values_list("codvenda")
+            colunas = ["Id", "Data Vencimento", "Valor Previsto", "Observação"]
 
             dados = (
-                ContasReceber.objects.filter(venda__in=codvenda_list)
-                .filter(datapagamento__isnull=True)
+                Pagamentos.objects.filter(cliente=self)
+                .filter(tipopagamento="P")
                 .select_related("venda")
                 .values_list(
-                    "venda__codvenda",
-                    "venda__datavenda",
-                    "codcontareceber",
-                    "datavencimento",
-                    "valorparcela",
+                    "codpagamento",
+                    "datapagamento",
+                    "valorpagamento",
+                    "observacao",
                 )
             )
 
             valor = 0
             for v in dados:
-                valor = valor + v[4]
+                valor = valor + v[2]
 
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 
@@ -134,6 +132,9 @@ class ClienteTable(tables.Table):
         model = Clientes
 
 
+# cliente, tipooperacao, codoperacao, data, descricao, valor, observacao
+
+
 class HistoricoCliente(models.Model):
     cliente = models.ForeignKey(
         Clientes,
@@ -153,7 +154,7 @@ class HistoricoCliente(models.Model):
         db_column="descricao", max_length=255, blank=True, null=True
     )
     valor = models.DecimalField(
-        db_column="valor", blank=True, null=True, max_digits=6, decimal_places=2
+        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
     )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True

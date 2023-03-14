@@ -1,7 +1,7 @@
 -- View: public.vw_historicocliente
 
 -- DROP VIEW public.vw_historicocliente;
-
+/*
 CREATE OR REPLACE VIEW public.vw_historicocliente
  AS
  SELECT (v.codcliente || 'V'::text) || iv.coditemvenda AS id,
@@ -32,3 +32,4 @@ UNION
 ALTER TABLE public.vw_historicocliente
     OWNER TO rlnclothesuser;
 
+*/

@@ -6,8 +6,8 @@ import django_tables2 as tables
 # Create your views here.
 from django.urls import reverse_lazy
 
-from .models import Vendas, VendaTable, ItemVenda
-from .forms import VendasForm, ItemVendaForm
+from .models import Vendas, VendaTable  # , ItemVenda
+from .forms import VendasForm  # , ItemVendaForm
 
 
 def venda_list(request):

@@ -5,10 +5,9 @@
     <table class="table table-sm" style="width:100%">
 
         <tr>
-            <th>Id Venda</th>
-            <th>Data Venda</th>
-            <th>Id</th>
-            <th>Data Vcto.</th>
+            <th>Id </th>
+            <th>Data Vencimento</th>
+            <th>Observacao</th>
             <th class="text-right">Valor Previsto</th>
         </tr>
 
@@ -16,9 +15,8 @@
         <tr>
             <td>{{h.0}}</td>
             <td>{{h.1|date:"d/m/Y"}}</td>
-            <td>{{h.2}}</td>
-            <td>{{h.3|date:"d/m/Y"}}</td>
-            <td class="text-right" style="color:blue">R$ {{h.4|floatformat:2}}</td>
+            <td>{{h.3|default_if_none:'---'}}</td>
+            <td class="text-right" style="color:blue">R$ {{h.2|floatformat:2}}</td>
         </tr>
         {% endfor %}
 
