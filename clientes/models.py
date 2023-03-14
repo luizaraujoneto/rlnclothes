@@ -24,6 +24,18 @@ class Clientes(models.Model):
     class Meta:
         db_table = "clientes"
 
+    def __str__(self):
+        return self.nomecliente[:50]
+
+    def save(self, *args, **kwargs):
+        if not self.codcliente:
+            max = Clientes.objects.aggregate(models.Max("codcliente"))[
+                "codcliente__max"
+            ]
+            self.codcliente = max + 1
+        super().save(*args, **kwargs)
+
+
     def saldocliente(self):
         vendas = (
             Vendas.objects.filter(cliente=self).aggregate(
@@ -114,17 +126,6 @@ class Clientes(models.Model):
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 
         return table
-
-    def __str__(self):
-        return self.nomecliente[:50]
-
-    def save(self, *args, **kwargs):
-        if not self.codcliente:
-            max = Clientes.objects.aggregate(models.Max("codcliente"))[
-                "codcliente__max"
-            ]
-            self.codcliente = max + 1
-        super().save(*args, **kwargs)
 
 
 class ClienteTable(tables.Table):

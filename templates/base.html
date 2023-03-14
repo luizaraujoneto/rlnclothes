@@ -18,11 +18,6 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color: #900C3F;">
         <span class=" navbar-brand mb-0 h1" style="color:#ffe484">RLNClothes</span>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
@@ -32,11 +27,22 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{% url 'clientes' %}" style="color:#ffe484">Clientes</a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{% url 'pedidos' %}" style="color:#ffe484">Pedidos</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color:#ffe484">Vendas</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="background-color: #900C3F;">
+                        <a class="dropdown-item" href="{% url 'vendas' %}" style="color:#ffe484">Vendas</a>
+                        <a class="dropdown-item" href="#" style="color:#ffe484">Pagamentos</a>
+                    </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:#ffe484">Notas Fiscais</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" style="color:#ffe484">Compras</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01" style="background-color: #900C3F;">
+                        <a class="dropdown-item" href="{% url 'pedidos' %}" style="color:#ffe484">Pedidos</a>
+                        <a class="dropdown-item" href="#" style="color:#ffe484">Produtos</a>
+                        <a class="dropdown-item" href="#" style="color:#ffe484">Notas Fiscais</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'vendas' %}" style="color:#ffe484">Vendas</a>
@@ -44,17 +50,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'relatorios' %}" style="color:#ffe484">Relatórios</a>
                 </li>
-                <!--
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">Configurações</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                -->
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'about' %}" style="color:#ffe484">Sobre</a>
                 </li>

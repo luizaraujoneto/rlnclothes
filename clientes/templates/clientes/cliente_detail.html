@@ -35,12 +35,12 @@
                             <p>
                                 <a class="btn btn-outline-warning my-2 my-sm-0"
                                     href="{% url 'cliente_edit' cliente.codcliente %}" role="button"
-                                    title="Alterar pedido">
+                                    title="Alterar cliente">
                                     <i class="bi bi-pencil-square"></i>
                                     Alterar</a>
                                 <a class="btn btn-outline-danger my-2 my-sm-0"
                                     href="{% url 'cliente_delete' cliente.codcliente %}" role="button"
-                                    title="Apagar pedido">
+                                    title="Apagar cliente">
                                     <i class="bi bi-trash"></i>
                                     Apagar</a>
                             </p>
@@ -50,26 +50,17 @@
                 </p>
 
                 <div>
-                    <a class="btn {% if subview_name == 'historico_cliente' %} btn-success {% else %} btn-outline-info {% endif %}my-2 my-sm-0 "
-                        href="{% url 'cliente_detail' cliente.codcliente 'historico_cliente' %}" role="button"
-                        title="Histórico">
-                        <i class="bi bi-list-columns"></i>
-                        Histórico</a>
-                    <a class="btn {% if subview_name == 'vendas_cliente' %} btn-success {% else %} btn-outline-info {% endif %}  my-2 my-sm-0 {% if view_name == 'vendas_cliente' %}active{% endif %}"
-                        href="{% url 'cliente_detail' cliente.codcliente 'vendas_cliente' %}" role="button"
-                        title="Vendas">
+                    <a class="btn btn-outline-info my-2 my-sm-0 "
+                        href="{% url 'cliente_novavenda' cliente.codcliente %}" role="button" title="Nova Venda">
                         <i class="bi bi-handbag"></i>
-                        Vendas</a>
-                    <a class="btn  {% if subview_name == 'pagamentos_cliente' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
-                        href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_cliente' %}" role="button"
-                        title="Pagamentos">
+                        Nova Venda</a>
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="#" role="button" title="Novo Pagamento">
                         <i class="bi bi-currency-dollar"></i>
-                        Pagamentos Efetivos</a>
-                    <a class="btn  {% if subview_name == 'areceber_cliente' %} btn-success {% else %} btn-outline-info {% endif %} my-2 my-sm-0"
-                        href="{% url 'cliente_detail' cliente.codcliente 'areceber_cliente' %}" role="button"
-                        title="Pagamentos">
+                        Novo Pagamento</a>
+                    <a class=" btn btn-outline-info my-2 my-sm-0" href="#" role="button"
+                        title="Ajustar Contas a Receber">
                         <i class="bi bi-currency-dollar"></i>
-                        Contas a Receber</a>
+                        Ajustar Contas a Receber</a>
                 </div>
 
             </div> <!-- card-body -->

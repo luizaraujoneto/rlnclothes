@@ -47,46 +47,16 @@ class Vendas(models.Model):
         managed = False
         db_table = "vendas"
 
+    def __str__(self):
+        return self.codvenda
+
+    def save(self, *args, **kwargs):
+        if not self.codvenda:
+            max = Vendas.objects.aggregate(models.Max("codvenda"))["codvenda__max"]
+            self.codvenda = max + 1
+        super().save(*args, **kwargs)
+
 
 class VendaTable(tables.Table):
     class Meta:
         model = Vendas
-
-
-""" 
-class ItemVenda(models.Model):
-    coditemvenda = models.IntegerField(
-        db_column="coditemvenda", blank=True, null=False, primary_key=True
-    )
-
-    venda = models.ForeignKey(
-        Vendas,
-        on_delete=models.PROTECT,
-        db_column="codvenda",
-        to_field="codvenda",
-        blank=True,
-        null=True,
-    )
-
-    produto = models.OneToOneField(
-        Produtos,
-        on_delete=models.PROTECT,
-        db_column="codproduto",
-        to_field="codproduto",
-        blank=True,
-        null=True,
-    )
-
-    valorvenda = models.DecimalField(
-        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
-    )
-    observacao = models.CharField(
-        db_column="observacao", max_length=255, blank=True, null=True
-    )
-
-    class Meta:
-        managed = False
-        db_table = "itemvenda"
-
-
-"""
