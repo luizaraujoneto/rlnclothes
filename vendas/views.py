@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import date
+from django import forms
 
-import django_tables2 as tables
-
+# import django_tables2 as tables
 
 # Create your views here.
 from django.urls import reverse_lazy
@@ -57,7 +57,7 @@ def venda_delete(request, pk):
                     {"venda": venda, "error_message": error_message},
                 )
 
-        return redirect("vendas")
+        return redirect("cliente_detail", venda.cliente.codcliente)
 
     return render(request, "vendas/venda_delete.html", {"venda": venda})
 
@@ -83,8 +83,8 @@ def venda_edit(request, pk):
 
     else:
         form = VendasForm(instance=venda)
-        form.fields["produto"].widget.attrs["disabled"] = "disabled"
+        form.fields["produto"].widget = forms.HiddenInput()
 
-    context = {"form": form, "cliente": venda.cliente}
+    context = {"form": form, "venda": venda}
 
     return render(request, "vendas/venda_edit.html", context)

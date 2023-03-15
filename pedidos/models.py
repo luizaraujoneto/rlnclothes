@@ -96,4 +96,4 @@ class Produtos(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.descricao[:20]
+        return self.descricao[:20] + " [Ref.:" + (self.referencia or "     ") + "]"

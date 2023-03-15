@@ -27,6 +27,18 @@
                         <td>{{cliente.telefone|default_if_none:'---'}}</td>
                     </tr>
                     <tr>
+                        <td>Total de Vendas</td>
+                        <td>{{cliente.totalvendas|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total de Pagamentos</td>
+                        <td>{{cliente.totalpagamentos|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total de Contas a Receber</td>
+                        <td>{{cliente.totalcontasareceber|floatformat:2}}</td>
+                    </tr>
+                    <tr>
                         <td>Saldo</td>
                         <td>{{cliente.saldocliente|floatformat:2}}</td>
                     </tr>
@@ -48,6 +60,13 @@
                     </tr>
                 </table>
                 </p>
+
+                {% if error_message %}
+                <div class="alert alert-danger">
+                    <strong>ATENÇÃO: </strong>{{error_message}}
+                    </ul>
+                </div>
+                {% endif %}
 
                 <div>
                     <a class="btn btn-outline-info my-2 my-sm-0 "

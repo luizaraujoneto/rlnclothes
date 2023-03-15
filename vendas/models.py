@@ -1,6 +1,7 @@
 from django.db import models
 import django_tables2 as tables
-
+from django.db.models.functions import Concat
+from django.db.models import Value
 
 # from clientes.models import Clientes
 
@@ -21,6 +22,7 @@ class Vendas(models.Model):
         on_delete=models.PROTECT,
         db_column="codcliente",
         to_field="codcliente",
+        # to_field_name=Concat("codcliente", Value(":"), "nomecliente"),
         blank=True,
         null=True,
     )
@@ -32,6 +34,7 @@ class Vendas(models.Model):
         on_delete=models.PROTECT,
         db_column="codproduto",
         to_field="codproduto",
+        # to_field_name=Concat("referencia", Value(":"), "descricao"),
         blank=True,
         null=True,
     )

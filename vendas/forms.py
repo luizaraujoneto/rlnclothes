@@ -11,8 +11,8 @@ class VendasForm(forms.ModelForm):
         fields = [
             "codvenda",
             "cliente",
-            "datavenda",
             "produto",
+            "datavenda",
             "valorvenda",
             "observacao",
         ]

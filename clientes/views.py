@@ -66,11 +66,17 @@ def cliente_detail(request, pk, subview="historico_cliente"):
     elif subview == "areceber_cliente":
         table = cliente.pagamentos("P")
 
+    error_message = ""
+
+    if cliente.totalcontasareceber() != cliente.saldocliente():
+        error_message = "'Saldo do cliente' diferente do 'Total de Contas a Receber'. É necessário ajustar os lançamentos em Contas a Receber."
+
     context = {
         "cliente": cliente,
         "view_name": "cliente_detail",
         "subview_name": subview,
         "table": table,
+        "error_message": error_message,
     }
 
     return render(request, "clientes\cliente_detail.html", context)

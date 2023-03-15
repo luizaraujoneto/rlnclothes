@@ -36,15 +36,16 @@ class Clientes(models.Model):
             self.codcliente = max + 1
         super().save(*args, **kwargs)
 
-    def saldocliente(self):
-        vendas = (
+    def totalvendas(self):
+        return (
             Vendas.objects.filter(cliente=self).aggregate(
                 totalvendas=models.Sum("valorvenda")
             )["totalvendas"]
             or 0
         )
 
-        recebido = (
+    def totalpagamentos(self):
+        return (
             Pagamentos.objects.filter(cliente=self)
             .filter(tipopagamento="C")
             .aggregate(totalpagamentoconfirmado=models.Sum("valorpagamento"))[
@@ -53,7 +54,21 @@ class Clientes(models.Model):
             or 0
         )
 
-        return float(vendas - recebido)
+    def totalcontasareceber(self):
+        return (
+            Pagamentos.objects.filter(cliente=self)
+            .filter(tipopagamento="P")
+            .aggregate(totalcontasareceber=models.Sum("valorpagamento"))[
+                "totalcontasareceber"
+            ]
+            or 0
+        )
+
+    def saldocliente(self):
+        vendas = self.totalvendas()
+        pagamentos = self.totalpagamentos()
+
+        return float(vendas - pagamentos)
 
     def historico(self):
         colunas = []
@@ -61,11 +76,6 @@ class Clientes(models.Model):
             colunas.append(f.name)
 
         dados = HistoricoCliente.objects.filter(cliente=self).values_list()
-        # dados = (
-        #    HistoricoCliente.objects.annotate(saldo=Sum("valor") * 2)
-        #    .filter(cliente=self)
-        #    .values_list()
-        # )
 
         valor = 0
         for v in dados:
