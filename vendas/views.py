@@ -83,7 +83,8 @@ def venda_edit(request, pk):
 
     else:
         form = VendasForm(instance=venda)
+        form.fields["produto"].widget.attrs["disabled"] = "disabled"
 
-    context = {"form": form}
+    context = {"form": form, "cliente": venda.cliente}
 
     return render(request, "vendas/venda_edit.html", context)

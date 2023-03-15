@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %} Editar pedido: {{form.numeropedido.value}} {% endblock %}
-
 {% block content %}
 
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Editar Pedido: {{form.numeropedido.value}} </h2>
+        <h2 class="display-5"> Editar Venda {{form.venda.codvenda}} </h2>
     </div>
 
     <div class="container">
@@ -22,7 +20,7 @@
                             <p>
                                 <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save">
                                 <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
-                                    onclick="location.href='{% url 'pedido_detail' form.codpedido.value %}'"
+                                    onclick="location.href='{% url 'cliente_detail' cliente.codcliente 'vendas_cliente' %}'"
                                     name="cancel" value="Cancelar">
 
                             </p>

@@ -1,8 +1,9 @@
 from django.db import models
 from django.db.models.functions import Cast
-from django.db.models import CharField
+from django.db.models import Sum
 
 import django_tables2 as tables
+
 
 from vendas.models import Vendas
 from pagamentos.models import Pagamentos
@@ -35,7 +36,6 @@ class Clientes(models.Model):
             self.codcliente = max + 1
         super().save(*args, **kwargs)
 
-
     def saldocliente(self):
         vendas = (
             Vendas.objects.filter(cliente=self).aggregate(
@@ -61,6 +61,11 @@ class Clientes(models.Model):
             colunas.append(f.name)
 
         dados = HistoricoCliente.objects.filter(cliente=self).values_list()
+        # dados = (
+        #    HistoricoCliente.objects.annotate(saldo=Sum("valor") * 2)
+        #    .filter(cliente=self)
+        #    .values_list()
+        # )
 
         valor = 0
         for v in dados:

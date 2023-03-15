@@ -5,63 +5,45 @@
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Detalhes do Pedido {{pedido.numeropedido}} </h2>
+        <h2 class="display-5"> Detalhes da Venda {{venda.codvenda}} </h2>
     </div>
 
     <div class="container">
 
-        <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button" title="Listagem de pedidos">
+        <p><a class="btn btn-outline-info" href="{% url 'cliente_detail' venda.cliente.codcliente 'vendas_cliente' %}"
+                role="button" title="Voltar para Detalhes do Cliente">
                 <i class="bi bi-list-columns-reverse"></i>
-                Pedidos</a></p>
+                Detalhes do Cliente</a></p>
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:60%;">
-                <h5 class="card-title text-bold">Pedido: {{pedido.numeropedido}} </h5>
+                <h5 class="card-title text-bold">Venda: {{venda.codvenda}} </h5>
                 <p class="card-text">
                 <table class="table" style="width:100%">
                     <tr>
-                        <td style="width: 25%; min-width: 25%;">Código</td>
-                        <td>{{pedido.codpedido}}</td>
+                        <td style="width: 25%; min-width: 25%;">Cliente</td>
+                        <td>{{venda.cliente.codcliente}} - {{venda.cliente.nomecliente}} </td>
                     </tr>
                     <tr>
-                        <td>Fornecedor</td>
-                        <td>{{pedido.fornecedor}}</td>
+                        <td>Produto</td>
+                        <td>{{venda.produto.codproduto}} - {{venda.produto.descricao}} </td>
                     </tr>
                     <tr>
-                        <td>Nota Fiscal</td>
-                        <td>{{pedido.notafiscal}}</td>
+                        <td>Preço de Custo</td>
+                        <td>{{venda.produto.valorcusto|floatformat:2}}</td>
                     </tr>
                     <tr>
-                        <td>Data </td>
-                        <td>{{pedido.datapedido|date:"d/m/Y"}}</td>
+                        <td>Data da Venda</td>
+                        <td>{{venda.datavenda|date:"d/m/Y"}}</td>
                     </tr>
                     <tr>
-                        <td>Valor</td>
-                        <td>{{pedido.valorpedido|floatformat:2}}</td>
+                        <td>Valor Venda</td>
+                        <td>{{venda.valorvenda|floatformat:2}}</td>
                     </tr>
                     <tr>
                         <td>Observação</td>
-                        <td>{{pedido.observacao}}</td>
+                        <td>{{venda.observacao}}</td>
                     </tr>
-                    {% if view_name == "list_produtos" %}
-                    <tr>
-                        <td> &nbsp;</td>
-                        <td class="text-right">
-                            <p>
-                                <a class="btn btn-outline-warning my-2 my-sm-0"
-                                    href="{% url 'pedido_edit' pedido.codpedido %}" role="button"
-                                    title="Alterar pedido">
-                                    <i class="bi bi-pencil-square"></i>
-                                    Alterar</a>
-                                <a class="btn btn-outline-danger my-2 my-sm-0"
-                                    href="{% url 'pedido_delete' pedido.codpedido %}" role="button"
-                                    title="Apagar pedido">
-                                    <i class="bi bi-trash"></i>
-                                    Apagar</a>
-                            </p>
-                        </td>
-                    </tr>
-                    {% endif %}
                 </table>
                 </p>
             </div> <!-- card-body -->
