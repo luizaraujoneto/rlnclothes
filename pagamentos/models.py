@@ -1,4 +1,5 @@
 from django.db import models
+import django_tables2 as tables
 
 # Create your models here.
 
@@ -17,8 +18,14 @@ class Pagamentos(models.Model):
         null=True,
     )
 
+    TIPOS_PAGAMENTO = [("C", "Confirmado"), ("P", "Previsto")]
+
     tipopagamento = models.CharField(
-        db_column="tipopagamento", max_length=1, blank=True, null=True
+        db_column="tipopagamento",
+        max_length=1,
+        blank=True,
+        null=True,
+        choices=TIPOS_PAGAMENTO,
     )
 
     datapagamento = models.DateField(db_column="datapagamento", blank=True, null=True)
@@ -36,6 +43,19 @@ class Pagamentos(models.Model):
         db_column="observacao", max_length=255, blank=True, null=True
     )
 
+    def save(self, *args, **kwargs):
+        if not self.codpagamento:
+            max = Pagamentos.objects.aggregate(models.Max("codpagamento"))[
+                "codpagamento__max"
+            ]
+            self.codpagamento = max + 1
+        super().save(*args, **kwargs)
+
     class Meta:
         managed = False
         db_table = "pagamentos"
+
+
+class PagamentoTable(tables.Table):
+    class Meta:
+        model = Pagamentos

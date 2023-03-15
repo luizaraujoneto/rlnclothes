@@ -65,7 +65,7 @@ def venda_delete(request, pk):
 def venda_detail(request, pk):
     venda = get_object_or_404(Vendas, codvenda=pk)
 
-    context = {"venda": venda, "view_name": "list_itemvendas"}
+    context = {"venda": venda}
 
     return render(request, "vendas/venda_detail.html", context)
 

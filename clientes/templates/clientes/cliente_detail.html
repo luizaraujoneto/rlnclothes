@@ -39,7 +39,7 @@
                         <td>{{cliente.totalcontasareceber|floatformat:2}}</td>
                     </tr>
                     <tr>
-                        <td>Saldo</td>
+                        <td>Saldo do Cliente</td>
                         <td>{{cliente.saldocliente|floatformat:2}}</td>
                     </tr>
                     <tr>
@@ -73,13 +73,17 @@
                         href="{% url 'cliente_novavenda' cliente.codcliente %}" role="button" title="Nova Venda">
                         <i class="bi bi-handbag"></i>
                         Nova Venda</a>
-                    <a class="btn btn-outline-info my-2 my-sm-0" href="#" role="button" title="Novo Pagamento">
+                    <a class="btn btn-outline-info my-2 my-sm-0"
+                        href="{% url 'cliente_novopagamento' cliente.codcliente %}" role="button"
+                        title="Novo Pagamento">
                         <i class="bi bi-currency-dollar"></i>
                         Novo Pagamento</a>
+                    <!--
                     <a class=" btn btn-outline-info my-2 my-sm-0" href="#" role="button"
                         title="Ajustar Contas a Receber">
                         <i class="bi bi-currency-dollar"></i>
                         Ajustar Contas a Receber</a>
+                    -->
                 </div>
 
             </div> <!-- card-body -->
@@ -90,28 +94,28 @@
 
                 <ul class="nav nav-tabs nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link {% if subview_name == 'historico_cliente' %} active  bg-secondary text-light {% endif %}"
+                        <a class="nav-link {% if subview_name == 'historico_cliente' %} active  bg-dark text-light {% endif %}"
                             aria-current="page"
                             href="{% url 'cliente_detail' cliente.codcliente 'historico_cliente' %}">
                             <i class="bi bi-list-columns"></i>
                             Histórico</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if subview_name == 'vendas_cliente' %}active  bg-secondary text-light {% endif %}"
+                        <a class="nav-link {% if subview_name == 'vendas_cliente' %}active  bg-dark text-light {% endif %}"
                             href="{% url 'cliente_detail' cliente.codcliente 'vendas_cliente' %}">
                             <i class="bi bi-handbag"></i>
                             Vendas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if subview_name == 'pagamentos_cliente' %}active bg-secondary text-light {% endif %}"
+                        <a class="nav-link {% if subview_name == 'pagamentos_cliente' %}active bg-dark text-light {% endif %}"
                             href="{% url 'cliente_detail' cliente.codcliente 'pagamentos_cliente' %}">
                             <i class="bi bi-currency-dollar"></i>
                             Pagamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if subview_name == 'areceber_cliente' %}active bg-secondary text-light {% endif %}"
+                        <a class="nav-link {% if subview_name == 'areceber_cliente' %}active bg-dark text-light {% endif %}"
                             href="{% url 'cliente_detail' cliente.codcliente 'areceber_cliente' %}">
-                            <i class="bi bi-currency-dollar"></i>
+                            <i class="bi bi-bank"></i>
                             Contas a Receber</a>
                     </li>
                 </ul>

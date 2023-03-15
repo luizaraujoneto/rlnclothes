@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main role="main">
+
+    <div class="jumbotron">
+        <h2 class="display-5"> Detalhes do Pagamento {{pagamento.codpagamento}} </h2>
+    </div>
+
+    <div class="container">
+
+        <p>
+            {% if pagamento.tipopagamento == 'C' %}
+            <a class="btn btn-outline-info"
+                href="{% url 'cliente_detail' pagamento.cliente.codcliente 'pagamentos_cliente' %}" role="button"
+                title="Voltar para Detalhes do Cliente">
+                <i class="bi bi-list-columns-reverse"></i>
+                Detalhes do Cliente</a>
+            {% else %}
+            <a class="btn btn-outline-info"
+                href="{% url 'cliente_detail' pagamento.cliente.codcliente 'areceber_cliente' %}" role="button"
+                title="Voltar para Detalhes do Cliente">
+                <i class="bi bi-list-columns-reverse"></i>
+                Detalhes do Cliente</a>
+            {% endif %}
+        </p>
+
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:60%;">
+                <h5 class="card-title text-bold">Pagamento: {{pagamento.codpagamento}} </h5>
+                <p class="card-text">
+                <table class="table" style="width:100%">
+                    <tr>
+                        <td style="width: 30%; min-width: 25%;">Cliente</td>
+                        <td>{{pagamento.cliente.codcliente}} - {{pagamento.cliente.nomecliente}} </td>
+                    </tr>
+                    <tr>
+                        <td>Tipo de Pagamento</td>
+                        <td>
+                            {% if pagamento.tipopagamento == 'C' %}
+                            Pagamento Confirmado
+                            {% else %}
+                            Contas a Receber
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Data do Pagamento</td>
+                        <td>{{pagamento.datapagamento|date:"d/m/Y"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor Pagamento</td>
+                        <td>{{pagamento.valorpagamento|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Forma de Pagamento</td>
+                        <td>{{pagamento.formapagamento|default_if_none:"---"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observação</td>
+                        <td>{{pagamento.observacao|default_if_none:"---"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-right" colspan="2">
+                            <p>
+                                <a class="btn btn-outline-warning my-2 my-sm-0"
+                                    href="{% url 'pagamento_edit' pagamento.codpagamento %}" role="button"
+                                    title="Alterar cliente">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Alterar</a>
+                                <a class="btn btn-outline-danger my-2 my-sm-0"
+                                    href="{% url 'pagamento_delete' pagamento.codpagamento %}" role="button"
+                                    title="Apagar cliente">
+                                    <i class="bi bi-trash"></i>
+                                    Apagar</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+    </div> <!-- container -->
+
+</main>
+
+
+{% endblock content %}

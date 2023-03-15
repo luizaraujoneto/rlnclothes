@@ -15,7 +15,12 @@
 
         {% for h in table.dados %}
         <tr>
-            <td>{%if h.2 == 'P' %}Pagamento{% else %} Venda {% endif %}</td>
+            <td>{%if h.2 == 'P' %}
+                <i class="bi bi-currency-dollar"></i> Pagamento
+                {% else %}
+                <i class="bi bi-handbag"></i> Venda
+                {% endif %}
+            </td>
             <td>{{h.4|date:"d/m/Y"}}</td>
             <td>{{h.5|default_if_none:"---"}}</td>
             {%if h.2 == 'P' %}

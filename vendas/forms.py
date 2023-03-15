@@ -1,8 +1,6 @@
 from django import forms
 
-from fornecedores.models import Fornecedores
-from notasfiscais.models import NotasFiscais
-from vendas.models import Vendas  # , ItemVenda
+from vendas.models import Vendas
 
 
 class VendasForm(forms.ModelForm):

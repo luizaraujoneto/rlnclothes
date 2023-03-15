@@ -49,38 +49,6 @@
             </div> <!-- card-body -->
         </div> <!-- card -->
 
-
-
-        {% if view_name == "create_produto" %}
-        <div class="card" style="align-items: center;">
-            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
-                <h5>Criar Produto:</h5>
-            </div>
-            {% include 'pedidos/produto_edit.html'%}
-        </div> <!-- card -->
-        {% endif %}
-
-        {% if view_name == "edit_produto" %}
-        <div class="card" style="align-items: center;">
-            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
-                <h5>Alterar Produto:</h5>
-            </div>
-            {% include 'pedidos/produto_edit.html'%}
-        </div> <!-- card -->
-        {% endif %}
-
-        {% if view_name == "detail_produto" %}
-        {% include 'pedidos/produto_detail.html' %}
-        {% endif %}
-
-        {% if view_name == "delete_produto" %}
-        {% include 'pedidos/produto_delete.html' %}
-        {% endif %}
-
-        {% if view_name == "list_produtos" %}
-        {% include 'pedidos/produto_list.html' %}
-        {% endif %}
-
     </div> <!-- container -->
 
 </main>
