@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% load humanize %}
+
+{% block content %}
+<main role="main">
+    <div class="jumbotron">
+        <h1 class="display-4">Saldo em Aberto por Cliente</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Cód. Cliente</th>
+                        <th>Nome Cliente</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{cliente.codcliente}}</td>
+                        <td>{{cliente.nomecliente}}</td>
+                        <td class="text-right">R$ {{cliente.saldocliente|floatformat:2}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <table class="table table-striped table-sm">
+                <tfoot>
+                    <tr class="text-right">
+                        <td>
+                            <strong>Total a receber: R$ {{saldototalclientes|floatformat:2}}</strong>
+                        </td>
+                    </tr>
+                    <tr class="text-left">
+                        <td>
+                            <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+
+
+        </div><!-- /row -->
+    </div><!-- /container -->
+</main>
+
+{% endblock content %}

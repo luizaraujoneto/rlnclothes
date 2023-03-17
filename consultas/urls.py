@@ -12,4 +12,14 @@ urlpatterns = [
         views.consulta_detail_produto,
         name="consulta_detail_produto",
     ),
+    path(
+        "consulta_saldo_por_cliente",
+        views.consulta_saldo_por_cliente,
+        name="consulta_saldo_por_cliente",
+    ),
+    path(
+        "consulta_contas_receber",
+        views.consulta_contas_receber,
+        name="consulta_contas_receber",
+    ),
 ]

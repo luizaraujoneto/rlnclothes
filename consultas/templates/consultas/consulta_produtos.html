@@ -5,9 +5,18 @@
 {% load humanize %}
 
 {% block content %}
-<main role="main">
+<main role="main"
+    onload="document.getElementById('tipoconsulta').value = '{{ tipoconsulta }}'; alert(document.getElementById('tipoconsulta').value)">
     <div class="jumbotron">
-        <h1 class="display-4">Consulta de produtos:</h1>
+        <h1 class="display-4">
+            {% if tipoconsulta == "T" %}
+            Listar Todos os Produtos
+            {% elif tipoconsulta == "D" %}
+            Listar Produtos Disponíveis
+            {% elif tipoconsulta == "V" %}
+            Listar Produtos Vendidos
+            {% endif %}
+        </h1>
     </div>
 
     <div class="container">
@@ -15,7 +24,7 @@
             <form method="GET">
                 <p>
                     <select name="tipoconsulta">
-                        <option value="A">Todos os produtos</option>
+                        <option value="T">Todos os produtos</option>
                         <option value="D">Apenas os Disponíveis</option>
                         <option value="V">Apenas os vendidos</option>
                     </select>
