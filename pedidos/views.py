@@ -14,7 +14,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Pedidos, PedidoTable, Produtos
 
-# from vendas.models import ItemVenda
+from vendas.models import Vendas
 
 
 def pedido_list(request):
@@ -126,13 +126,13 @@ def produto_detail(request, codproduto):
     produto = get_object_or_404(Produtos, codproduto=codproduto)
 
     try:
-        itemvenda = ItemVenda.objects.get(produto=produto)
+        venda = Vendas.objects.get(produto=produto)
     except:
-        itemvenda = None
+        venda = None
 
     context = {
         "produto": produto,
-        "itemvenda": itemvenda,
+        "venda": venda,
         "pedido": produto.pedido,
         "view_name": "detail_produto",
     }

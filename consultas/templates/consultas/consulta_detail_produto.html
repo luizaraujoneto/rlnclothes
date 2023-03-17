@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% load humanize %}
+
+{% block content %}
+
+<main role="main">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-5">Produto: {{produto.codproduto}} - {{produto.descricao}}:</h1>
+        </div>
+
+        <div class="row">
+            <div class="card-body" style="align-items: center;width:60%;">
+                <div class="card-text">
+                    <h5 class="text-left bg-dark text-light">Detalhes do produto </h5>
+
+                    <table class="table tb-sm" style="width:100%">
+                        <tr>
+                            <td style="width: 25%; min-width: 25%;">Código</td>
+                            <td>{{produto.codprodutofornecedor}}</td>
+                        </tr>
+                        <tr>
+                            <td>Referência</td>
+                            <td>{{produto.referencia}}</td>
+                        </tr>
+                        <tr>
+                            <td>Valor Custo</td>
+                            <td>{{produto.valorcusto|floatformat:2}}</td>
+                        </tr>
+                        <tr>
+                            <td>Observação</td>
+                            <td>{{produto.observacao}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h5 class="text-left bg-dark text-light">Detalhes da Compra:</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Número do Pedido</td>
+                            <td> {{produto.pedido.numeropedido}}</td>
+                        </tr>
+                        <tr>
+                            <td>Data da Compra</td>
+                            <td> {{produto.pedido.datapedido|date:"d/m/Y"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fornecedor</td>
+                            <td> {{produto.pedido.fornecedor}}</td>
+                        </tr>
+                        {% if venda %}
+                        <tr>
+                            <td colspan="2">
+                                <h5 class="text-left bg-dark text-light">Detalhes da venda:</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cód.Venda</td>
+                            <td>{{venda.codvenda}}</td>
+                        </tr>
+                        <tr>
+                            <td>Data Venda</td>
+                            <td>{{venda.datavenda|date:"d/m/Y"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cliente</td>
+                            <td>{{venda.cliente.codcliente}} - {{venda.cliente.nomecliente}}</td>
+                        </tr>
+                        <tr>
+                            <td>Valor Venda</td>
+                            <td>{{venda.valorvenda|floatformat:2}}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2">
+                                <h5 class="text-left bg-light">Não foram encontradas informações de venda para esse
+                                    produto.
+                                </h5>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="2">
+                                <input class="btn btn-outline-info my-2 my-sm-0" type="button"
+                                    onclick="location.href='{% url 'consulta_produtos' %}'" name="voltar"
+                                    value="Voltar">
+                            </td>
+                        </tr>
+                    </table>
+                </div> <!-- card-text -->
+            </div> <!-- card-body -->
+
+        </div> <!-- row -->
+    </div> <!-- /container -->
+</main>
+
+{% endblock content %}

@@ -23,7 +23,7 @@
             <td>Observação</td>
             <td>{{produto.observacao}}</td>
         </tr>
-        {% if itemvenda %}
+        {% if venda %}
         <tr>
             <td colspan="2">
                 <h5 class="text-left bg-dark text-light">Detalhes da venda:</h5>
@@ -31,19 +31,19 @@
         </tr>
         <tr>
             <td>Cód.Venda</td>
-            <td>{{itemvenda.venda.codvenda}}</td>
+            <td>{{venda.codvenda}}</td>
         </tr>
         <tr>
             <td>Data Venda</td>
-            <td>{{itemvenda.venda.datavenda|date:"d/m/Y"}}</td>
+            <td>{{venda.datavenda|date:"d/m/Y"}}</td>
         </tr>
         <tr>
             <td>Cliente</td>
-            <td>{{itemvenda.venda.cliente.codcliente}} - {{itemvenda.venda.cliente.nomecliente}}</td>
+            <td>{{venda.cliente.codcliente}} - {{venda.cliente.nomecliente}}</td>
         </tr>
         <tr>
             <td>Valor Venda</td>
-            <td>{{itemvenda.valorvenda|floatformat:2}}</td>
+            <td>{{venda.valorvenda|floatformat:2}}</td>
         </tr>
         {% else %}
         <tr>
