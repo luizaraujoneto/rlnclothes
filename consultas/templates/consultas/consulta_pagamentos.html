@@ -7,7 +7,7 @@
 {% block content %}
 <main role="main">
     <div class="jumbotron">
-        <h1 class="display-4">Contas a Receber</h1>
+        <h1 class="display-4">{{titulo}}</h1>
     </div>
 
     <div class="container">
@@ -23,16 +23,16 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>Data Pagamento</th>
+                        <th class="text-center">Data Pagamento</th>
                         <th>Nome Cliente</th>
-                        <th>Valor a Pagar</th>
+                        <th class="text-right">Valor Pagamento</th>
                         <th>Observação</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for pagamento in mes.pagamentosmes %}
                     <tr>
-                        <td>{{pagamento.datapagamento|date:"d/m/Y"}}</td>
+                        <td class="text-center">{{pagamento.datapagamento|date:"d/m/Y"}}</td>
                         <td>{{pagamento.cliente.codcliente}} -
                             {{pagamento.cliente.nomecliente}}</td>
                         <td class="text-right">R$ {{pagamento.valorpagamento|floatformat:2}}</td>

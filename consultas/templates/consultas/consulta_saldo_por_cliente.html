@@ -17,31 +17,41 @@
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
-                        <th>Cód. Cliente</th>
+                        <th class="text-center">Cód. Cliente</th>
                         <th>Nome Cliente</th>
-                        <th>Saldo</th>
+                        <th class="text-right">Saldo a Pagar</th>
+                        <th class="text-right">Saldo a Receber</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for cliente in clientes %}
                     <tr>
-                        <td>{{cliente.codcliente}}</td>
+                        <td class="text-center">{{cliente.codcliente}}</td>
                         <td>{{cliente.nomecliente}}</td>
                         <td class="text-right">R$ {{cliente.saldocliente|floatformat:2}}</td>
+                        <td class="text-right">R$ {{cliente.totalcontasareceber|floatformat:2}}</td>
+                        <th>
+                            {% if cliente.saldocliente != cliente.totalcontasareceber %}
+                            <i class="bi bi-patch-exclamation" style="color:red"
+                                title="Valores inconsistentes. Verificar!"></i>
+                            {% endif %}
+                        </th>
                     </tr>
                     {% endfor %}
                 </tbody>
-            </table>
-
-            <table class="table table-striped table-sm">
                 <tfoot>
                     <tr class="text-right">
-                        <td>
+                        <td colspan="3">
                             <strong>Total a receber: R$ {{saldototalclientes|floatformat:2}}</strong>
                         </td>
+                        <td>
+                            <strong>Total a receber: R$ {{saldocontasaReceber|floatformat:2}}</strong>
+                        </td>
+                        <td>&nbsp;</td>
                     </tr>
                     <tr class="text-left">
-                        <td>
+                        <td colspan="4">
                             <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
                         </td>
                     </tr>

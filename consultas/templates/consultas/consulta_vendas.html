@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% load humanize %}
+
+{% block content %}
+<main role="main">
+    <div class="jumbotron">
+        <h1 class="display-4">{{titulo}}</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <form method="GET">
+                <p>
+                    <select name="mesanoconsulta">
+                        <option value="all">Todas as vendas</option>
+                        {% for mes in meses %}
+                        <option value="{{mes.mesano}}">{{mes.mesano}}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filtrar">
+                </p>
+            </form>
+
+        </div>
+
+        <div class="row">
+
+            {% for mes in meses %}
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr aria-colspan="4">
+                        <th colspan="4">
+                            <h5>Mês : {{mes.mesano}}</h5>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Data Venda</th>
+                        <th>Cliente</th>
+                        <th>Produto</th>
+                        <th class="text-right">Valor Custo</th>
+                        <th class="text-right">Valor Venda</th>
+                        <th class="text-center">%</th>
+                        <th class="text-right">Valor Lucro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in mes.vendasmes %}
+                    <tr>
+                        <td class="text-center">{{venda.datavenda|date:"d/m/Y"}}</td>
+                        <td>{{venda.cliente.codcliente}} -
+                            {{venda.cliente.nomecliente}}</td>
+                        <td>{{venda.produto.codproduto}} - {{venda.produto}} </td>
+                        <td class="text-right">R$ {{venda.produto.valorcusto|floatformat:2}} </td>
+                        <td class="text-right">R$ {{venda.valorvenda|floatformat:2}}</td>
+                        <td class="text-right">{{venda.percentual|floatformat:2}}%</td>
+                        <td class="text-right">R$ {{venda.lucro|floatformat:2}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="3"> Totais:</td>
+                        <td class="text-right"><strong> R$ {{mes.totalcustomes|floatformat:2}} </strong></td>
+                        <td class="text-right"><strong> R$ {{mes.totalvendasmes|floatformat:2}} </strong></td>
+                        <td>&nbsp;</td>
+                        <td class="text-right"><strong> R$ {{mes.totallucromes|floatformat:2}} </strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% endfor %}
+
+            <table class="table table-striped table-sm">
+                <tfoot>
+                    <tr class="text-right">
+                        <td class="text-right"> Total de Custo: <strong> R$ {{totalgeralcusto|floatformat:2}} </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">Total de Vendas: <strong> R$ {{totalgeralvendas|floatformat:2}} </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right"> Lucro total: <strong> R$ {{totalgerallucro|floatformat:2}} </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">
+                            <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div><!-- /row -->
+    </div><!-- /container -->
+</main>
+
+{% endblock content %}
