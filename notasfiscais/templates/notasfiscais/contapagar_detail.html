@@ -1,0 +1,45 @@
+<div class="card-body" style="align-items: center;width:60%;">
+    <p class="card-text">
+    <h5 class="text-left bg-dark text-light">Detalhes da Conta a Pagar:</h5>
+
+    <table class="table tb-sm" style="width:100%">
+        <tr>
+            <td>Código</td>
+            <td>{{contapagar.codcontapagar}}</td>
+        </tr>
+        <tr>
+            <td>Parcela</td>
+            <td>{{contapagar.parcela}}</td>
+        </tr>
+        <tr>
+            <td>Data Vencimento</td>
+            <td>{{contapagar.datavencimento|date:"d/m/Y"}}</td>
+        </tr>
+        <tr>
+            <td>Valor Parcela</td>
+            <td>{{contapagar.valorparcela|floatformat:2}}</td>
+        </tr>
+        <tr>
+            <td>Data Pagamento</td>
+            <td>{{contapagar.datapagameneto|date:"d/m/Y"}}</td>
+        </tr>
+        <tr>
+            <td>Forma de Pagamento</td>
+            <td>{{contapagar.formapagamento|default_if_none:"---"}}</td>
+        </tr>
+        <tr>
+            <td>Observação</td>
+            <td>{{contapagar.observacao|default_if_none:"---"}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input class="btn btn-outline-info my-2 my-sm-0" type="button"
+                    onclick="location.href='{% url 'notafiscal_detail' contapagar.notafiscal.codnotafiscal %}'"
+                    name="voltar" value="Voltar">
+            </td>
+        </tr>
+    </table>
+    </p>
+
+    </p>
+</div> <!-- card-body -->

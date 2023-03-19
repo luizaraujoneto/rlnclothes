@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main role="main">
+
+    <div class="jumbotron">
+        <h2 class="display-5"> Detalhes da Nota Fiscal {{notafiscal.numeronotafiscal}} </h2>
+    </div>
+
+    <div class="container">
+
+        <p><a class="btn btn-outline-info" href="{% url 'notasfiscais' %}" role="button"
+                title="Listagem de Notas Fiscais">
+                <i class="bi bi-arrow-left-square-fill"></i>
+                Notas Fiscais</a></p>
+
+        <div class="card" style="align-items: left;">
+            <div class="card-body" style="align-items: center;width:60%;">
+                <h5 class="card-title text-bold">Nota Fiscal: {{notafiscal.numeronotafiscal}} </h5>
+                <p class="card-text">
+                <table class="table" style="width:100%">
+                    <tr>
+                        <td style="width: 25%; min-width: 25%;">Código</td>
+                        <td>{{notafiscal.codnotafiscal}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fornecedor</td>
+                        <td>{{notafiscal.fornecedor}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data </td>
+                        <td>{{notafiscal.datanotafiscal|date:"d/m/Y"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor</td>
+                        <td>{{notafiscal.valornotafiscal|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observação</td>
+                        <td>{{notafiscal.observacao|default_if_none:"---"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Forma de Pagamento</td>
+                        <td>{{notafiscal.formapagamento|default_if_none:"---"}}</td>
+                    </tr>
+                    {% if view_name == "list_contaspagar" %}
+                    <tr>
+                        <td> &nbsp;</td>
+                        <td class="text-right">
+                            <p>
+                                <a class="btn btn-outline-warning my-2 my-sm-0"
+                                    href="{% url 'notafiscal_edit' notafiscal.codnotafiscal %}" role="button"
+                                    title="Alterar notafiscal">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Alterar</a>
+                                <a class="btn btn-outline-danger my-2 my-sm-0"
+                                    href="{% url 'notafiscal_delete' notafiscal.codnotafiscal %}" role="button"
+                                    title="Apagar notafiscal">
+                                    <i class="bi bi-trash"></i>
+                                    Apagar</a>
+                            </p>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+                </p>
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+
+        {% if error_message %}
+        <div class="alert alert-danger">
+            <strong>ATENÇÃO: </strong>{{error_message}}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if view_name == "create_contapagar" or view_name == "edit_contapagar" %}
+        {% include 'notasfiscais/contapagar_edit.html'%}
+        {% endif %}
+
+        {% if view_name == "detail_contapagar" %}
+        {% include 'notasfiscais/contapagar_detail.html' %}
+        {% endif %}
+
+        {% if view_name == "delete_contapagar" %}
+        {% include 'notasfiscais/contapagar_delete.html' %}
+        {% endif %}
+
+        {% if view_name == "list_contaspagar" %}
+        {% include 'notasfiscais/contapagar_list.html' %}
+        {% endif %}
+
+    </div> <!-- container -->
+
+</main>
+
+
+{% endblock content %}
