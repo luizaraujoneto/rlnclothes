@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import F, FloatField, ExpressionWrapper
 from datetime import datetime
 
+from django.db.models.functions import ExtractMonth, ExtractYear, Concat
+from django.db.models import Value, CharField
+
 # Create your views here.
 
 from pedidos.models import Produtos
@@ -113,12 +116,13 @@ def consulta_pagamentos(request, tipopagamento):
 
         if mesanopagamento != mesanoatual:
             if mesanoatual != "":
-                meses.append(
+                meses.insert(
+                    0,
                     {
                         "mesano": mesanoatual,
                         "totalmes": totalmes,
                         "pagamentosmes": pagamentosmes,
-                    }
+                    },
                 )
 
             mesanoatual = mesanopagamento
@@ -129,6 +133,15 @@ def consulta_pagamentos(request, tipopagamento):
         totalmes = totalmes + p.valorpagamento
 
         totalgeral = totalgeral + p.valorpagamento
+
+    meses.insert(
+        0,
+        {
+            "mesano": mesanoatual,
+            "totalmes": totalmes,
+            "pagamentosmes": pagamentosmes,
+        },
+    )
 
     datareferencia = datetime.now()
 
@@ -143,9 +156,9 @@ def consulta_pagamentos(request, tipopagamento):
 
 
 def consulta_vendas(request):
-    filtro = request.GET.get("mesano", "__all__")
+    filtro = request.POST.get("mesanoconsulta", "__all__")
 
-    all = (
+    vendas = (
         Vendas.objects.annotate(
             lucro=ExpressionWrapper(
                 F("valorvenda") - F("produto__valorcusto"),
@@ -158,6 +171,14 @@ def consulta_vendas(request):
                 output_field=FloatField(),
             )
         )
+        .annotate(
+            mesanovenda=Concat(
+                ExtractMonth("datavenda"),
+                Value("/"),
+                ExtractYear("datavenda"),
+                output_field=CharField(),
+            )
+        )
         .all()
         .order_by("datavenda")
     )
@@ -165,6 +186,7 @@ def consulta_vendas(request):
     titulo = "Vendas por Mês/Ano"
 
     meses = []
+    mesanofiltro = []
     mesanoatual = ""
     totalcustomes = 0.0
     totalvendasmes = 0.0
@@ -172,19 +194,29 @@ def consulta_vendas(request):
     totalgeralvendas = 0.0
     vendasmes = []
 
-    for v in all:
-        mesanovenda = v.datavenda.strftime("%m/%Y")
+    m = ""
+    for v in vendas.values_list("mesanovenda"):
+        if v[0] != m:
+            mesanofiltro.insert(0, v[0])
+            m = v[0]
+
+    for v in vendas:
+        mesanovenda = v.mesanovenda  # v.datavenda.strftime("%m/%Y")
+
+        if filtro != "__all__" and filtro != mesanovenda:
+            continue
 
         if mesanovenda != mesanoatual:
             if mesanoatual != "":
-                meses.append(
+                meses.insert(
+                    0,
                     {
                         "mesano": mesanoatual,
                         "totalcustomes": totalcustomes,
                         "totalvendasmes": totalvendasmes,
                         "totallucromes": totalvendasmes - totalcustomes,
                         "vendasmes": vendasmes,
-                    }
+                    },
                 )
 
             mesanoatual = mesanovenda
@@ -199,6 +231,17 @@ def consulta_vendas(request):
         totalgeralcusto = totalgeralcusto + v.produto.valorcusto
         totalgeralvendas = totalgeralvendas + v.valorvenda
 
+    meses.insert(
+        0,
+        {
+            "mesano": mesanoatual,
+            "totalcustomes": totalcustomes,
+            "totalvendasmes": totalvendasmes,
+            "totallucromes": totalvendasmes - totalcustomes,
+            "vendasmes": vendasmes,
+        },
+    )
+
     datareferencia = datetime.now()
 
     context = {
@@ -208,6 +251,7 @@ def consulta_vendas(request):
         "totalgeralvendas": totalgeralvendas,
         "totalgerallucro": totalgeralvendas - totalgeralcusto,
         "datareferencia": datareferencia,
+        "mesanofiltro": mesanofiltro,
     }
 
     return render(request, "consultas/consulta_vendas.html", context)
