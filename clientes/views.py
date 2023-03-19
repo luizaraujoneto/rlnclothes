@@ -11,7 +11,7 @@ from .forms import ClientesForm
 
 
 def cliente_list(request):
-    table = ClienteTable(Clientes.objects.all())
+    table = ClienteTable(Clientes.objects.all().order_by("nomecliente"))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     return render(request, "clientes\cliente_list.html", {"table": table})
 

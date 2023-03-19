@@ -39,32 +39,24 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" style="color:#ffe484">Consultas</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01" style="background-color: #900C3F;">
-                        <a class="dropdown-item" href="{% url 'consulta_produtos' %}" style="color:#ffe484">Produtos</a>
-                        <a class="dropdown-item" href="{% url 'consulta_produtos' %}" style="color:#ffe484">Produtos
-                            Disponíveis</a>
-                        <a class="dropdown-item" href="{% url 'consulta_vendas' %}" style="color:#ffe484">Vendas por
-                            Mês/Ano </a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'consulta_saldo_por_cliente' %}"
                             style="color:#ffe484">Saldo em aberto por Cliente </a>
                         <a class="dropdown-item" href="{% url 'consulta_contas_receber' %}" style="color:#ffe484">
                             Contas a Receber</a>
                         <a class="dropdown-item" href="{% url 'consulta_pagamentos_confirmados' %}"
                             style="color:#ffe484">Pagamentos Confirmados</a>
-
-                        <!--
-                            Produtos vendidos por mês com lucro 
-                            Produtos disponíveis com data compra e pedido
-
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Pedidos</a>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Notas Fiscais</a>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Contas a Pagar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Clientes</a>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Vendas</a>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Pagamentos</a>
-                        <a class="dropdown-item" href="#" style="color:#ffe484">Contas a Receber</a>
-                        -->
+                        <a class="dropdown-item" href="{% url 'consulta_vendas' %}" style="color:#ffe484">Vendas por
+                            Mês/Ano </a>
+                        <a class="dropdown-item" href="{% url 'consulta_produtos' %}" style="color:#ffe484">Produtos
+                            Disponíveis</a>
+                        <a class="dropdown-item" href="{% url 'consulta_produtos' %}" style="color:#ffe484">Produtos</a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'consulta_contaspagar' %}" style="color:#ffe484">Contas a
+                            Pagar por Mês/Ano </a>
+                        <a class="dropdown-item" href="{% url 'consulta_saldonotafiscal' %}" style="color:#ffe484">Notas
+                            Fiscais com Saldo em Aberto</a>
                     </div>
                 </li>
                 <li class="nav-item">

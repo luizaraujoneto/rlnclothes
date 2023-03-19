@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% load humanize %}
+
+{% block content %}
+<main role="main">
+    <div class="jumbotron">
+        <h1 class="display-4">Notas Fiscais com Saldo em Aberto</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th class="text-center">Cód. Nota Fiscal</th>
+                        <th>Número </th>
+                        <th>Data </th>
+                        <th class="text-right">Valor Nota Fiscal</th>
+                        <th class="text-right">Valor Parcelas</th>
+                        <th class="text-right">Valor Pago</th>
+                        <th class="text-right">Saldo a Pagar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for nota in notasfiscais %}
+                    <tr>
+                        <td class="text-center">{{nota.codnotafiscal}}</td>
+                        <td>{{nota.numeronotafiscal}}</td>
+                        <td>{{nota.datanotafiscal|date:"d/m/Y"}} </td>
+                        <td class="text-right">R$ {{nota.valornotafiscal|floatformat:2}}</td>
+                        <td class="text-right">R$ {{nota.valorparcelas|floatformat:2}}</td>
+                        <td class="text-right">R$ {{nota.valorpago|floatformat:2}}</td>
+                        <td class="text-right">R$ {{nota.saldo|floatformat:2}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr class="text-right">
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr class="text-left">
+                        <td colspan="7">
+                            <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div><!-- /row -->
+    </div><!-- /container -->
+</main>
+
+{% endblock content %}

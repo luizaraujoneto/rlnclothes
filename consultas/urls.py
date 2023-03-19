@@ -32,4 +32,14 @@ urlpatterns = [
         views.consulta_vendas,
         name="consulta_vendas",
     ),
+    path(
+        "consulta_contaspagar",
+        views.consulta_contaspagar,
+        name="consulta_contaspagar",
+    ),
+    path(
+        "consulta_saldonotafiscal",
+        views.consulta_saldonotafiscal,
+        name="consulta_saldonotafiscal",
+    ),
 ]

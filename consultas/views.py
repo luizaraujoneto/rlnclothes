@@ -3,7 +3,9 @@ from django.db.models import F, FloatField, ExpressionWrapper
 from datetime import datetime
 
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat
-from django.db.models import Value, CharField
+from django.db.models import Value, CharField, Sum
+
+import decimal
 
 # Create your views here.
 
@@ -11,6 +13,7 @@ from pedidos.models import Produtos
 from vendas.models import Vendas
 from clientes.models import Clientes
 from pagamentos.models import Pagamentos
+from notasfiscais.models import NotasFiscais, ContasPagar
 
 
 def consulta_produtos(request):
@@ -255,3 +258,125 @@ def consulta_vendas(request):
     }
 
     return render(request, "consultas/consulta_vendas.html", context)
+
+
+def consulta_contaspagar(request):
+    # filter(datapagamento__isnull=True)
+    all = ContasPagar.objects.all().order_by("datavencimento")
+
+    titulo = "Consulta Contas a Pagar"
+
+    meses = []
+    mesanoatual = ""
+    totalparcelasmes = 0.0
+    totalpagomes = 0.0
+    totalgeralparcelas = 0.0
+    totalgeralpago = 0.0
+    contaspagarmes = []
+
+    for c in all:
+        mesanocontapagar = c.datavencimento.strftime("%m/%Y")
+
+        if mesanocontapagar != mesanoatual:
+            if mesanoatual != "":
+                meses.insert(
+                    0,
+                    {
+                        "mesano": mesanoatual,
+                        "totalparcelasmes": totalparcelasmes,
+                        "totalpagomes": totalpagomes,
+                        "contaspagar": contaspagarmes,
+                        "saldomes": totalparcelasmes - totalpagomes,
+                    },
+                )
+
+            mesanoatual = mesanocontapagar
+            contaspagarmes = []
+            totalparcelasmes = 0.0
+            totalpagomes = 0.0
+
+        contaspagarmes.append(c)
+        totalparcelasmes = totalparcelasmes + c.valorparcela
+
+        totalgeralparcelas = totalgeralparcelas + c.valorparcela
+        if c.datapagamento:
+            totalpagomes = totalpagomes + c.valorparcela
+            totalgeralpago = totalgeralpago + c.valorparcela
+
+    meses.insert(
+        0,
+        {
+            "mesano": mesanoatual,
+            "totalparcelasmes": totalparcelasmes,
+            "totalpagomes": totalpagomes,
+            "contaspagar": contaspagarmes,
+            "saldomes": totalparcelasmes - totalpagomes,
+        },
+    )
+
+    datareferencia = datetime.now()
+
+    context = {
+        "titulo": titulo,
+        "meses": meses,
+        "totalparcelas": totalgeralparcelas,
+        "totalpago": totalgeralpago,
+        "datareferencia": datareferencia,
+        "saldo": totalgeralparcelas - totalgeralpago,
+    }
+
+    return render(request, "consultas/consulta_contaspagar.html", context)
+
+
+def consulta_saldonotafiscal(request):
+    all = NotasFiscais.objects.all().order_by("datanotafiscal")
+
+    notasfiscais = []
+
+    print(all.count())
+
+    for nf in all:
+        contaspagar = ContasPagar.objects.filter(notafiscal=nf)
+
+        totalparcelas = (
+            contaspagar.aggregate(totalparcelas=Sum("valorparcela"))["totalparcelas"]
+            or 0
+        )
+        totalpago = (
+            contaspagar.exclude(datapagamento__isnull=True).aggregate(
+                totalpago=Sum("valorparcela")
+            )["totalpago"]
+            or 0
+        )
+
+        valornotafiscal = decimal.Decimal(nf.valornotafiscal)
+        totalpago = decimal.Decimal(totalpago)
+        totalparcelas = decimal.Decimal(totalparcelas)
+        saldo = decimal.Decimal(0.0)
+
+        saldo = valornotafiscal - totalpago
+
+        if (
+            abs(valornotafiscal - totalparcelas) > 0.01
+            or abs(valornotafiscal - totalpago) > 0.01
+        ):
+            notasfiscais.append(
+                {
+                    "codnotafiscal": nf.codnotafiscal,
+                    "numeronotafiscal": nf.numeronotafiscal,
+                    "datanotafiscal": nf.datanotafiscal,
+                    "valornotafiscal": nf.valornotafiscal,
+                    "valorparcelas": totalparcelas,
+                    "valorpago": totalpago,
+                    "saldo": saldo,
+                }
+            )
+
+    datareferencia = datetime.now()
+
+    context = {
+        "notasfiscais": notasfiscais,
+        "datareferencia": datareferencia,
+    }
+
+    return render(request, "consultas/consulta_saldonotafiscal.html", context)
