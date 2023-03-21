@@ -8,32 +8,32 @@
             <th>Tipo</th>
             <th>Data</th>
             <th>Descrição</th>
-            <th>Valor</th>
-            <th>Observacao</th>
-            <th>Saldo</th>
+            <th class="text-right">Valor</th>
+            <!-- <th>Observacao</th>-->
+            <th class="text-right">Saldo</th>
         </tr>
 
         {% for h in table.dados %}
         <tr>
-            <td>{%if h.2 == 'P' %}
+            <td>{%if h.tipooperacao == 'P' %}
                 <i class="bi bi-currency-dollar"></i> Pagamento
                 {% else %}
                 <i class="bi bi-handbag"></i> Venda
                 {% endif %}
             </td>
-            <td>{{h.4|date:"d/m/Y"}}</td>
-            <td>{{h.5|default_if_none:"---"}}</td>
-            {%if h.2 == 'P' %}
+            <td>{{h.data|date:"d/m/Y"}}</td>
+            <td>{{h.descricao|default_if_none:"---"}}</td>
+            {%if h.tipooperacao == 'P' %}
             <td class="text-right" style="color:blue">
-                (R$ {{h.6|floatformat:2}})
+                R$ {{h.valor|floatformat:2}}
             </td>
             {% else %}
             <td class="text-right" style="color:red">
-                R$ {{h.6|floatformat:2}}
+                (R$ {{h.valor|floatformat:2}})
             </td>
             {% endif %}
-            <td>{{h.7|default_if_none:"---"}}</td>
-            <td>{{h.8|default_if_none:"---"}}</td>
+            <!--<td>{{h.observacao|default_if_none:"---"}}</td>-->
+            <td class="text-right">R$ {{h.saldo|floatformat:2}}</td>
         </tr>
         {% endfor %}
 

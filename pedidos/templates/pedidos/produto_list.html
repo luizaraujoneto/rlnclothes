@@ -22,12 +22,17 @@
             <td>{{produto.descricao}}</td>
             <td class="text-right">{{produto.valorcusto|floatformat:2}}</td>
             <td class="text-right">
-                <a class="btn btn-outline-info bt-sm px-2 py-1" href="{% url 'produto_detail' produto.codproduto %}">
-                    <i class="bi bi-file-ruled" title="Detalhes do produto"></i></a>
-                <a class="btn btn-outline-warning bt-sm px-2 py-1" href="{% url 'produto_edit' produto.codproduto %}">
-                    <i class="bi bi-pencil-square bi-sm" title="Alterar produto"></i></a>
-                <a class="btn btn-outline-danger bt-sm px-2 py-1" href="{% url 'produto_delete' produto.codproduto %}">
-                    <i class="bi bi-trash bi-sm" title="Apagar produto"></i></a>
+                <div class="btn-group">
+                    <a class="btn btn-outline-info bt-sm px-2 py-1"
+                        href="{% url 'produto_detail' produto.codproduto %}">
+                        <i class="bi bi-file-ruled" title="Detalhes do produto"></i></a>
+                    <a class="btn btn-outline-warning bt-sm px-2 py-1"
+                        href="{% url 'produto_edit' produto.codproduto %}">
+                        <i class="bi bi-pencil-square bi-sm" title="Alterar produto"></i></a>
+                    <a class="btn btn-outline-danger bt-sm px-2 py-1"
+                        href="{% url 'produto_delete' produto.codproduto %}">
+                        <i class="bi bi-trash bi-sm" title="Apagar produto"></i></a>
+                </div>
             </td>
         </tr>
 

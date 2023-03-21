@@ -60,9 +60,12 @@ def notafiscal_detail(request, pk):
 
     error_message = ""
 
-    totalcontaspagar = ContasPagar.objects.filter(notafiscal=notafiscal).aggregate(
-        totalcontaspagar=Sum("valorparcela")
-    )["totalcontaspagar"]
+    totalcontaspagar = (
+        ContasPagar.objects.filter(notafiscal=notafiscal).aggregate(
+            totalcontaspagar=Sum("valorparcela")
+        )["totalcontaspagar"]
+        or 0
+    )
 
     if notafiscal.valornotafiscal != totalcontaspagar:
         error_message = (

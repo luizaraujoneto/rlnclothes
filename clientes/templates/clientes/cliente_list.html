@@ -40,15 +40,17 @@
                             {{row.record.saldocliente|floatformat:2}}
                         </td>
                         <td style="min-width: 90px;" class="align-middle text-center">
-                            <a href="{% url 'cliente_detail' row.record.codcliente %}"
-                                class="btn btn-outline-info px-2 py-1"><i class="bi bi-file-ruled bi-sm"
-                                    title="Detalhes"></i> </a>
-                            <a href="{% url 'cliente_edit' row.record.codcliente %}"
-                                class="btn btn-outline-warning px-2 py-1"><i class="bi bi-pencil-square bi-sm"
-                                    title="Alterar"></i> </a>
-                            <a href="{% url 'cliente_delete' row.record.codcliente %}"
-                                class="btn btn-outline-danger px-2 py-1"><i class="bi bi-trash bi-sm"
-                                    title="Apagar"></i> </a>
+                            <div class="btn-group">
+                                <a href="{% url 'cliente_detail' row.record.codcliente %}"
+                                    class="btn btn-outline-info px-2 py-1"><i class="bi bi-file-ruled bi-sm"
+                                        title="Detalhes"></i> </a>
+                                <a href="{% url 'cliente_edit' row.record.codcliente %}"
+                                    class="btn btn-outline-warning px-2 py-1"><i class="bi bi-pencil-square bi-sm"
+                                        title="Alterar"></i> </a>
+                                <a href="{% url 'cliente_delete' row.record.codcliente %}"
+                                    class="btn btn-outline-danger px-2 py-1"><i class="bi bi-trash bi-sm"
+                                        title="Apagar"></i> </a>
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}

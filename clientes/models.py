@@ -75,16 +75,26 @@ class Clientes(models.Model):
         for f in HistoricoCliente()._meta.get_fields():
             colunas.append(f.name)
 
-        dados = HistoricoCliente.objects.filter(cliente=self).values_list()
-
-        valor = 0
-        for v in dados:
-            if v[2] == "V":
-                valor = valor + v[6]
+        dados = []
+        saldo = 0.0
+        for h in HistoricoCliente.objects.filter(cliente=self).values():
+            linha = h
+            if h["tipooperacao"] == "V":
+                saldo = saldo - h["valor"]
             else:
-                valor = valor - v[6]
+                saldo = saldo + h["valor"]
+            linha["saldo"] = saldo
 
-        table = {"colunas": colunas, "dados": dados, "valor": valor}
+            dados.append(linha)
+
+        #        valor = 0
+        #        for v in dados:
+        #            if v[''] == "V":
+        #                valor = valor + v[6]
+        #            else:
+        #                valor = valor - v[6]
+
+        table = {"colunas": colunas, "dados": dados, "valor": saldo}
 
         return table
 

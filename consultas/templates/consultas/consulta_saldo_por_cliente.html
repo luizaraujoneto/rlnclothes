@@ -47,7 +47,7 @@
                     <tr>
                         <td class="h6">&nbsp;</td>
                         <td class="h6">
-                            {{conta.codpagamento}} - {{conta.formapagamento}}
+                            {{conta.codpagamento}} {{conta.formapagamento|default_if_none:"---"}}
                         </td>
                         <td class="h6 text-center">
                             {{conta.datapagamento|date:"d/m/Y"}}

@@ -42,6 +42,21 @@ def consulta_produtos(request):
     return render(request, "consultas\consulta_produtos.html", context)
 
 
+def consulta_produtos_disponiveis(request):
+    produtos = Produtos.objects.exclude(
+        codproduto__in=Vendas.objects.all().values_list("produto")
+    ).order_by("pedido__datapedido", "descricao")
+
+    quantidade = produtos.count()
+
+    context = {
+        "produtos": produtos,
+        "quantidade": quantidade,
+    }
+
+    return render(request, "consultas\consulta_produtos_disponiveis.html", context)
+
+
 def consulta_detail_produto(request, codproduto):
     produto = get_object_or_404(Produtos, codproduto=codproduto)
 
@@ -69,8 +84,10 @@ def consulta_saldo_por_cliente(request):
     for cliente in all:
         saldo = cliente.saldocliente()
 
-        contasareceber = Pagamentos.objects.filter(cliente=cliente).filter(
-            tipopagamento="P"
+        contasareceber = (
+            Pagamentos.objects.filter(cliente=cliente)
+            .filter(tipopagamento="P")
+            .order_by("datapagamento")
         )
 
         # areceber = float(cliente.totalcontasareceber())

@@ -18,7 +18,7 @@ from vendas.models import Vendas
 
 
 def pedido_list(request):
-    table = PedidoTable(Pedidos.objects.all())
+    table = PedidoTable(Pedidos.objects.all().order_by("-datapedido"))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
     return render(request, "pedidos\pedido_list.html", {"table": table})
 
@@ -27,10 +27,12 @@ def pedido_create(request):
     if request.method == "POST":
         form = PedidosForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        pedido = form.instance
 
-        return redirect("pedidos")
+        if form.is_valid():
+            pedido = form.save()
+
+        return redirect("pedido_detail", pedido.codpedido)
 
     else:
         form = PedidosForm(initial={})

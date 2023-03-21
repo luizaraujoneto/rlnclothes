@@ -1,6 +1,6 @@
 <p><a class="btn btn-outline-primary btn-sm" href="{% url 'contapagar_create' notafiscal.codnotafiscal %}"
         role="button"><i class="bi bi-calendar-plus"></i>&nbsp;Nova Conta a Pagar</a></p>
-<h5 class="text-left bg-dark text-light">Lista de contas a pagars:</h5>
+<h5 class="text-left bg-dark text-light">Lista de contas a pagar:</h5>
 <table class="table table-striped table-sm">
     <thead>
         <tr>
@@ -25,15 +25,17 @@
             <td class="text-center">{{contapagar.datapagamento|date:"d/m/Y"}}</td>
             <td>{{contapagar.formapagamento}}</td>
             <td class="text-right">
-                <a class="btn btn-outline-info bt-sm px-2 py-1"
-                    href="{% url 'contapagar_detail' contapagar.codcontapagar %}">
-                    <i class="bi bi-file-ruled" title="Detalhes da conta a pagar"></i></a>
-                <a class="btn btn-outline-warning bt-sm px-2 py-1"
-                    href="{% url 'contapagar_edit' contapagar.codcontapagar %}">
-                    <i class="bi bi-pencil-square bi-sm" title="Alterar Conta a Pagar"></i></a>
-                <a class="btn btn-outline-danger bt-sm px-2 py-1"
-                    href="{% url 'contapagar_delete' contapagar.codcontapagar %}">
-                    <i class="bi bi-trash bi-sm" title="Apagar Conta a Pagar "></i></a>
+                <div class="btn-group">
+                    <a class="btn btn-outline-info bt-sm px-2 py-1"
+                        href="{% url 'contapagar_detail' contapagar.codcontapagar %}">
+                        <i class="bi bi-file-ruled" title="Detalhes da conta a pagar"></i></a>
+                    <a class="btn btn-outline-warning bt-sm px-2 py-1"
+                        href="{% url 'contapagar_edit' contapagar.codcontapagar %}">
+                        <i class="bi bi-pencil-square bi-sm" title="Alterar Conta a Pagar"></i></a>
+                    <a class="btn btn-outline-danger bt-sm px-2 py-1"
+                        href="{% url 'contapagar_delete' contapagar.codcontapagar %}">
+                        <i class="bi bi-trash bi-sm" title="Apagar Conta a Pagar "></i></a>
+                </div>
             </td>
         </tr>
 
