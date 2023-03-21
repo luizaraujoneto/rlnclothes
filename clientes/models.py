@@ -120,7 +120,13 @@ class Clientes(models.Model):
                 valor = valor + v[3]
 
         elif tipo == "P":  # Pagamentos "P"revistos
-            colunas = ["Id", "Data Vencimento", "Valor Previsto", "Observação"]
+            colunas = [
+                "Id",
+                "Descrição",
+                "Data Vencimento",
+                "Valor Previsto",
+                "Observação",
+            ]
 
             dados = (
                 Pagamentos.objects.filter(cliente=self)
@@ -128,6 +134,7 @@ class Clientes(models.Model):
                 .select_related("venda")
                 .values_list(
                     "codpagamento",
+                    "formapagamento",
                     "datapagamento",
                     "valorpagamento",
                     "observacao",
@@ -136,7 +143,7 @@ class Clientes(models.Model):
 
             valor = 0
             for v in dados:
-                valor = valor + v[2]
+                valor = valor + v[3]
 
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 

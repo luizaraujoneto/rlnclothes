@@ -21,41 +21,60 @@
                         <th>Nome Cliente</th>
                         <th class="text-right">Saldo a Pagar</th>
                         <th class="text-right">Saldo a Receber</th>
-                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for cliente in clientes %}
+                    {% for saldo in saldos %}
                     <tr>
-                        <td class="text-center">{{cliente.codcliente}}</td>
-                        <td>{{cliente.nomecliente}}</td>
-                        <td class="text-right">R$ {{cliente.saldocliente|floatformat:2}}</td>
-                        <td class="text-right">R$ {{cliente.totalcontasareceber|floatformat:2}}</td>
-                        <th>
-                            {% if cliente.saldocliente != cliente.totalcontasareceber %}
+                        <th class="text-center">{{saldo.cliente.codcliente}}
+                            {% if saldo.saldocliente != saldo.valorareceber %}
                             <i class="bi bi-patch-exclamation" style="color:red"
                                 title="Valores inconsistentes. Verificar!"></i>
                             {% endif %}
                         </th>
+                        <th>{{saldo.cliente.nomecliente}}</th>
+                        <th class="text-right">R$ {{saldo.saldocliente|floatformat:2}}</th>
+                        <th class="text-right">R$ {{saldo.valorareceber|floatformat:2}}</th>
+
+                    </tr>
+                    <tr>
+                        <th class="h6">&nbsp;</th>
+                        <th class="h6">Descrição Pagamento</th>
+                        <th class="h6 text-center">Data Prevista</th>
+                        <th class="h6 text-right">Valor Parcela</th>
+                    </tr>
+                    {% for conta in saldo.contasareceber%}
+                    <tr>
+                        <td class="h6">&nbsp;</td>
+                        <td class="h6">
+                            {{conta.codpagamento}} - {{conta.formapagamento}}
+                        </td>
+                        <td class="h6 text-center">
+                            {{conta.datapagamento|date:"d/m/Y"}}
+                        </td>
+                        <td class="h6 text-right">
+                            R$ {{conta.valorpagamento|floatformat:2}}
+                        </td>
                     </tr>
                     {% endfor %}
-                </tbody>
-                <tfoot>
+                    <tr>
+                        <td class="h6" colspan="4"><small>&nbsp;</small></td>
+                    </tr>
+                    {% endfor %}
                     <tr class="text-right">
                         <td colspan="3">
-                            <strong>Total a receber: R$ {{saldototalclientes|floatformat:2}}</strong>
+                            <strong>Saldo Total dos Clientes: R$ {{saldototalclientes|floatformat:2}}</strong>
                         </td>
                         <td>
-                            <strong>Total a receber: R$ {{saldocontasaReceber|floatformat:2}}</strong>
+                            <strong>Previsão de Pagamentos: R$ {{saldocontasaReceber|floatformat:2}}</strong>
                         </td>
-                        <td>&nbsp;</td>
                     </tr>
                     <tr class="text-left">
                         <td colspan="4">
                             <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
                         </td>
                     </tr>
-                </tfoot>
+                </tbody>
             </table>
 
 

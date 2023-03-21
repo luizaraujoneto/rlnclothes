@@ -24,11 +24,11 @@
             <td>{{h.4|date:"d/m/Y"}}</td>
             <td>{{h.5|default_if_none:"---"}}</td>
             {%if h.2 == 'P' %}
-            <td class="text-right" style="color:red">
+            <td class="text-right" style="color:blue">
                 (R$ {{h.6|floatformat:2}})
             </td>
             {% else %}
-            <td class="text-right" style="color:blue">
+            <td class="text-right" style="color:red">
                 R$ {{h.6|floatformat:2}}
             </td>
             {% endif %}

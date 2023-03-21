@@ -10,11 +10,20 @@ class PagamentosForm(forms.ModelForm):
             "codpagamento",
             "cliente",
             "tipopagamento",
+            "formapagamento",
             "datapagamento",
             "valorpagamento",
-            "formapagamento",
             "observacao",
         ]
+        labels = {
+            "codpagamento": "Cód. Pgto.",
+            "cliente": "Cliente",
+            "tipopagamento": "Tipo Pgto.",
+            "formapagamento": "Descrição",
+            "datapagamento": "Data Pgto.",
+            "valorpagamento": "Valor Pgto.",
+            "observacao": "Observação",
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,3 +34,4 @@ class PagamentosForm(forms.ModelForm):
         )
         self.fields["datapagamento"].widget = forms.DateInput(attrs={"type": "date"})
         self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
+        self.fields["formapagamento"].widget.attrs["size"] = "45"

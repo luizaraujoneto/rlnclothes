@@ -17,7 +17,8 @@
         <td>{{v.0}}</td>
         <td>{{v.1|date:"d/m/Y"}}</td>
         <td>{{v.2}}</td>
-        <td>{{v.3|floatformat:2}}</td>
+        <td class="text-right" style="color:red">
+            R$ {{v.3|floatformat:2}}</td>
         <td>
             <a href="{% url 'venda_detail' v.0 %}" class="btn btn-outline-info px-2 py-1"><i
                     class="bi bi-file-ruled bi-sm" title="Detalhes"></i> </a>

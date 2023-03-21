@@ -6,8 +6,8 @@
 
         <tr>
             <th>Id</th>
+            <th>Descrição</th>
             <th>Data Pgto.</th>
-            <th>Forma Pgto.</th>
             <th class="text-right">Valor Pago</th>
             <th>Observação</th>
         </tr>
@@ -15,8 +15,8 @@
         {% for p in table.dados %}
         <tr>
             <td>{{p.0}}</td>
-            <td>{{p.1|date:"d/m/Y"}}</td>
             <td>{{p.2|default_if_none:"---"}}</td>
+            <td>{{p.1|date:"d/m/Y"}}</td>
             <td class="text-right" style="color:blue">R$ {{p.3|floatformat:2}}</td>
             <td>{{p.4|default_if_none:"---"}} </td>
             <td>

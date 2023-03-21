@@ -46,6 +46,10 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Descrição</td>
+                        <td>{{pagamento.formapagamento|default_if_none:"---"}}</td>
+                    </tr>
+                    <tr>
                         <td>Data do Pagamento</td>
                         <td>{{pagamento.datapagamento|date:"d/m/Y"}}</td>
                     </tr>
@@ -53,10 +57,7 @@
                         <td>Valor Pagamento</td>
                         <td>{{pagamento.valorpagamento|floatformat:2}}</td>
                     </tr>
-                    <tr>
-                        <td>Forma de Pagamento</td>
-                        <td>{{pagamento.formapagamento|default_if_none:"---"}}</td>
-                    </tr>
+
                     <tr>
                         <td>Observação</td>
                         <td>{{pagamento.observacao|default_if_none:"---"}}</td>

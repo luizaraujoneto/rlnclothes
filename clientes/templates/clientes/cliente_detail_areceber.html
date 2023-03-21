@@ -6,6 +6,7 @@
 
         <tr>
             <th>Id </th>
+            <th>Descrição</th>
             <th>Data Vencimento</th>
             <th>Observacao</th>
             <th class="text-right">Valor Previsto</th>
@@ -14,9 +15,10 @@
         {% for p in table.dados %}
         <tr>
             <td>{{p.0}}</td>
-            <td>{{p.1|date:"d/m/Y"}}</td>
-            <td>{{p.3|default_if_none:'---'}}</td>
-            <td class="text-right" style="color:blue">R$ {{p.2|floatformat:2}}</td>
+            <td>{{p.1|default_if_none:'---'}}</td>
+            <td>{{p.2|date:"d/m/Y"}}</td>
+            <td>{{p.4|default_if_none:'---'}}</td>
+            <td class="text-right" style="color:blue">R$ {{p.3|floatformat:2}}</td>
             <td>
                 <a href="{% url 'pagamento_detail' p.0 %}" class="btn btn-outline-info px-2 py-1"><i
                         class="bi bi-file-ruled bi-sm" title="Detalhes"></i> </a>

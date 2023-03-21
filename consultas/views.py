@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db import models
 from django.db.models import F, FloatField, ExpressionWrapper
 from datetime import datetime
 
@@ -61,25 +62,44 @@ def consulta_detail_produto(request, codproduto):
 def consulta_saldo_por_cliente(request):
     all = Clientes.objects.all().order_by("nomecliente")
 
-    clientes = []
+    saldos = []
     saldoclientes = 0.00
     saldoareceber = 0.00
 
-    for c in all:
-        s = c.saldocliente()
-        a = float(c.totalcontasareceber())
-        if s > 0:
-            clientes.append(c)
-            saldoclientes = saldoclientes + s
-            saldoareceber = saldoareceber + a
-        elif a > 0:
-            clientes.append(c)
-            saldoareceber = saldoareceber + a
+    for cliente in all:
+        saldo = cliente.saldocliente()
+
+        contasareceber = Pagamentos.objects.filter(cliente=cliente).filter(
+            tipopagamento="P"
+        )
+
+        # areceber = float(cliente.totalcontasareceber())
+        areceber = (
+            contasareceber.aggregate(totalcontasareceber=models.Sum("valorpagamento"))[
+                "totalcontasareceber"
+            ]
+            or 0
+        )
+
+        if saldo > 0:
+            saldos.append(
+                {
+                    "cliente": cliente,
+                    "saldocliente": saldo,
+                    "valorareceber": areceber,
+                    "contasareceber": contasareceber,
+                }
+            )
+            saldoclientes = saldoclientes + saldo
+            saldoareceber = saldoareceber + float(areceber)
+        elif areceber > 0:
+            saldos.append(cliente)
+            saldoareceber = saldoareceber + areceber
 
     datareferencia = datetime.now()
 
     context = {
-        "clientes": clientes,
+        "saldos": saldos,
         "saldototalclientes": saldoclientes,
         "saldocontasaReceber": saldoareceber,
         "datareferencia": datareferencia,
