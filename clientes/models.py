@@ -21,6 +21,9 @@ class Clientes(models.Model):
     telefone = models.CharField(
         db_column="telefone", max_length=255, blank=True, null=True
     )
+    observacao = models.CharField(
+        db_column="observacao", max_length=255, blank=True, null=True
+    )
 
     class Meta:
         db_table = "clientes"

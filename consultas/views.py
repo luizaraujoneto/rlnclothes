@@ -16,30 +16,21 @@ from clientes.models import Clientes
 from pagamentos.models import Pagamentos
 from notasfiscais.models import NotasFiscais, ContasPagar
 
-
+"""
 def consulta_produtos(request):
-    filtro = request.GET.get("tipoconsulta", "D")
-
-    if filtro == "D":
-        produtos = Produtos.objects.exclude(
-            codproduto__in=Vendas.objects.all().values_list("produto")
-        )
-    elif filtro == "V":
-        produtos = Produtos.objects.filter(
-            codproduto__in=Vendas.objects.all().values_list("produto")
-        )
-    else:
-        produtos = Produtos.objects.all()
+    produtos = Produtos.objects.filter(
+        codproduto__in=Vendas.objects.all().values_list("produto")
+    )
 
     quantidade = produtos.count()
 
     context = {
         "produtos": produtos,
         "quantidade": quantidade,
-        "tipoconsulta": filtro,
     }
 
-    return render(request, "consultas\consulta_produtos.html", context)
+    return render(request, "consultas\consulta_produtos_vendidos.html", context)
+"""
 
 
 def consulta_produtos_disponiveis(request):

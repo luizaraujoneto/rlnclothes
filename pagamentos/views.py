@@ -25,7 +25,14 @@ def pagamento_create(request, codcliente):
         if form.is_valid():
             form.save()
 
-        return redirect("cliente_detail", cliente.codcliente)
+        pagamento = form.instance
+
+        if pagamento.tipopagamento == "P":
+            subview = "areceber_cliente"
+        else:
+            subview = "pagamentos_cliente"
+
+        return redirect("cliente_detail", cliente.codcliente, subview)
 
     else:
         form = PagamentosForm(
@@ -40,8 +47,15 @@ def pagamento_create(request, codcliente):
 def pagamento_delete(request, pk):
     pagamento = get_object_or_404(Pagamentos, codpagamento=pk)
 
+    subview = ""
+
     if request.method == "POST":
         if pagamento.codpagamento:
+            if pagamento.tipopagamento == "P":
+                subview = "areceber_cliente"
+            else:
+                subview = "pagamentos_cliente"
+
             try:
                 pagamento.delete()
             except Exception as e:
@@ -52,7 +66,7 @@ def pagamento_delete(request, pk):
                     {"pagamento": pagamento, "error_message": error_message},
                 )
 
-        return redirect("cliente_detail", pagamento.cliente.codcliente)
+        return redirect("cliente_detail", pagamento.cliente.codcliente, subview)
 
     return render(request, "pagamentos/pagamento_delete.html", {"pagamento": pagamento})
 

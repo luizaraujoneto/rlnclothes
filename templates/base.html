@@ -42,7 +42,7 @@
                         <a class="dropdown-item" href="{% url 'consulta_saldo_por_cliente' %}"
                             style="color:#ffe484">Saldo em aberto por Cliente </a>
                         <a class="dropdown-item" href="{% url 'consulta_contas_receber' %}" style="color:#ffe484">
-                            Contas a Receber</a>
+                            Previsão de Pagamentos</a>
                         <a class="dropdown-item" href="{% url 'consulta_pagamentos_confirmados' %}"
                             style="color:#ffe484">Pagamentos Confirmados</a>
                         <div class="dropdown-divider"></div>
@@ -50,7 +50,7 @@
                             Mês/Ano </a>
                         <a class="dropdown-item" href="{% url 'consulta_produtos_disponiveis' %}"
                             style="color:#ffe484">Produtos Disponíveis</a>
-                        <a class="dropdown-item" href="{% url 'consulta_produtos' %}" style="color:#ffe484">Produtos</a>
+                        <!--<a class="dropdown-item" href="{  % url 'consulta_produtos' %  }" style="color:#ffe484">Produtos</a>-->
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'consulta_contaspagar' %}" style="color:#ffe484">Contas a
@@ -65,7 +65,14 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'about' %}" style="color:#ffe484">Sobre</a>
                 </li>
+
             </ul>
+            {% if user.is_authenticated %}
+            <span class="navbar-text" style="color:#ffe484"> Usuário: {{user.username}},
+                <a class="navbar-text" href="{% url 'logout' %}" style="color:#ffe484">
+                    Logout</a>
+            </span>
+            {% endif %}
         </div>
     </nav>
 

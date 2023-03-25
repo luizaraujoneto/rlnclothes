@@ -95,7 +95,7 @@ WSGI_APPLICATION = "rlnclothes.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "rlnclothesdb",
+        "NAME": "rlnclothesdb_hmg",
         "USER": "rlnclothesuser",
         "PASSWORD": "rlnclothes",
         "HOST": "localhost",
@@ -173,3 +173,5 @@ if DEBUG:
         "SHOW_TOOLBAR_CALLBACK": lambda request: True,
     }
 """
+
+LOGOUT_REDIRECT_URL = "/"

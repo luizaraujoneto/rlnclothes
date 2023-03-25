@@ -29,7 +29,7 @@ def venda_create(request, codcliente):
         if form.is_valid():
             form.save()
 
-        return redirect("cliente_detail", cliente.codcliente)
+        return redirect("cliente_detail", cliente.codcliente, "vendas_cliente")
 
     else:
         form = VendasForm(initial={"cliente": cliente, "datavenda": date.today()})
@@ -37,7 +37,7 @@ def venda_create(request, codcliente):
             codproduto__in=Vendas.objects.all().values_list("produto")
         )
 
-    context = {"cliente": cliente, "form": form}
+    context = {"cliente": cliente, "form": form, "subview": "vendas_cliente"}
 
     return render(request, "vendas/venda_create.html", context)
 
@@ -57,7 +57,7 @@ def venda_delete(request, pk):
                     {"venda": venda, "error_message": error_message},
                 )
 
-        return redirect("cliente_detail", venda.cliente.codcliente)
+        return redirect("cliente_detail", venda.cliente.codcliente, "vendas_cliente")
 
     return render(request, "vendas/venda_delete.html", {"venda": venda})
 
@@ -79,12 +79,14 @@ def venda_edit(request, pk):
         if form.is_valid():
             form.save()
 
-            return redirect("venda_detail", venda.codvenda)
+            return redirect(
+                "cliente_detail", venda.cliente.codcliente, "vendas_cliente"
+            )
 
     else:
         form = VendasForm(instance=venda)
         form.fields["produto"].widget = forms.HiddenInput()
 
-    context = {"form": form, "venda": venda}
+    context = {"form": form, "venda": venda, "subview": "vendas_cliente"}
 
     return render(request, "vendas/venda_edit.html", context)
