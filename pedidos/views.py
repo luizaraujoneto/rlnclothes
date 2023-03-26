@@ -151,7 +151,11 @@ def produto_create(request, codpedido):
         if form.is_valid():
             form.save()
 
-            return redirect("pedido_detail", codpedido)
+            submit_value = request.POST["submit"]
+            if submit_value == "Salvar e cadastrar outro":
+                return redirect("produto_create", codpedido)
+            else:
+                return redirect("pedido_detail", codpedido)
 
     else:
         form = ProdutosForm(initial={"pedido": pedido})

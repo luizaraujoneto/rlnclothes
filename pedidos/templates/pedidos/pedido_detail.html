@@ -10,12 +10,15 @@
 
     <div class="container">
 
-        <p><a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button" title="Listagem de pedidos">
+        <p>
+            <a class="btn btn-outline-info" href="{% url 'pedidos' %}" role="button" title="Listagem de pedidos">
                 <i class="bi bi-arrow-left-square-fill"></i>
-                Pedidos</a></p>
+                Pedidos
+            </a>
+        </p>
 
-        <div class="card" style="align-items: center;">
-            <div class="card-body" style="align-items: center;width:60%;">
+        <div class="card">
+            <div class="card-body" style="align-items: left;">
                 <h5 class="card-title text-bold">Pedido: {{pedido.numeropedido}} </h5>
                 <p class="card-text">
                 <table class="table" style="width:100%">
@@ -46,18 +49,20 @@
                     {% if view_name == "list_produtos" %}
                     <tr>
                         <td> &nbsp;</td>
-                        <td class="text-right">
-                            <p>
+                        <td class="text-left">
+                            <p class="btn-group">
                                 <a class="btn btn-outline-warning my-2 my-sm-0"
                                     href="{% url 'pedido_edit' pedido.codpedido %}" role="button"
                                     title="Alterar pedido">
                                     <i class="bi bi-pencil-square"></i>
-                                    Alterar</a>
+                                    Alterar
+                                </a>
                                 <a class="btn btn-outline-danger my-2 my-sm-0"
                                     href="{% url 'pedido_delete' pedido.codpedido %}" role="button"
                                     title="Apagar pedido">
                                     <i class="bi bi-trash"></i>
-                                    Apagar</a>
+                                    Apagar
+                                </a>
                             </p>
                         </td>
                     </tr>
@@ -67,22 +72,10 @@
             </div> <!-- card-body -->
         </div> <!-- card -->
 
-        {% if view_name == "create_produto" %}
-        <div class="card" style="align-items: center;">
-            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
-                <h5>Criar Produto:</h5>
-            </div>
-            {% include 'pedidos/produto_edit.html'%}
-        </div> <!-- card -->
-        {% endif %}
+        <a href="#" name="formprodutos"></a>
 
-        {% if view_name == "edit_produto" %}
-        <div class="card" style="align-items: center;">
-            <div class="card-header text-bold bg-info text-light" style="align-items: center;width:60%;">
-                <h5>Alterar Produto:</h5>
-            </div>
-            {% include 'pedidos/produto_edit.html'%}
-        </div> <!-- card -->
+        {% if view_name == "create_produto" or view_name == "edit_produto" %}
+        {% include 'pedidos/produto_edit.html'%}
         {% endif %}
 
         {% if view_name == "detail_produto" %}

@@ -29,9 +29,24 @@ class ProdutosForm(forms.ModelForm):
     class Meta:
         model = Produtos
         fields = "__all__"
+        labels = {
+            "codproduto": "Cód. Produto",
+            "codprodutofornecedor": "Cód. Fornecedor",
+            "referencia": "Referência",
+            "descricao": "Descrição",
+            "valorcusto": "Valor Custo",
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["codproduto"].widget.attrs["readonly"] = "readonly"
+
+        codproduto = self.instance.codproduto
+        if codproduto:
+            self.fields["codproduto"].widget.attrs = {
+                "readonly": "readonly",
+                "width": "50",
+            }
+        else:
+            self.fields["codproduto"].widget = forms.HiddenInput()
         self.fields["pedido"].widget = forms.HiddenInput()
-        self.fields["descricao"].widget.attrs["width"] = "50"
+        self.fields["descricao"].widget.attrs["size"] = "50"

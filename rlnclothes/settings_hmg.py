@@ -72,6 +72,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "rlnclothes.context_processors.debug",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -125,8 +126,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-# LANGUAGE_CODE = "pt-br"
+# LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
 LOCALE_NAME = "pt_BR"
 

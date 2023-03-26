@@ -1,5 +1,7 @@
 <!--templates/base.html-->
 {% load static %}
+{% load i18n %}
+
 <html lang="en">
 
 <head>
@@ -16,7 +18,9 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color: #900C3F;">
-        <span class=" navbar-brand mb-0 h1" style="color:#ffe484">RLNClothes</span>
+        <span class=" navbar-brand mb-0 h1" style="color:#ffe484">
+            RLNClothes {% if DEBUG %} [Homologação] {% endif %}
+        </span>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
@@ -60,7 +64,8 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'relatorios' %}" style="color:#ffe484">Relatórios</a>
+                    <a class="nav-link" href="{% url 'relatorios' %}" style="color:#ffe484">Relatórios
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'about' %}" style="color:#ffe484">Sobre</a>
