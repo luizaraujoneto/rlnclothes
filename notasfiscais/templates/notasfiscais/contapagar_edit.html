@@ -23,6 +23,10 @@
                 <td class="text-right">
                     <p>
                         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save">
+                        {% if view_name == "create_contapagar" %}
+                        <input class="btn btn-outline-success my-2 my-sm-0" name="submit" type="submit"
+                            value="Salvar e cadastrar outro">
+                        {% endif %}
                         <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
                             onclick="location.href='{% url 'notafiscal_detail' notafiscal.codnotafiscal %}'"
                             name="cancel" value="Cancelar">

@@ -28,7 +28,13 @@ class Pagamentos(models.Model):
         choices=TIPOS_PAGAMENTO,
     )
 
-    datapagamento = models.DateField(db_column="datapagamento", blank=True, null=True)
+    datapagamento = models.DateField(
+        db_column="datapagamento",
+        blank=True,
+        null=True,
+        auto_now=False,
+        auto_now_add=False,
+    )
     valorpagamento = models.DecimalField(
         db_column="valorpagamento",
         blank=True,

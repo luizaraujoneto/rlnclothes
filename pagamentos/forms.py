@@ -32,6 +32,8 @@ class PagamentosForm(forms.ModelForm):
         self.fields["tipopagamento"].widget = forms.RadioSelect(
             choices=Pagamentos.TIPOS_PAGAMENTO
         )
-        self.fields["datapagamento"].widget = forms.DateInput(attrs={"type": "date"})
+        self.fields["datapagamento"].widget = forms.DateInput(
+            attrs={"type": "date"}, format="%d/%m/%Y"
+        )
         self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
         self.fields["formapagamento"].widget.attrs["size"] = "45"

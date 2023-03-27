@@ -90,13 +90,6 @@ class Clientes(models.Model):
 
             dados.append(linha)
 
-        #        valor = 0
-        #        for v in dados:
-        #            if v[''] == "V":
-        #                valor = valor + v[6]
-        #            else:
-        #                valor = valor - v[6]
-
         table = {"colunas": colunas, "dados": dados, "valor": saldo}
 
         return table
@@ -107,6 +100,7 @@ class Clientes(models.Model):
         dados = (
             HistoricoCliente.objects.filter(cliente=self)
             .filter(tipooperacao="V")
+            .order_by("data")
             .values_list("codoperacao", "data", "descricao", "valor", "observacao")
         )
 
@@ -125,6 +119,7 @@ class Clientes(models.Model):
             dados = (
                 HistoricoCliente.objects.filter(cliente=self)
                 .filter(tipooperacao="P")
+                .order_by("data")
                 .values_list("codoperacao", "data", "descricao", "valor", "observacao")
             )
 
@@ -145,6 +140,7 @@ class Clientes(models.Model):
                 Pagamentos.objects.filter(cliente=self)
                 .filter(tipopagamento="P")
                 .select_related("venda")
+                .order_by("datapagamento")
                 .values_list(
                     "codpagamento",
                     "formapagamento",

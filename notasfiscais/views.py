@@ -162,7 +162,11 @@ def contapagar_create(request, codnotafiscal):
         if form.is_valid():
             form.save()
 
-            return redirect("notafiscal_detail", codnotafiscal)
+            submit_value = request.POST.get("submit")
+            if submit_value == "Salvar e cadastrar outro":
+                return redirect("contapagar_create", codnotafiscal)
+            else:
+                return redirect("notafiscal_detail", codnotafiscal)
 
     else:
         form = ContasPagarForm(initial={"notafiscal": notafiscal})
@@ -172,8 +176,6 @@ def contapagar_create(request, codnotafiscal):
         "notafiscal": notafiscal,
         "view_name": "create_contapagar",
     }
-
-    print(notafiscal, codnotafiscal)
 
     return render(request, "notasfiscais/notafiscal_detail.html", context)
 

@@ -27,12 +27,19 @@ def pagamento_create(request, codcliente):
 
         pagamento = form.instance
 
-        if pagamento.tipopagamento == "P":
-            subview = "areceber_cliente"
+        submit_value = request.POST["submit"]
+        if submit_value == "Salvar e cadastrar outro":
+            return redirect(
+                "cliente_novopagamento",
+                cliente.codcliente,
+            )
         else:
-            subview = "pagamentos_cliente"
+            if pagamento.tipopagamento == "P":
+                subview = "areceber_cliente"
+            else:
+                subview = "pagamentos_cliente"
 
-        return redirect("cliente_detail", cliente.codcliente, subview)
+            return redirect("cliente_detail", cliente.codcliente, subview)
 
     else:
         form = PagamentosForm(
