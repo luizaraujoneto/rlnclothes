@@ -2,7 +2,7 @@
 
 DROP DATABASE IF EXISTS rlnclothesdb_hmg;
 
-CREATE DATABASE rlnclothesdb-hmg
+CREATE DATABASE rlnclothesdb_hmg
     WITH
     OWNER = rlnclothesuser
     ENCODING = 'UTF8'

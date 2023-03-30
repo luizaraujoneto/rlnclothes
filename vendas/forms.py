@@ -19,5 +19,7 @@ class VendasForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["codvenda"].widget = forms.HiddenInput()
         self.fields["cliente"].widget = forms.HiddenInput()
-        self.fields["datavenda"].widget = forms.DateInput(attrs={"type": "date"})
+        self.fields["datavenda"].widget = forms.DateInput(
+            format="%Y-%m-%d", attrs={"type": "date"}
+        )
         self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})

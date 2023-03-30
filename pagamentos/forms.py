@@ -2,6 +2,8 @@ from django import forms
 
 from pagamentos.models import Pagamentos
 
+from datetime import datetime
+
 
 class PagamentosForm(forms.ModelForm):
     class Meta:
@@ -33,7 +35,7 @@ class PagamentosForm(forms.ModelForm):
             choices=Pagamentos.TIPOS_PAGAMENTO
         )
         self.fields["datapagamento"].widget = forms.DateInput(
-            attrs={"type": "date"}, format="%d/%m/%Y"
+            format="%Y-%m-%d", attrs={"type": "date"}
         )
         self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
         self.fields["formapagamento"].widget.attrs["size"] = "45"

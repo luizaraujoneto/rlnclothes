@@ -1,6 +1,8 @@
 from django.db import models
 import django_tables2 as tables
 
+from django import forms
+
 # Create your models here.
 
 
