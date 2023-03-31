@@ -145,3 +145,18 @@ def pdf_report2(request):
     response["Content-Disposition"] = 'attachment; filename="{}"'.format(filename)
 
     return response
+
+
+def html_report(request):
+    dataimpressao = datetime.now().strftime("%d/%m/%Y")
+    horaimpressao = datetime.now().strftime("%H:%M:%S")
+
+    clientes = Clientes.objects.all().order_by("nomecliente")
+
+    context = {
+        "clientes": clientes,
+        "dataimpressao": dataimpressao,
+        "horaimpressao": horaimpressao,
+    }
+
+    return render(request, "relatorios/relatorio_clientes.html", context=context)

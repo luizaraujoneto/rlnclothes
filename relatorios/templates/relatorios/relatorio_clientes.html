@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<title>Relação de Clientes</title>
+	<link rel="stylesheet" href="/static/css/relatorio.css">
+</head>
+
+<body>
+	<header class="cabecalho">
+		<img class="brasao" src="/static/images/logo-beige.png" alt="Logo RLNClothes">
+		<div class="cabecalho">
+			<span class="text-right">Data: {{dataimpressao}}</span>
+			<span>Relação de Cliente</span>
+			<span class="text-right">Hora: {{horaimpressao}} </span>
+		</div>
+	</header>
+	<!--
+	<section class="titular">
+		<div>
+			<span class="label">Nome:</span>
+			<span>LUIZ BATISTA DE ARAÚJO NETO</span>
+		</div>
+		<div>
+			<span class="label">CPF:</span>
+			<span>776.971.704-34</span>
+		</div>
+	</section>
+-->
+	<section class="item">
+		<table class="valoresMensais">
+			<!-- <caption>LUIZ BATISTA DE ARAÚJO NETO (776.971.704-34)</caption> -->
+			<tbody>
+				<tr>
+					<th>Cód.</th>
+					<th>Nome</th>
+					<th>Telefone</th>
+					<th>OBservação</th>
+					<th>Saldo</th>
+				</tr>
+				{% for cliente in clientes %}
+				<tr>
+					<td>
+						{{cliente.codcliente}}
+					</td>
+					<td>
+						{{cliente.nomecliente}}
+					</td>
+					<td>
+						{{cliente.telefone}}
+					</td>
+					<td>
+						{{cliente.saldo}}
+					</td>
+					<td>
+						{{cliente.observacao}}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</section>
+
+	<footer>
+		<hr />
+	</footer>
+
+</body>
+
+</html>
