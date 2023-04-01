@@ -5,11 +5,13 @@
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> {{cliente.nomecliente}} - Novo Pagamento</h2>
+        <h1 class="display-4">Novo Pagamento</h1>
     </div>
 
     <div class="container">
         <div class="row">
+            <h1 class="display-5"> Cliente: {{cliente.nomecliente}}</h1>
+
             <form action="" method="post"> {% csrf_token %}
                 <table>
                     {{form.as_table}}

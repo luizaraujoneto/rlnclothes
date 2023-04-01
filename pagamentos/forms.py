@@ -32,10 +32,18 @@ class PagamentosForm(forms.ModelForm):
         self.fields["codpagamento"].widget = forms.HiddenInput()
         self.fields["cliente"].widget = forms.HiddenInput()
         self.fields["tipopagamento"].widget = forms.RadioSelect(
-            choices=Pagamentos.TIPOS_PAGAMENTO
+            choices=Pagamentos.TIPOS_PAGAMENTO,
         )
         self.fields["datapagamento"].widget = forms.DateInput(
-            format="%Y-%m-%d", attrs={"type": "date"}
+            format="%Y-%m-%d", attrs={"type": "date", "class": "form-control"}
         )
-        self.fields["observacao"].widget = forms.Textarea(attrs={"cols": 50, "rows": 4})
-        self.fields["formapagamento"].widget.attrs["size"] = "45"
+        self.fields["observacao"].widget = forms.Textarea(
+            attrs={"cols": 50, "rows": 4, "class": "form-control"}
+        )
+        self.fields["valorpagamento"].widget.attrs = {
+            "class": "form-control",
+        }
+        self.fields["formapagamento"].widget.attrs = {
+            "size": "45",
+            "class": "form-control",
+        }

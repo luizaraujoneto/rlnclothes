@@ -5,11 +5,10 @@
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Detalhes do Pagamento {{pagamento.codpagamento}} </h2>
+        <h1 class="display-4"> Detalhes do Pagamento </h1>
     </div>
 
     <div class="container">
-
         <p>
             {% if pagamento.tipopagamento == 'C' %}
             <a class="btn btn-outline-info"
@@ -28,9 +27,12 @@
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:60%;">
-                <h5 class="card-title text-bold">Pagamento: {{pagamento.codpagamento}} </h5>
                 <p class="card-text">
                 <table class="table" style="width:100%">
+                    <tr>
+                        <td style="width: 30%; min-width: 25%;">Pagamento </td>
+                        <td>{{pagamento.codpagamento}}</td>
+                    </tr>
                     <tr>
                         <td style="width: 30%; min-width: 25%;">Cliente</td>
                         <td>{{pagamento.cliente.codcliente}} - {{pagamento.cliente.nomecliente}} </td>
@@ -39,9 +41,9 @@
                         <td>Tipo de Pagamento</td>
                         <td>
                             {% if pagamento.tipopagamento == 'C' %}
-                            Pagamento Confirmado
+                            Confirmado
                             {% else %}
-                            Contas a Receber
+                            Previsto
                             {% endif %}
                         </td>
                     </tr>

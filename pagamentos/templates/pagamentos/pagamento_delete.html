@@ -5,8 +5,7 @@
 <main role="main">
 
     <div class="jumbotron">
-        <h2 class="display-5"> Apagar Pagamento:</h2>
-        <h2> {{pagamento.codpagamento}} - {{pagamento.formapagamento}} </h2>
+        <h2 class="display-4"> Apagar Pagamento:</h2>
     </div>
 
     <div class="container">
@@ -26,8 +25,11 @@
             <form action="" method="post"> {% csrf_token %}
                 <table class="table">
                     <tr>
-                        <td colspan="2">
-                            <h5 class="display-5">Confirma a exclusão do Pagamento:</h5>
+                        <th>
+                            <label> Pagamento:</label>
+                        </th>
+                        <td>
+                            <h6>{{pagamento.codpagamento}} - {{pagamento.formapagamento}}</h6>
                         </td>
                     </tr>
                     <tr>
@@ -45,7 +47,7 @@
                     <tr>
                         <th><label>Valor Pagamento: </label></th>
                         <td>
-                            <h6> {{pagamento.valorpagamento|floatformat:2}}</h6>
+                            <h6> R$ {{pagamento.valorpagamento|floatformat:2}}</h6>
                         </td>
                     </tr>
                     <tr>

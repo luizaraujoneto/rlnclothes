@@ -16,10 +16,10 @@ class Clientes(models.Model):
         db_column="codcliente", blank=True, null=False, primary_key=True
     )
     nomecliente = models.CharField(
-        db_column="nomecliente", max_length=255, blank=True, null=True
+        db_column="nomecliente", max_length=100, blank=False, null=False
     )
     telefone = models.CharField(
-        db_column="telefone", max_length=255, blank=True, null=True
+        db_column="telefone", max_length=50, blank=True, null=True
     )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True
@@ -125,7 +125,7 @@ class Clientes(models.Model):
 
             valor = 0
             for v in dados:
-                valor = valor + v[3]
+                valor = valor + v[3] or 0
 
         elif tipo == "P":  # Pagamentos "P"revistos
             colunas = [

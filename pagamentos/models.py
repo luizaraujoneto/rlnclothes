@@ -16,8 +16,8 @@ class Pagamentos(models.Model):
         on_delete=models.PROTECT,
         db_column="codcliente",
         to_field="codcliente",
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
 
     TIPOS_PAGAMENTO = [("C", "Confirmado"), ("P", "Previsto")]
@@ -25,22 +25,22 @@ class Pagamentos(models.Model):
     tipopagamento = models.CharField(
         db_column="tipopagamento",
         max_length=1,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         choices=TIPOS_PAGAMENTO,
     )
 
     datapagamento = models.DateField(
         db_column="datapagamento",
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         auto_now=False,
         auto_now_add=False,
     )
     valorpagamento = models.DecimalField(
         db_column="valorpagamento",
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         max_digits=6,
         decimal_places=2,
     )
