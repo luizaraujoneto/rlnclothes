@@ -33,7 +33,7 @@ class Pedidos(models.Model):
 
     datapedido = models.DateField(db_column="datapedido", blank=True, null=True)
     valorpedido = models.DecimalField(
-        db_column="valorpedido", blank=True, null=True, max_digits=15, decimal_places=2
+        db_column="valorpedido", blank=True, null=True, max_digits=6, decimal_places=2
     )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True

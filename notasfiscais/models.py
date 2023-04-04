@@ -28,7 +28,7 @@ class NotasFiscais(models.Model):
         db_column="valornotafiscal",
         blank=True,
         null=True,
-        max_digits=15,
+        max_digits=6,
         decimal_places=2,
     )
     observacao = models.CharField(

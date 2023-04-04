@@ -42,6 +42,7 @@ class PagamentosForm(forms.ModelForm):
         )
         self.fields["valorpagamento"].widget.attrs = {
             "class": "form-control",
+            "step": "0.01",
         }
         self.fields["formapagamento"].widget.attrs = {
             "size": "45",
