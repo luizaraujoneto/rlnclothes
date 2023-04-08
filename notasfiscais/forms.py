@@ -65,13 +65,33 @@ class ContasPagarForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["codcontapagar"].widget.attrs["readonly"] = "readonly"
+
+        codcontapagar = self.instance.codcontapagar
+        if codcontapagar:
+            self.fields["codcontapagar"].widget.attrs = {
+                "readonly": "readonly",
+                "width": "50",
+                "class": "form-control",
+            }
+        else:
+            self.fields["codcontapagar"].widget = forms.HiddenInput()
+
         self.fields["notafiscal"].widget = forms.HiddenInput()
-        self.fields["observacao"].widget.attrs["width"] = "50"
-        self.fields["formapagamento"].widget.attrs["width"] = "50"
+        self.fields["parcela"].widget.attrs = {"class": "form-control", "width": 150}
+        self.fields["formapagamento"].widget.attrs = {
+            "class": "form-control",
+            "width": 50,
+        }
         self.fields["datavencimento"].widget = forms.DateInput(
-            format="%Y-%m-%d", attrs={"type": "date"}
+            format="%Y-%m-%d", attrs={"type": "date", "class": "form-control"}
         )
         self.fields["datapagamento"].widget = forms.DateInput(
-            format="%Y-%m-%d", attrs={"type": "date"}
+            format="%Y-%m-%d", attrs={"type": "date", "class": "form-control"}
         )
+        self.fields["observacao"].widget = forms.Textarea(
+            attrs={"class": "form-control", "cols": 50, "rows": 4}
+        )
+        self.fields["valorparcela"].widget.attrs = {
+            "class": "form-control",
+            "step": "0.01",
+        }
