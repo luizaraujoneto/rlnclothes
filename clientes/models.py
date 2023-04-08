@@ -4,6 +4,7 @@ from django.db.models import Sum
 
 import django_tables2 as tables
 
+from decimal import Decimal
 
 from vendas.models import Vendas
 from pagamentos.models import Pagamentos
@@ -40,38 +41,38 @@ class Clientes(models.Model):
         super().save(*args, **kwargs)
 
     def totalvendas(self):
-        return (
+        return Decimal(
             Vendas.objects.filter(cliente=self).aggregate(
                 totalvendas=models.Sum("valorvenda")
             )["totalvendas"]
-            or 0
+            or Decimal("0.00")
         )
 
     def totalpagamentos(self):
-        return (
+        return Decimal(
             Pagamentos.objects.filter(cliente=self)
             .filter(tipopagamento="C")
             .aggregate(totalpagamentoconfirmado=models.Sum("valorpagamento"))[
                 "totalpagamentoconfirmado"
             ]
-            or 0
+            or Decimal("0.00")
         )
 
     def totalcontasareceber(self):
-        return (
+        return Decimal(
             Pagamentos.objects.filter(cliente=self)
             .filter(tipopagamento="P")
             .aggregate(totalcontasareceber=models.Sum("valorpagamento"))[
                 "totalcontasareceber"
             ]
-            or 0
+            or Decimal("0.00")
         )
 
     def saldocliente(self):
         vendas = self.totalvendas()
         pagamentos = self.totalpagamentos()
 
-        return float(vendas - pagamentos)
+        return Decimal(vendas - pagamentos)
 
     def historico(self):
         colunas = []
@@ -79,13 +80,14 @@ class Clientes(models.Model):
             colunas.append(f.name)
 
         dados = []
-        saldo = 0.0
+        saldo = Decimal("0.00")
         for h in HistoricoCliente.objects.filter(cliente=self).values():
             linha = h
+            valor = Decimal(h["valor"])
             if h["tipooperacao"] == "V":
-                saldo = saldo - h["valor"]
+                saldo = saldo - valor
             else:
-                saldo = saldo + h["valor"]
+                saldo = saldo + valor
             linha["saldo"] = saldo
 
             dados.append(linha)
@@ -104,9 +106,9 @@ class Clientes(models.Model):
             .values_list("codoperacao", "data", "descricao", "valor", "observacao")
         )
 
-        valor = 0
+        valor = Decimal("0.00")
         for v in dados:
-            valor = valor + v[3]
+            valor = valor + Decimal(v[3])
 
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 
@@ -123,9 +125,9 @@ class Clientes(models.Model):
                 .values_list("codoperacao", "data", "descricao", "valor", "observacao")
             )
 
-            valor = 0
+            valor = Decimal("0.00")
             for v in dados:
-                valor = valor + v[3] or 0
+                valor = valor + Decimal(v[3]) or Decimal("0.00")
 
         elif tipo == "P":  # Pagamentos "P"revistos
             colunas = [
@@ -150,9 +152,9 @@ class Clientes(models.Model):
                 )
             )
 
-            valor = 0
+            valor = Decimal("0.00")
             for v in dados:
-                valor = valor + v[3]
+                valor = valor + Decimal(v[3])
 
         table = {"colunas": colunas, "dados": dados, "valor": valor}
 
@@ -186,7 +188,7 @@ class HistoricoCliente(models.Model):
         db_column="descricao", max_length=255, blank=True, null=True
     )
     valor = models.DecimalField(
-        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
+        db_column="valorvenda", blank=True, null=True, max_digits=10, decimal_places=2
     )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True

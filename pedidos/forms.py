@@ -65,8 +65,15 @@ class ProdutosForm(forms.ModelForm):
             self.fields["codproduto"].widget.attrs = {
                 "readonly": "readonly",
                 "width": "50",
+                "class": "form-control",
             }
         else:
             self.fields["codproduto"].widget = forms.HiddenInput()
         self.fields["pedido"].widget = forms.HiddenInput()
-        self.fields["descricao"].widget.attrs["size"] = "50"
+        self.fields["codprodutofornecedor"].widget.attrs = {"class": "form-control"}
+        self.fields["referencia"].widget.attrs = {"class": "form-control"}
+        self.fields["descricao"].widget.attrs = {"class": "form-control", "size": "50"}
+        self.fields["valorcusto"].widget.attrs = {
+            "class": "form-control",
+            "step": "0.01",
+        }

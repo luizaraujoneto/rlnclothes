@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 
+from decimal import Decimal
+
 import django_tables2 as tables
 
 # Forms
@@ -60,12 +62,9 @@ def notafiscal_detail(request, pk):
 
     error_message = ""
 
-    totalcontaspagar = (
-        ContasPagar.objects.filter(notafiscal=notafiscal).aggregate(
-            totalcontaspagar=Sum("valorparcela")
-        )["totalcontaspagar"]
-        or 0
-    )
+    totalcontaspagar = ContasPagar.objects.filter(notafiscal=notafiscal).aggregate(
+        totalcontaspagar=Sum("valorparcela")
+    )["totalcontaspagar"] or Decimal("0.00")
 
     if notafiscal.valornotafiscal != totalcontaspagar:
         error_message = (

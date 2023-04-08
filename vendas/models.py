@@ -40,7 +40,7 @@ class Vendas(models.Model):
     )
 
     valorvenda = models.DecimalField(
-        db_column="valorvenda", blank=True, null=True, max_digits=6, decimal_places=2
+        db_column="valorvenda", blank=True, null=True, max_digits=10, decimal_places=2
     )
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True

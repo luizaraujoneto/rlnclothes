@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         db_column="valorpedido",
                         decimal_places=2,
-                        max_digits=15,
+                        max_digits=10,
                         null=True,
                     ),
                 ),

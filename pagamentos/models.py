@@ -41,7 +41,7 @@ class Pagamentos(models.Model):
         db_column="valorpagamento",
         blank=False,
         null=False,
-        max_digits=6,
+        max_digits=10,
         decimal_places=2,
     )
     formapagamento = models.CharField(

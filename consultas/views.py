@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import models
-from django.db.models import F, FloatField, ExpressionWrapper
+from django.db.models import F, DecimalField, ExpressionWrapper
 from datetime import datetime
+
+from decimal import Decimal, getcontext
 
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat
 from django.db.models import Value, CharField, Sum
-
-import decimal
 
 # Create your views here.
 
@@ -69,11 +69,11 @@ def consulta_saldo_por_cliente(request):
     all = Clientes.objects.all().order_by("nomecliente")
 
     saldos = []
-    saldoclientes = 0.00
-    saldoareceber = 0.00
+    saldoclientes = Decimal("0.00")
+    saldoareceber = Decimal("0.00")
 
     for cliente in all:
-        saldo = cliente.saldocliente()
+        saldo = Decimal(cliente.saldocliente())
 
         contasareceber = (
             Pagamentos.objects.filter(cliente=cliente)
@@ -82,26 +82,33 @@ def consulta_saldo_por_cliente(request):
         )
 
         # areceber = float(cliente.totalcontasareceber())
-        areceber = (
+        areceber = Decimal(
             contasareceber.aggregate(totalcontasareceber=models.Sum("valorpagamento"))[
                 "totalcontasareceber"
             ]
-            or 0
+            or 0,
         )
 
         if saldo > 0:
             saldos.append(
                 {
                     "cliente": cliente,
-                    "saldocliente": saldo,
-                    "valorareceber": areceber,
+                    "saldocliente": round(saldo, 2),
+                    "valorareceber": round(areceber, 2),
                     "contasareceber": contasareceber,
                 }
             )
             saldoclientes = saldoclientes + saldo
-            saldoareceber = saldoareceber + float(areceber)
+            saldoareceber = saldoareceber + areceber
         elif areceber > 0:
-            saldos.append(cliente)
+            saldos.append(
+                {
+                    "cliente": cliente,
+                    "saldocliente": round(saldo, 2),
+                    "valorareceber": round(areceber, 2),
+                    "contasareceber": contasareceber,
+                }
+            )
             saldoareceber = saldoareceber + areceber
 
     datareferencia = datetime.now()
@@ -138,8 +145,8 @@ def consulta_pagamentos(request, tipopagamento):
 
     meses = []
     mesanoatual = ""
-    totalmes = 0.0
-    totalgeral = 0.0
+    totalmes = Decimal("0.00")
+    totalgeral = Decimal("0.00")
     pagamentosmes = []
 
     for p in all:
@@ -158,12 +165,12 @@ def consulta_pagamentos(request, tipopagamento):
 
             mesanoatual = mesanopagamento
             pagamentosmes = []
-            totalmes = 0
+            totalmes = Decimal("0.00")
 
         pagamentosmes.append(p)
-        totalmes = totalmes + p.valorpagamento
+        totalmes = totalmes + Decimal(p.valorpagamento)
 
-        totalgeral = totalgeral + p.valorpagamento
+        totalgeral = totalgeral + Decimal(p.valorpagamento)
 
     meses.insert(
         0,
@@ -193,13 +200,13 @@ def consulta_vendas(request):
         Vendas.objects.annotate(
             lucro=ExpressionWrapper(
                 F("valorvenda") - F("produto__valorcusto"),
-                output_field=FloatField(),
+                output_field=DecimalField(),
             )
         )
         .annotate(
             percentual=ExpressionWrapper(
                 (F("valorvenda") / F("produto__valorcusto") - 1) * 100,
-                output_field=FloatField(),
+                output_field=DecimalField(),
             )
         )
         .annotate(
@@ -219,10 +226,10 @@ def consulta_vendas(request):
     meses = []
     mesanofiltro = []
     mesanoatual = ""
-    totalcustomes = 0.0
-    totalvendasmes = 0.0
-    totalgeralcusto = 0.0
-    totalgeralvendas = 0.0
+    totalcustomes = Decimal("0.00")
+    totalvendasmes = Decimal("0.00")
+    totalgeralcusto = Decimal("0.00")
+    totalgeralvendas = Decimal("0.00")
     vendasmes = []
 
     m = ""
@@ -252,15 +259,15 @@ def consulta_vendas(request):
 
             mesanoatual = mesanovenda
             vendasmes = []
-            totalcustomes = 0
-            totalvendasmes = 0
+            totalcustomes = Decimal("0.00")
+            totalvendasmes = Decimal("0.00")
 
         vendasmes.append(v)
-        totalcustomes = totalcustomes + v.produto.valorcusto
-        totalvendasmes = totalvendasmes + v.valorvenda
+        totalcustomes = totalcustomes + Decimal(v.produto.valorcusto)
+        totalvendasmes = totalvendasmes + Decimal(v.valorvenda)
 
-        totalgeralcusto = totalgeralcusto + v.produto.valorcusto
-        totalgeralvendas = totalgeralvendas + v.valorvenda
+        totalgeralcusto = totalgeralcusto + Decimal(v.produto.valorcusto)
+        totalgeralvendas = totalgeralvendas + Decimal(v.valorvenda)
 
     meses.insert(
         0,
@@ -296,10 +303,10 @@ def consulta_contaspagar(request):
 
     meses = []
     mesanoatual = ""
-    totalparcelasmes = 0.0
-    totalpagomes = 0.0
-    totalgeralparcelas = 0.0
-    totalgeralpago = 0.0
+    totalparcelasmes = Decimal("0.00")
+    totalpagomes = Decimal("0.00")
+    totalgeralparcelas = Decimal("0.00")
+    totalgeralpago = Decimal("0.00")
     contaspagarmes = []
 
     for c in all:
@@ -320,16 +327,16 @@ def consulta_contaspagar(request):
 
             mesanoatual = mesanocontapagar
             contaspagarmes = []
-            totalparcelasmes = 0.0
-            totalpagomes = 0.0
+            totalparcelasmes = Decimal("0.00")
+            totalpagomes = Decimal("0.00")
 
         contaspagarmes.append(c)
-        totalparcelasmes = totalparcelasmes + c.valorparcela
+        totalparcelasmes = totalparcelasmes + Decimal(c.valorparcela)
 
-        totalgeralparcelas = totalgeralparcelas + c.valorparcela
+        totalgeralparcelas = totalgeralparcelas + Decimal(c.valorparcela)
         if c.datapagamento:
-            totalpagomes = totalpagomes + c.valorparcela
-            totalgeralpago = totalgeralpago + c.valorparcela
+            totalpagomes = totalpagomes + Decimal(c.valorparcela)
+            totalgeralpago = totalgeralpago + Decimal(c.valorparcela)
 
     meses.insert(
         0,
@@ -366,21 +373,17 @@ def consulta_saldonotafiscal(request):
     for nf in all:
         contaspagar = ContasPagar.objects.filter(notafiscal=nf)
 
-        totalparcelas = (
-            contaspagar.aggregate(totalparcelas=Sum("valorparcela"))["totalparcelas"]
-            or 0
-        )
-        totalpago = (
-            contaspagar.exclude(datapagamento__isnull=True).aggregate(
-                totalpago=Sum("valorparcela")
-            )["totalpago"]
-            or 0
-        )
+        totalparcelas = contaspagar.aggregate(totalparcelas=Sum("valorparcela"))[
+            "totalparcelas"
+        ] or Decimal("0.00")
+        totalpago = contaspagar.exclude(datapagamento__isnull=True).aggregate(
+            totalpago=Sum("valorparcela")
+        )["totalpago"] or Decimal("0.00")
 
-        valornotafiscal = decimal.Decimal(nf.valornotafiscal)
-        totalpago = decimal.Decimal(totalpago)
-        totalparcelas = decimal.Decimal(totalparcelas)
-        saldo = decimal.Decimal(0.0)
+        valornotafiscal = Decimal(nf.valornotafiscal)
+        totalpago = Decimal(totalpago)
+        totalparcelas = Decimal(totalparcelas)
+        saldo = Decimal("0.00")
 
         saldo = valornotafiscal - totalpago
 
