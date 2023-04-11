@@ -33,6 +33,7 @@ class PagamentosForm(forms.ModelForm):
         self.fields["cliente"].widget = forms.HiddenInput()
         self.fields["tipopagamento"].widget = forms.RadioSelect(
             choices=Pagamentos.TIPOS_PAGAMENTO,
+            attrs={"class": "form-check-inline"},
         )
         self.fields["datapagamento"].widget = forms.DateInput(
             format="%Y-%m-%d", attrs={"type": "date", "class": "form-control"}

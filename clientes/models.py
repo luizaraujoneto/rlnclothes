@@ -162,8 +162,14 @@ class Clientes(models.Model):
 
 
 class ClienteTable(tables.Table):
+    codcliente = tables.Column(
+        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
+    )
+    nomecliente = tables.Column(verbose_name="Nome", orderable="True")
+
     class Meta:
         model = Clientes
+        fields = ["codcliente", "nomecliente", "telefone", "observacao"]
 
 
 # cliente, tipooperacao, codoperacao, data, descricao, valor, observacao

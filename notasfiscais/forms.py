@@ -61,7 +61,26 @@ class NotasFiscaisForm(forms.ModelForm):
 class ContasPagarForm(forms.ModelForm):
     class Meta:
         model = ContasPagar
-        fields = "__all__"
+        fields = [
+            "codcontapagar",
+            "notafiscal",
+            "parcela",
+            "datavencimento",
+            "valorparcela",
+            "datapagamento",
+            "formapagamento",
+            "observacao",
+        ]
+        labels = {
+            "codcontapagar": "Cód. Conta Pagar",
+            "notafiscal": "Nota Fiscal",
+            "parcela": "Parcela",
+            "datavencimento": "Data Vencimento",
+            "valorparcela": "Valor Parcela",
+            "datapagamento": "Data Pagamento",
+            "formapagamento": "Forma Pagamento",
+            "observacao": "Observação",
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
