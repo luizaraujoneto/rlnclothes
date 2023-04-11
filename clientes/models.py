@@ -162,14 +162,31 @@ class Clientes(models.Model):
 
 
 class ClienteTable(tables.Table):
-    codcliente = tables.Column(
-        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
-    )
+    codcliente = tables.Column(verbose_name="Cód", attrs={"class": "text-center"})
+    status = tables.Column(verbose_name="Status", default="i")
     nomecliente = tables.Column(verbose_name="Nome", orderable="True")
+    telefone = tables.Column(verbose_name="Telefone")
+    observacao = tables.Column(verbose_name="Observação")
+    saldo = tables.Column(
+        verbose_name="Saldo",
+        accessor="calculate_saldo",
+        attrs={"class": "text-right"},
+    )
+
+    def calculate_saldo(self, record):
+        print(record)
+        return round(record or 0, 2)
 
     class Meta:
         model = Clientes
-        fields = ["codcliente", "nomecliente", "telefone", "observacao"]
+        fields = [
+            "codcliente",
+            "status",
+            "nomecliente",
+            "telefone",
+            "observacao",
+            "saldo",
+        ]
 
 
 # cliente, tipooperacao, codoperacao, data, descricao, valor, observacao
