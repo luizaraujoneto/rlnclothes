@@ -6,13 +6,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+from django_tables2 import RequestConfig
+
 from .models import Clientes, ClienteTable, HistoricoCliente
 from .forms import ClientesForm
 
 
 def cliente_list(request):
     table = ClienteTable(Clientes.objects.all().order_by("nomecliente"))
-    table.paginate(page=request.GET.get("page", 1), per_page=25)
+    # table.paginate(page=request.GET.get("page", 1), per_page=25)
+    RequestConfig(request, paginate={"per_page": 25}).configure(table)
     return render(request, "clientes\cliente_list.html", {"table": table})
 
 

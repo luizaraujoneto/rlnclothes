@@ -33,14 +33,8 @@
                     </th>
 
                     {% for row in table.page %}
-                    <tr>
-                        <td>{{row.items}}</td>
-                        <td>{{row.status.name}}</td>
-                        <td>{{row.nomecliente}}</td>
-                        <td>{{row.telefone}}</td>
-                        <td>row.observacao</td>
-                        <td>row.saldo</td>
 
+                    <tr>
                         {% for column, cell in row.items %}
                         <td class="{{column.attrs.th.class}}">
                             {{ cell }}

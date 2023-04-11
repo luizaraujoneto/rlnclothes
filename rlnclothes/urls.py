@@ -20,7 +20,10 @@ from django.urls import include
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 
+import debug_toolbar
+
 urlpatterns = [
+    path("__debug__/", include(debug_toolbar.urls)),
     path("admin/", admin.site.urls),
     path("clientes/", include("clientes.urls")),
     path("pedidos/", include("pedidos.urls")),
