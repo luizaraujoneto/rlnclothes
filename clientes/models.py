@@ -5,6 +5,9 @@ from django.db.models import Sum
 import django_tables2 as tables
 
 from decimal import Decimal
+from django.utils.html import format_html
+from django.utils import timezone
+import pytz
 
 from vendas.models import Vendas
 from pagamentos.models import Pagamentos
@@ -73,6 +76,20 @@ class Clientes(models.Model):
         pagamentos = self.totalpagamentos()
 
         return Decimal(vendas - pagamentos)
+
+    def possuiParcelaEmAtraso(self):
+        atraso = False
+
+        parcelas = Pagamentos.objects.filter(cliente=self).filter(tipopagamento="P")
+
+        for p in parcelas:
+            vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
+            agora = timezone.now()
+
+            if p.datapagamento < agora:
+                atraso = True
+
+        return atraso
 
     def historico(self):
         colunas = []
@@ -162,26 +179,44 @@ class Clientes(models.Model):
 
 
 class ClienteTable(tables.Table):
-    codcliente = tables.Column(verbose_name="Cód", attrs={"class": "text-center"})
-    status = tables.Column(verbose_name="Status", default="i")
+    codcliente = tables.Column(
+        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
+    )
     nomecliente = tables.Column(verbose_name="Nome", orderable="True")
     telefone = tables.Column(verbose_name="Telefone")
     observacao = tables.Column(verbose_name="Observação")
     saldo = tables.Column(
-        verbose_name="Saldo",
-        accessor="calculate_saldo",
-        attrs={"class": "text-right"},
+        verbose_name="Saldo", empty_values=(), attrs={"th": {"class": "text-right"}}
     )
 
-    def calculate_saldo(self, record):
-        print(record)
-        return round(record or 0, 2)
+    def render_codcliente(self, record):
+        cliente = record
+        msg1 = ""
+        msg2 = ""
+
+        if round(cliente.saldocliente() or 0, 2) != round(
+            cliente.totalcontasareceber() or 0, 2
+        ):
+            msg1 = "Inconsistência entre Saldo e Previsão de Pagamentos."
+
+        if cliente.possuiParcelaEmAtraso():
+            msg2 = "Cliente posui parcela em atraso."
+
+        html = "&nbsp;<span class='text-danger small' title='{}\n{}'><i class='bi bi-patch-exclamation-fill'></i>&nbsp; </span>"
+
+        if msg1 != "" or msg2 != "":
+            return format_html(str(cliente.codcliente) + html, msg1, msg2)
+        else:
+            return cliente.codcliente
+
+    def render_saldo(self, record):
+        saldo = Decimal(record.saldocliente() or 0)
+        return round(saldo, 2)
 
     class Meta:
         model = Clientes
         fields = [
             "codcliente",
-            "status",
             "nomecliente",
             "telefone",
             "observacao",

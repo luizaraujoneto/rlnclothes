@@ -25,9 +25,6 @@
                     {% for column in table.columns %}
                     <th class="{{column.attrs.th.class}}">{{ column.header }}</th>
                     {% endfor %}
-                    <th>
-                        Saldo
-                    </th>
                     <th class="text-center">
                         A&ccedil;&otilde;es
                     </th>
@@ -40,9 +37,6 @@
                             {{ cell }}
                         </td>
                         {% endfor %}
-                        <td class="text-right">
-                            {{row.record.saldocliente|floatformat:2}}
-                        </td>
                         <td style="min-width: 90px;" class="align-middle text-center">
                             <div class="btn-group">
                                 <a href="{% url 'cliente_detail' row.record.codcliente %}"
