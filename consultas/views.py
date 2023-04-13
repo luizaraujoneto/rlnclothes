@@ -154,8 +154,7 @@ def consulta_pagamentos(request, tipopagamento):
 
         if mesanopagamento != mesanoatual:
             if mesanoatual != "":
-                meses.insert(
-                    0,
+                meses.append(
                     {
                         "mesano": mesanoatual,
                         "totalmes": totalmes,
@@ -172,8 +171,7 @@ def consulta_pagamentos(request, tipopagamento):
 
         totalgeral = totalgeral + Decimal(p.valorpagamento)
 
-    meses.insert(
-        0,
+    meses.append(
         {
             "mesano": mesanoatual,
             "totalmes": totalmes,
