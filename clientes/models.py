@@ -83,10 +83,10 @@ class Clientes(models.Model):
         parcelas = Pagamentos.objects.filter(cliente=self).filter(tipopagamento="P")
 
         for p in parcelas:
-            vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
-            agora = timezone.now()
+            # vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
+            agora = timezone.now().date
 
-            if p.datapagamento < agora:
+            if p.datapagamento.__lt__(agora):
                 atraso = True
 
         return atraso
