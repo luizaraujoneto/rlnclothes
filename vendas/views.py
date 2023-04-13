@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from datetime import date
+from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django import forms
 
-# import django_tables2 as tables
-
-# Create your views here.
-from django.urls import reverse_lazy
+from datetime import date
 
 from .models import Vendas, VendaTable  # , ItemVenda
 from .forms import VendasForm  # , ItemVendaForm
 
 from clientes.models import Clientes
 from pedidos.models import Produtos
+
+# Create your views here.
 
 
 def venda_list(request):
@@ -35,7 +35,7 @@ def venda_create(request, codcliente):
         form = VendasForm(initial={"cliente": cliente, "datavenda": date.today()})
         form.fields["produto"].queryset = Produtos.objects.exclude(
             codproduto__in=Vendas.objects.all().values_list("produto")
-        )
+        ).order_by("descricao")
 
     context = {"cliente": cliente, "form": form, "subview": "vendas_cliente"}
 
@@ -90,3 +90,17 @@ def venda_edit(request, pk):
     context = {"form": form, "venda": venda, "subview": "vendas_cliente"}
 
     return render(request, "vendas/venda_edit.html", context)
+
+
+def get_product_data(request, pk):
+    produto = get_object_or_404(Produtos, codproduto=pk)
+
+    data = {
+        "pedido": produto.pedido.numeropedido,
+        "datacompra": produto.pedido.datapedido.strftime(
+            "%d/%m/%Y"
+        ),  # format the date as a string
+        "valorcusto": "R$ {:0.2f}".format(produto.valorcusto).replace(".", ","),
+    }
+
+    return JsonResponse(data)
