@@ -4,7 +4,7 @@ from vendas.models import Vendas
 
 
 class VendasForm(forms.ModelForm):
-    info = forms.CharField()
+    info = forms.CharField(required=False)
 
     class Meta:
         model = Vendas
@@ -22,6 +22,7 @@ class VendasForm(forms.ModelForm):
             "codvenda": "Cód. Venda",
             "cliente": "Cliente",
             "produto": "Produto",
+            "info": "II",
             "datavenda": "Data Venda",
             "valorvenda": "Valor Venda",
             "observacao": "Observação",
@@ -33,7 +34,11 @@ class VendasForm(forms.ModelForm):
         self.fields["cliente"].widget = forms.HiddenInput()
         self.fields["produto"].widget.attrs = {"class": "form-control"}
         self.fields["info"].widget = forms.TextInput(
-            attrs={"readonly": True, "class": "form-control", "disabled": True}
+            attrs={
+                "readonly": True,
+                "class": "form-control",
+                "disabled": True,
+            }
         )
 
         self.fields["datavenda"].widget = forms.DateInput(

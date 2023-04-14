@@ -28,8 +28,7 @@ def venda_create(request, codcliente):
 
         if form.is_valid():
             form.save()
-
-        return redirect("cliente_detail", cliente.codcliente, "vendas_cliente")
+            return redirect("cliente_detail", cliente.codcliente, "vendas_cliente")
 
     else:
         form = VendasForm(initial={"cliente": cliente, "datavenda": date.today()})
