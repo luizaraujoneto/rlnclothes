@@ -47,4 +47,19 @@ urlpatterns = [
         views.consulta_saldonotafiscal,
         name="consulta_saldonotafiscal",
     ),
+    path(
+        "dashboardReceberVsPagar/",
+        views.DashboardTotalAreceberVsTotalAPagar.as_view(),
+        name="dashboardrecebervspagar",
+    ),
+    path(
+        "dashboardUltimasVendas/",
+        views.DashboardVendasView.as_view(),
+        name="dashboardultimasvendas",
+    ),
+    path(
+        "dashboardUltimosPagamentos/",
+        views.DashboardPagamentosView.as_view(),
+        name="dashboardultimospagamentos",
+    ),
 ]
