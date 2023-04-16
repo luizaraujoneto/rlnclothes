@@ -9,6 +9,8 @@ from django.utils.html import format_html
 from django.utils import timezone
 import pytz
 
+from datetime import datetime
+
 from vendas.models import Vendas
 from pagamentos.models import Pagamentos
 
@@ -83,10 +85,10 @@ class Clientes(models.Model):
         parcelas = Pagamentos.objects.filter(cliente=self).filter(tipopagamento="P")
 
         for p in parcelas:
-            # vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
-            agora = timezone.now().date
+            vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
+            agora = timezone.datetime.now().astimezone(vencimento.tzinfo)
 
-            if p.datapagamento.__lt__(agora):
+            if vencimento.__lt__(agora):
                 atraso = True
 
         return atraso
