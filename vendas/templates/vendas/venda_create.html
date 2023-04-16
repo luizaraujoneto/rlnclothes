@@ -40,42 +40,25 @@
 
 </main>
 
-<!-- ChatGPT Code for Ajax request -->
 <script>
-    // Get references to the select element and the label elements
     const selectElement = document.getElementById('id_produto');
     const infoProduto = document.getElementById('id_info');
 
-    // const valorcustoLabel = document.getElementById('valorcusto-label');
-    // const datacompraLabel = document.getElementById('datacompra-label');
-    // const pedidoLabel = document.getElementById('pedido-label');
-
-    // Define a function to update the labels based on the selected product
     function updateLabels() {
-        // Get the selected option value
         const productId = selectElement.value;
 
-        // Make an AJAX request to get the product data
-        // Replace "/get_product_data/" with the URL of your Django view that returns the product data
         fetch(`/vendas/produto/${productId}/`)
             .then(response => response.json())
             .then(data => {
-                // Update the label values with the product data
-                // pedidoLabel.textContent = data.pedido
-                // valorcustoLabel.textContent = data.valorcusto;
-                // datacompraLabel.textContent = data.datacompra;
-
-                info = `Pedido: ${data.pedido} (${data.datacompra}) Valor Custo: ${data.valorcusto}`
+                info = `Pedido: ${data.pedido} (${data.datacompra}) Custo: ${data.valorcusto}`
                 infoProduto.value = info
 
             })
             .catch(error => console.error(error));
     }
 
-    // Add an event listener to the select element to update the labels when the value changes
     selectElement.addEventListener('change', updateLabels);
 
-    // Update the labels when the page loads
     updateLabels();
 
 </script>
