@@ -8,10 +8,13 @@ from decimal import Decimal, getcontext
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat
 from django.db.models import Value, CharField, Sum
 
+
+# Matplotlib imports
 import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from django.views import View
 import os
+
 
 # Create your views here.
 
@@ -113,24 +116,21 @@ def consulta_saldo_por_cliente(request):
 
 
 def consulta_contas_receber(request):
-    return consulta_pagamentos(request, tipopagamento="P")
+    context = consulta_pagamentos(tipopagamento="P")
+    context.append({"titulo": "Consulta de Contas a Receber"})
+    return render(request, "consultas/consulta_pagamentos.html", context)
 
 
 def consulta_pagamentos_confirmados(request):
-    return consulta_pagamentos(request, tipopagamento="C")
+    context = consulta_pagamentos(tipopagamento="C")
+    context.append({"titulo": "Consulta de Pagamentos Confirmados"})
+    return render(request, "consultas/consulta_pagamentos.html", context)
 
 
-def consulta_pagamentos(request, tipopagamento):
-    all = Pagamentos.objects.filter(tipopagamento=tipopagamento).order_by(
+def consulta_pagamentos(tipopagamento):
+    pagamentos = Pagamentos.objects.filter(tipopagamento=tipopagamento).order_by(
         "datapagamento"
     )
-
-    if tipopagamento == "P":  # Pagamentos Previstos
-        titulo = "Consulta de Contas a Receber"
-    elif tipopagamento == "C":  # Pagamentos Confirmados
-        titulo = "Consulta de Pagamentos Confirmados"
-    else:
-        titulo = ""
 
     meses = []
     mesanoatual = ""
@@ -138,7 +138,7 @@ def consulta_pagamentos(request, tipopagamento):
     totalgeral = Decimal("0.00")
     pagamentosmes = []
 
-    for p in all:
+    for p in pagamentos:
         mesanopagamento = p.datapagamento.strftime("%m/%Y")
 
         if mesanopagamento != mesanoatual:
@@ -171,13 +171,12 @@ def consulta_pagamentos(request, tipopagamento):
     datareferencia = datetime.now()
 
     context = {
-        "titulo": titulo,
         "meses": meses,
         "total": totalgeral,
         "datareferencia": datareferencia,
     }
 
-    return render(request, "consultas/consulta_pagamentos.html", context)
+    return context
 
 
 def consulta_vendas(request):
@@ -533,5 +532,69 @@ class DashboardPagamentosView(View):
 
         # Delete the temporary file
         os.remove("sales_table.png")
+
+        return response
+
+
+class DashboardTotalAreceberVsTotalAPagar(View):
+    def get(self, request):
+        valorAReceber = (
+            Pagamentos.objects.filter(tipopagamento="P").aggregate(
+                totalcontasareceber=models.Sum("valorpagamento")
+            )["totalcontasareceber"]
+            or 0
+        )
+
+        valorAPagar = (
+            ContasPagar.objects.filter(datapagamento__isnull=True).aggregate(
+                totalapagar=Sum("valorparcela")
+            )["totalapagar"]
+            or 0
+        )
+
+        data = {"Valor a Receber": valorAReceber, "Valor a Pagar": valorAPagar}
+
+        # Create a bar chart
+        fig, ax = plt.subplots()
+        ax.bar(data.keys(), data.values())
+
+        # Save the chart to a PNG image
+        chart_image = "dashboard.png"
+        plt.savefig(chart_image)
+
+        # Read the PNG image and return it as a response
+        with open(chart_image, "rb") as f:
+            response = HttpResponse(f.read(), content_type="image/png")
+        response["Content-Disposition"] = "inline; filename=dashboard.png"
+
+        # Delete the PNG image
+        os.remove(chart_image)
+
+        return response
+
+
+class DashboardValorAReceberPorMes(View):
+    def get(self, request):
+        context = consulta_pagamentos(tipopagamento="P")
+
+        data = {}
+        for mes in context["meses"]:
+            data[mes["mesano"]] = mes["totalmes"]
+
+        # Create a bar chart
+        fig, ax = plt.subplots()
+        ax.bar(data.keys(), data.values())
+
+        # Save the chart to a PNG image
+        chart_image = "dashboard.png"
+        plt.savefig(chart_image)
+
+        # Read the PNG image and return it as a response
+        with open(chart_image, "rb") as f:
+            response = HttpResponse(f.read(), content_type="image/png")
+        response["Content-Disposition"] = "inline; filename=dashboard.png"
+
+        # Delete the PNG image
+        os.remove(chart_image)
 
         return response

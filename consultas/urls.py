@@ -62,4 +62,9 @@ urlpatterns = [
         views.DashboardPagamentosView.as_view(),
         name="dashboardultimospagamentos",
     ),
+    path(
+        "dashboarvalorrecebermes/",
+        views.DashboardValorAReceberPorMes.as_view(),
+        name="dashboarvalorrecebermes",
+    ),
 ]
