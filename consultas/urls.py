@@ -47,24 +47,11 @@ urlpatterns = [
         views.consulta_saldonotafiscal,
         name="consulta_saldonotafiscal",
     ),
-    # path(
-    #     "dashboardReceberVsPagar/",
-    #     views.DashboardTotalAreceberVsTotalAPagar.as_view(),
-    #     name="dashboardrecebervspagar",
-    # ),
-    # path(
-    #     "dashboardUltimasVendas/",
-    #     views.DashboardVendasView.as_view(),
-    #     name="dashboardultimasvendas",
-    # ),
-    # path(
-    #     "dashboardUltimosPagamentos/",
-    #     views.DashboardPagamentosView.as_view(),
-    #     name="dashboardultimospagamentos",
-    # ),
-    # path(
-    #     "dashboarvalorrecebermes/",
-    #     views.DashboardValorAReceberPorMes.as_view(),
-    #     name="dashboarvalorrecebermes",
-    # ),
+    # Total a receber e a pagar
+    # Exibir Gráfico de barras com previsão de valores a receber por mês
+    # Exibir Gráfico de barras com previsão de valores a pagar por mês
+    # Exibir Gráfico de barras com Vendas últimos 3 meses
+    # Exibir Gráfico de barras com Pagamentos recebidos últimos 3 meses
+    # Exibir Tabela com 3 últimos pagamentos
+    # Exibir Tabela com 3 últimas vendas
 ]

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_tables2",
-    "debug_toolbar",
+    # "debug_toolbar",
     "django.contrib.humanize",
     "clientes.apps.ClientesConfig",
     "pedidos.apps.PedidosConfig",
@@ -167,14 +167,12 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # enable Django debug toolbar
-
-
-if DEBUG:
-    INTERNAL_IPS = ["127.0.0.1"]
-    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
-    DEBUG_TOOLBAR_CONFIG = {
-        "SHOW_TOOLBAR_CALLBACK": lambda request: True,
-    }
+# if DEBUG:
+#     INTERNAL_IPS = ["127.0.0.1"]
+#     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+#     DEBUG_TOOLBAR_CONFIG = {
+#         "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+#     }
 
 
 LOGOUT_REDIRECT_URL = "/"
