@@ -9,7 +9,7 @@ from .models import Vendas, VendaTable  # , ItemVenda
 from .forms import VendasForm  # , ItemVendaForm
 
 from clientes.models import Clientes
-from pedidos.models import Produtos
+from pedidos.models import Produtos, Devolucoes
 
 # Create your views here.
 
@@ -32,9 +32,13 @@ def venda_create(request, codcliente):
 
     else:
         form = VendasForm(initial={"cliente": cliente, "datavenda": date.today()})
-        form.fields["produto"].queryset = Produtos.objects.exclude(
-            codproduto__in=Vendas.objects.all().values_list("produto")
-        ).order_by("descricao")
+        form.fields["produto"].queryset = (
+            Produtos.objects.exclude(
+                codproduto__in=Vendas.objects.all().values_list("produto")
+            )
+            .exclude(codproduto__in=Devolucoes.objects.all().values_list("produto"))
+            .order_by("descricao")
+        )
 
     context = {"cliente": cliente, "form": form, "subview": "vendas_cliente"}
 

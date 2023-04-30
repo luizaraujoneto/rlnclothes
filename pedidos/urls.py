@@ -18,6 +18,9 @@ urlpatterns = [
     path(
         "delete_produto/<int:codproduto>", views.produto_delete, name="produto_delete"
     ),
+    path(
+        "<int:codpedido>/devolucoes_edit", views.devolucoes_edit, name="devolucoes_edit"
+    ),
 ]
 
 """

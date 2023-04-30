@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-# from django.http import HttpResponseRedirect
-# from django.urls import reverse
-
 import django_tables2 as tables
 
 # Forms
@@ -15,6 +12,7 @@ from django.urls import reverse_lazy
 from .models import Pedidos, PedidoTable, Produtos
 
 from vendas.models import Vendas
+from pedidos.models import Devolucoes
 
 
 def pedido_list(request):
@@ -65,7 +63,12 @@ def pedido_delete(request, pk):
 def pedido_detail(request, pk):
     pedido = get_object_or_404(Pedidos, codpedido=pk)
 
-    context = {"pedido": pedido, "view_name": "list_produtos"}
+    if pedido.tipopedido == "C":
+        viewname = "list_produtos"
+    else:
+        viewname = "list_devolucoes"
+
+    context = {"pedido": pedido, "view_name": viewname}
 
     return render(request, "pedidos\pedido_detail.html", context)
 
@@ -199,3 +202,42 @@ def produto_delete(request, codproduto):
     }
 
     return render(request, "pedidos\pedido_detail.html", context)
+
+
+def devolucoes_edit(request, codpedido):
+    # produto = get_object_or_404(Produtos, codproduto=codproduto)
+
+    pedido = get_object_or_404(Pedidos, codpedido=codpedido)
+
+    produtosdisponiveis = (
+        Produtos.objects.exclude(
+            codproduto__in=Vendas.objects.all().values_list("produto")
+        )
+        .exclude(codproduto__in=Devolucoes.objects.all().values_list("produto"))
+        .order_by("descricao")
+    )
+
+    produtosdevolvidos = Produtos.objects.filter(
+        codproduto__in=Devolucoes.objects.filter(pedido=pedido).values_list("produto")
+    ).order_by("descricao")
+
+    # if request.method == "POST":
+    #     form = ProdutosForm(request.POST, instance=produto)
+
+    #     if form.is_valid():
+    #         form.save()
+
+    #         return redirect("pedido_detail", produto.pedido.codpedido)
+
+    # else:
+    #     form = ProdutosForm(instance=produto)
+
+    context = {
+        #    "form": form,
+        "pedido": pedido,
+        "view_name": "edit_devolucoes",
+        "produtosdisponiveis": produtosdisponiveis,
+        "produtosdevolvidos": produtosdevolvidos,
+    }
+
+    return render(request, "pedidos/pedido_detail.html", context)

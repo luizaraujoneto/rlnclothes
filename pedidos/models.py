@@ -23,6 +23,16 @@ class Pedidos(models.Model):
         null=True,
     )
 
+    TIPOS_PEDIDO = [("C", "Compra"), ("D", "Devolução")]
+
+    tipopedido = models.CharField(
+        db_column="tipo_pedido",
+        max_length=1,
+        blank=False,
+        null=False,
+        choices=TIPOS_PEDIDO,
+    )
+
     notafiscal = models.ForeignKey(
         NotasFiscais,
         on_delete=models.PROTECT,
@@ -125,3 +135,39 @@ class Produtos(models.Model):
 
     def __str__(self):
         return self.descricao[:20] + " [Ref.:" + (self.referencia or "     ") + "]"
+
+
+class Devolucoes(models.Model):
+    coddevolucao = models.IntegerField(
+        db_column="coddevolucao", blank=True, null=False, primary_key=True
+    )
+
+    pedido = models.ForeignKey(
+        Pedidos,
+        on_delete=models.PROTECT,
+        db_column="codpedido",
+        to_field="codpedido",
+        blank=False,
+        null=False,
+    )
+
+    produto = models.ForeignKey(
+        Produtos,
+        on_delete=models.PROTECT,
+        db_column="codproduto",
+        to_field="codproduto",
+        blank=False,
+        null=False,
+    )
+
+    class Meta:
+        managed = False
+        db_table = "devolucoes"
+
+    def save(self, *args, **kwargs):
+        if not self.coddevolucao:
+            max = Devolucoes.objects.aggregate(models.Max("coddevolucao"))[
+                "coddevolucao__max"
+            ]
+            self.coddevolucao = max + 1
+        super().save(*args, **kwargs)

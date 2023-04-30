@@ -13,6 +13,7 @@ class PedidosForm(forms.ModelForm):
             "numeropedido",
             "fornecedor",
             "notafiscal",
+            "tipopedido",
             "datapedido",
             "valorpedido",
             "observacao",
@@ -22,6 +23,7 @@ class PedidosForm(forms.ModelForm):
             "numeropedido": "Número Pedido",
             "fornecedor": "Fornecedor",
             "notafiscal": "Nota Fiscal",
+            "tipopedido": "Tipo Pedido",
             "datapedido": "Data Pedido",
             "valorpedido": "Valor Pedido",
             "observacao": "Observação",
@@ -33,6 +35,10 @@ class PedidosForm(forms.ModelForm):
         self.fields["numeropedido"].widget.attrs = {"class": "form-control"}
         self.fields["fornecedor"].widget.attrs = {"class": "form-control"}
         self.fields["notafiscal"].widget.attrs = {"class": "form-control"}
+        self.fields["tipopedido"].widget = forms.RadioSelect(
+            choices=Pedidos.TIPOS_PEDIDO,
+            attrs={"class": "form-check-inline"},
+        )
         self.fields["datapedido"].widget = forms.DateInput(
             format="%Y-%m-%d", attrs={"type": "date", "class": "form-control"}
         )

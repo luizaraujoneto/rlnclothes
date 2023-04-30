@@ -35,6 +35,16 @@
                         <td>{{pedido.notafiscal}}</td>
                     </tr>
                     <tr>
+                        <td>Tipo de Pedido</td>
+                        <td>
+                            {% if pedido.tipopedido == 'C' %}
+                            Compras
+                            {% else %}
+                            Devolução
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Data </td>
                         <td>{{pedido.datapedido|date:"d/m/Y"}}</td>
                     </tr>
@@ -72,8 +82,7 @@
             </div> <!-- card-body -->
         </div> <!-- card -->
 
-        <a href="#" name="formprodutos"></a>
-
+        <!-- Subviews de Pedidos de Compras -->
         {% if view_name == "create_produto" or view_name == "edit_produto" %}
         {% include 'pedidos/produto_edit.html'%}
         {% endif %}
@@ -88,6 +97,15 @@
 
         {% if view_name == "list_produtos" %}
         {% include 'pedidos/produto_list.html' %}
+        {% endif %}
+
+        <!-- Subviews de Pedidos de Devolucao -->
+        {% if view_name == "edit_devolucoes" %}
+        {% include 'pedidos/devolucao_edit.html'%}
+        {% endif %}
+
+        {% if view_name == "list_devolucoes" %}
+        {% include 'pedidos/devolucao_list.html' %}
         {% endif %}
 
     </div> <!-- container -->
