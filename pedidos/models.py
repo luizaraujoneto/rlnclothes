@@ -166,8 +166,11 @@ class Devolucoes(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.coddevolucao:
-            max = Devolucoes.objects.aggregate(models.Max("coddevolucao"))[
-                "coddevolucao__max"
-            ]
+            max = (
+                Devolucoes.objects.aggregate(models.Max("coddevolucao"))[
+                    "coddevolucao__max"
+                ]
+                or 0
+            )
             self.coddevolucao = max + 1
         super().save(*args, **kwargs)

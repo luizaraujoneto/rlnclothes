@@ -205,8 +205,27 @@ def produto_delete(request, codproduto):
 
 
 def devolucoes_edit(request, codpedido):
-    # produto = get_object_or_404(Produtos, codproduto=codproduto)
+    if request.method == "POST":
+        codpedido = request.POST["codpedido"]
+        codprodutos = request.POST["produtosdevolvidosInput"]
+        submit = request.POST["submit"]
+        print(request.POST, codprodutos, submit)
 
+        pedido = get_object_or_404(Pedidos, codpedido=codpedido)
+
+        devolucoes = Devolucoes.objects.filter(pedido=pedido)
+        for devolucao in devolucoes:
+            devolucao.delete()
+
+        codprodutos = codprodutos.split(",")
+        for codproduto in codprodutos:
+            produto = get_object_or_404(Produtos, codproduto=codproduto)
+            d = Devolucoes(pedido=pedido, produto=produto)
+            d.save()
+
+        return redirect("pedido_detail", codpedido)
+
+    #  request.method == 'GET'
     pedido = get_object_or_404(Pedidos, codpedido=codpedido)
 
     produtosdisponiveis = (
@@ -221,19 +240,7 @@ def devolucoes_edit(request, codpedido):
         codproduto__in=Devolucoes.objects.filter(pedido=pedido).values_list("produto")
     ).order_by("descricao")
 
-    # if request.method == "POST":
-    #     form = ProdutosForm(request.POST, instance=produto)
-
-    #     if form.is_valid():
-    #         form.save()
-
-    #         return redirect("pedido_detail", produto.pedido.codpedido)
-
-    # else:
-    #     form = ProdutosForm(instance=produto)
-
     context = {
-        #    "form": form,
         "pedido": pedido,
         "view_name": "edit_devolucoes",
         "produtosdisponiveis": produtosdisponiveis,

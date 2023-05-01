@@ -9,32 +9,21 @@
             <th>Referência</th>
             <th>Descrição</th>
             <th>Valor Custo</th>
-            <!-- <th>Ações</th> -->
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
 
-        {% for produto in pedido.devolucoes_set.all %}
+        {% for devolucao in pedido.devolucoes_set.all %}
         <tr>
-            <td>{{produto.codproduto}}</td>
-            <td>{{produto.codprodutofornecedor}}</td>
-            <td>{{produto.referencia}}</td>
-            <td>{{produto.descricao}}</td>
-            <td class="text-right">{{produto.valorcusto|floatformat:2}}</td>
+            <td>{{devolucao.produto.codproduto}}</td>
+            <td>{{devolucao.produto.codprodutofornecedor}}</td>
+            <td>{{devolucao.produto.referencia}}</td>
+            <td>{{devolucao.produto.descricao}}</td>
+            <td class="text-right">{{devolucao.produto.valorcusto|floatformat:2}}</td>
             <td class="text-right">
-                <!--
-                <div class="btn-group">
-                    <a class="btn btn-outline-info bt-sm px-2 py-1"
-                        href="{% url 'produto_detail' produto.codproduto %}">
-                        <i class="bi bi-file-ruled" title="Detalhes do produto"></i></a>
-                    <a class="btn btn-outline-warning bt-sm px-2 py-1"
-                        href="{% url 'produto_edit' produto.codproduto %}">
-                        <i class="bi bi-pencil-square bi-sm" title="Alterar produto"></i></a>
-                    <a class="btn btn-outline-danger bt-sm px-2 py-1"
-                        href="{% url 'produto_delete' produto.codproduto %}">
-                        <i class="bi bi-trash bi-sm" title="Apagar produto"></i></a>
-                </div>
-                -->
+                <a class="btn btn-outline-info bt-sm px-2 py-1" href="{ url 'produto_detail' produto.codproduto %}">
+                    <i class="bi bi-file-ruled" title="Detalhes do produto"></i></a>
             </td>
         </tr>
 
