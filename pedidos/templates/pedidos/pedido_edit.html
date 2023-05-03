@@ -20,9 +20,17 @@
                             <h5 class="display-5"> {{form.codpedido.value}}</h6>
                         </td>
                     </tr>
-
+                    <tr>
+                        <th class="display-5"><label>Tipo Pedido.:&nbsp;</label></th>
+                        <td>
+                            {% if form.tipopedido.value == 'C' %}
+                            <h5 class="display-5">Compra</h6>
+                                {% else %}
+                                <h5 class="display-5">Devolução</h6>
+                                    {% endif %}
+                        </td>
+                    </tr>
                     {{form.as_table}}
-
                     <tr>
                         <td>&nbsp;</td>
                         <td class="text-right">

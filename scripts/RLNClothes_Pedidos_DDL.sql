@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS public.pedidos
     datapedido timestamp with time zone NOT NULL,
     valorpedido double precision NOT NULL,
     observacao character varying(255) COLLATE pg_catalog."default",
+    tipo_pedido character varying(1) COLLATE pg_catalog."default" NOT NULL DEFAULT 'C'::character varying,
     CONSTRAINT pedidos_pkey PRIMARY KEY (codpedido),
     CONSTRAINT fk_pedidos_fornecedores FOREIGN KEY (codfornecedor)
         REFERENCES public.fornecedores (codfornecedor) MATCH SIMPLE

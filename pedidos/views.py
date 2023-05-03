@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django import forms
 import django_tables2 as tables
 
 # Forms
@@ -90,12 +90,14 @@ def pedido_edit(request, pk):
                 "codpedido": pedido.codpedido,
                 "numeropedido": pedido.numeropedido,
                 "fornecedor": pedido.fornecedor,
+                "tipopedido": pedido.tipopedido,
                 "notafiscal": pedido.notafiscal,
                 "datapedido": pedido.datapedido,
                 "valorpedido": "{:.2f}".format(pedido.valorpedido),
                 "observacao": pedido.observacao,
             }
         )
+        form.fields["tipopedido"].widget = forms.HiddenInput()
 
     context = {"form": form}
 
@@ -209,7 +211,6 @@ def devolucoes_edit(request, codpedido):
         codpedido = request.POST["codpedido"]
         codprodutos = request.POST["produtosdevolvidosInput"]
         submit = request.POST["submit"]
-        print(request.POST, codprodutos, submit)
 
         pedido = get_object_or_404(Pedidos, codpedido=codpedido)
 
@@ -217,11 +218,12 @@ def devolucoes_edit(request, codpedido):
         for devolucao in devolucoes:
             devolucao.delete()
 
-        codprodutos = codprodutos.split(",")
-        for codproduto in codprodutos:
-            produto = get_object_or_404(Produtos, codproduto=codproduto)
-            d = Devolucoes(pedido=pedido, produto=produto)
-            d.save()
+        if codprodutos != "":
+            codprodutos = codprodutos.split(",")
+            for codproduto in codprodutos:
+                produto = get_object_or_404(Produtos, codproduto=codproduto)
+                d = Devolucoes(pedido=pedido, produto=produto)
+                d.save()
 
         return redirect("pedido_detail", codpedido)
 
