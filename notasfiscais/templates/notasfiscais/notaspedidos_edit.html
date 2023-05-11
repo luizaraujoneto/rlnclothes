@@ -1,0 +1,77 @@
+<p><a class="btn btn-outline-primary btn-sm" href="{% url 'devolucoes_edit' pedido.codpedido %}" role="button"><i
+            class="bi bi-calendar-plus"></i>&nbsp;Alterar Lista de Produtos Devolvidos</a></p>
+<h5 class="text-left bg-dark text-light">Lista de produtos:</h5>
+
+
+<script>
+    function atualizarProdutosSelecionados() {
+        const produtosdevolvidosInput = document.getElementById('produtosdevolvidosInput');
+        const produtosdevolvidosList = document.getElementById('produtosdevolvidoslist');
+        const checked = produtosdevolvidosList.options;
+        const selectedIds = [...checked].map(option => option.value);
+        produtosdevolvidosInput.value = selectedIds; //JSON.stringify(selectedIds);
+    }
+
+    function moveSelectedItems(fromListId, toListId) {
+        const fromList = document.getElementById(fromListId);
+        const toList = document.getElementById(toListId);
+        for (i = fromList.options.length - 1; i >= 0; i--) {
+            item = fromList.options[i];
+            if (item.selected == true) {
+                toList.add(item);
+            }
+        };
+        atualizarProdutosSelecionados();
+    }
+
+
+
+</script>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-4">
+
+        <select name="produtosdisponiveislist" id="produtosdisponiveislist" class="form-control" size="13"
+            multiple="multiple">
+            {% for produto in produtosdisponiveis %}
+            <option value="{{ produto.codproduto }}">{{ produto }}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+    <div class="col-lg-2">
+        <button type="button" id="lstview_leftSelected" class="btn btn-default btn-block btn-info"
+            onclick="moveSelectedItems('produtosdisponiveislist', 'produtosdevolvidoslist')">
+            <i class="bi bi-box-arrow-in-right"></i>
+            Devolver
+        </button>
+        <button type="button" id="lstview_rightSelected" class="btn btn-default btn-block btn-info"
+            onclick="moveSelectedItems('produtosdevolvidoslist', 'produtosdisponiveislist' )">
+            <i class="bi bi-box-arrow-in-left"></i>
+            Manter
+        </button>
+    </div>
+
+    <div class="col-lg-4">
+        <select name="produtosdevolvidoslist" id="produtosdevolvidoslist" class="form-control" size="13"
+            multiple="multiple">
+            {% for produto in produtosdevolvidos %}
+            <option value="{{ produto.codproduto }}">{{ produto }}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+</div>
+<div class="row justify-content-center">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="codpedido" id="codpedido" value="{{pedido.codpedido}}">
+        <input type="hidden" name="produtosdevolvidosInput" id="produtosdevolvidosInput">
+        <p>
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save" name="submit" id="submit">
+            <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
+                onclick="location.href='{% url 'pedido_detail' pedido.codpedido %}'" name="cancel" value="Cancelar">
+
+        </p>
+    </form>
+</div>

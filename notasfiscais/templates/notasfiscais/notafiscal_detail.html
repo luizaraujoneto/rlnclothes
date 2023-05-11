@@ -10,13 +10,16 @@
 
     <div class="container">
 
-        <p><a class="btn btn-outline-info" href="{% url 'notasfiscais' %}" role="button"
+        <p>
+            <a class="btn btn-outline-info" href="{% url 'notasfiscais' %}" role="button"
                 title="Listagem de Notas Fiscais">
                 <i class="bi bi-arrow-left-square-fill"></i>
-                Notas Fiscais</a></p>
+                Notas Fiscais
+            </a>
+        </p>
 
         <div class="card" style="align-items: left;">
-            <div class="card-body" style="align-items: center;width:60%;">
+            <div class="card-body" style="align-items: center;width:100%;">
                 <h5 class="card-title text-bold">Nota Fiscal: {{notafiscal.numeronotafiscal}} </h5>
                 <p class="card-text">
                 <table class="table" style="width:100%">
@@ -65,31 +68,79 @@
                     {% endif %}
                 </table>
                 </p>
+
+                {% if view_name == "list_contaspagar" or view_name == "list_notaspedidos" %}
+
+                {% if error_message %}
+                <div class="alert alert-danger">
+                    <strong>ATENÇÃO: </strong>{{error_message}}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div>
+                    <a class="btn btn-outline-info my-2 my-sm-0 "
+                        href="{% url 'contapagar_create' notafiscal.codnotafiscal %}" role="button" title="Nova Venda">
+                        <i class="bi bi-currency-dollar"></i>
+                        Nova Conta a Pagar</a>
+                    <a class="btn btn-outline-info my-2 my-sm-0" href="#" role="button" title="Novo Pagamento">
+                        <i class="bi bi-list-columns"></i>
+                        Relacionar Pedidos</a>
+                </div>
+
+                {% endif %}
+
             </div> <!-- card-body -->
         </div> <!-- card -->
 
-        {% if error_message %}
-        <div class="alert alert-danger">
-            <strong>ATENÇÃO: </strong>{{error_message}}
-            </ul>
-        </div>
-        {% endif %}
+        <div class="card" style="align-items: center;">
+            <div class="card-body" style="align-items: center;width:100%;">
 
-        {% if view_name == "create_contapagar" or view_name == "edit_contapagar" %}
-        {% include 'notasfiscais/contapagar_edit.html'%}
-        {% endif %}
+                {% if view_name == "list_contaspagar" or view_name == "list_notaspedidos" %}
 
-        {% if view_name == "detail_contapagar" %}
-        {% include 'notasfiscais/contapagar_detail.html' %}
-        {% endif %}
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link {% if view_name == 'list_contaspagar' %} active  bg-dark text-light {% endif %}"
+                            aria-current="page" href="#">
+                            <i class="bi bi-currency-dollar"></i>
+                            Contas a Pagar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if view_name == 'list_notaspedidos' %}active  bg-dark text-light {% endif %}"
+                            href="#">
+                            <i class="bi bi-list-columns"></i>
+                            Pedidos</a>
+                    </li>
+                </ul>
 
-        {% if view_name == "delete_contapagar" %}
-        {% include 'notasfiscais/contapagar_delete.html' %}
-        {% endif %}
+                {% endif %}
 
-        {% if view_name == "list_contaspagar" %}
-        {% include 'notasfiscais/contapagar_list.html' %}
-        {% endif %}
+                {% if view_name == "list_notaspedidos" %}
+                {% include 'notasfiscais/contapagar_list.html' %}
+                {% endif %}
+
+                {% if view_name == "edit_contaspagar" %}
+                {% include 'notasfiscais/contapagar_list.html' %}
+                {% endif %}
+
+                {% if view_name == "list_contaspagar" %}
+                {% include 'notasfiscais/contapagar_list.html' %}
+                {% endif %}
+
+                {% if view_name == "create_contapagar" or view_name == "edit_contapagar" %}
+                {% include 'notasfiscais/contapagar_edit.html'%}
+                {% endif %}
+
+                {% if view_name == "detail_contapagar" %}
+                {% include 'notasfiscais/contapagar_detail.html' %}
+                {% endif %}
+
+                {% if view_name == "delete_contapagar" %}
+                {% include 'notasfiscais/contapagar_delete.html' %}
+                {% endif %}
+
+            </div> <!-- card-body -->
+        </div> <!-- card -->
 
     </div> <!-- container -->
 
