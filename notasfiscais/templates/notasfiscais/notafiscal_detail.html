@@ -83,7 +83,9 @@
                         href="{% url 'contapagar_create' notafiscal.codnotafiscal %}" role="button" title="Nova Venda">
                         <i class="bi bi-currency-dollar"></i>
                         Nova Conta a Pagar</a>
-                    <a class="btn btn-outline-info my-2 my-sm-0" href="#" role="button" title="Novo Pagamento">
+                    <a class="btn btn-outline-info my-2 my-sm-0"
+                        href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'edit_notaspedidos' %}" role="button"
+                        title="Novo Pagamento">
                         <i class="bi bi-list-columns"></i>
                         Relacionar Pedidos</a>
                 </div>
@@ -101,13 +103,14 @@
                 <ul class="nav nav-tabs nav-justified">
                     <li class="nav-item">
                         <a class="nav-link {% if view_name == 'list_contaspagar' %} active  bg-dark text-light {% endif %}"
-                            aria-current="page" href="#">
+                            aria-current="page"
+                            href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_contaspagar' %}">
                             <i class="bi bi-currency-dollar"></i>
                             Contas a Pagar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if view_name == 'list_notaspedidos' %}active  bg-dark text-light {% endif %}"
-                            href="#">
+                            href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_notaspedidos' %}">
                             <i class="bi bi-list-columns"></i>
                             Pedidos</a>
                     </li>
@@ -116,7 +119,11 @@
                 {% endif %}
 
                 {% if view_name == "list_notaspedidos" %}
-                {% include 'notasfiscais/contapagar_list.html' %}
+                {% include 'notasfiscais/notaspedidos_list.html' %}
+                {% endif %}
+
+                {% if view_name == "edit_notaspedidos" %}
+                {% include 'notasfiscais/notaspedidos_edit.html' %}
                 {% endif %}
 
                 {% if view_name == "edit_contaspagar" %}

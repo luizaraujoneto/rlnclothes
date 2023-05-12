@@ -11,7 +11,11 @@ urlpatterns = [
     path("create", views.notafiscal_create, name="notafiscal_create"),
     path(
         "<int:pk>/detail/",
-        # login_required(views.notafiscal_detail),
+        views.notafiscal_detail,
+        name="notafiscal_detail",
+    ),
+    path(
+        "<int:pk>/detail/<slug:view_name>/",
         views.notafiscal_detail,
         name="notafiscal_detail",
     ),

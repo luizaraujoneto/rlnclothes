@@ -1,29 +1,35 @@
-<p><a class="btn btn-outline-primary btn-sm" href="{% url 'devolucoes_edit' pedido.codpedido %}" role="button"><i
-            class="bi bi-calendar-plus"></i>&nbsp;Alterar Lista de Produtos Devolvidos</a></p>
-<h5 class="text-left bg-dark text-light">Lista de produtos:</h5>
+<h5 class="text-left bg-dark text-light">Lista de pedidos:</h5>
 <table class="table table-striped table-sm">
     <thead>
         <tr>
-            <th>Código</th>
-            <th>Cód. Fornecedor</th>
-            <th>Referência</th>
-            <th>Descrição</th>
-            <th>Valor Custo</th>
+            <th>Pedido</th>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Valor</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
 
-        {% for devolucao in pedido.devolucoes_set.all %}
+        {% for pedido in notafiscal.pedidos_set.all %}
         <tr>
-            <td>{{devolucao.produto.codproduto}}</td>
-            <td>{{devolucao.produto.codprodutofornecedor}}</td>
-            <td>{{devolucao.produto.referencia}}</td>
-            <td>{{devolucao.produto.descricao}}</td>
-            <td class="text-right">{{devolucao.produto.valorcusto|floatformat:2}}</td>
+            <td>{{pedido.numeropedido}}</td>
+            <td>{{pedido.datapedido|date:"d/m/Y"}}</td>
+            {%if pedido.tipopedido == 'C' %}
+            <td>Compra</td>
+            <td class="text-right" style="color:blue">
+                R$ {{pedido.valorpedido|floatformat:2}}
+            </td>
+            {% else %}
+            <td>Devolução</td>
+            <td class="text-right" style="color:red">
+                (R$ {{pedido.valorpedido|floatformat:2}})
+            </td>
+            {% endif %}
             <td class="text-right">
-                <a class="btn btn-outline-info bt-sm px-2 py-1" href="{ url 'produto_detail' produto.codproduto %}">
-                    <i class="bi bi-file-ruled" title="Detalhes do produto"></i></a>
+                <a class="btn btn-outline-info bt-sm px-2 py-1" href="{% url 'pedido_detail' pedido.codpedido %}"
+                    target="_blank">
+                    <i class="bi bi-file-ruled" title="Detalhes do pedido"></i></a>
             </td>
         </tr>
 

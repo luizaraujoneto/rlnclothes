@@ -7,9 +7,11 @@ import django_tables2 as tables
 
 # Forms
 from .forms import NotasFiscaisForm, ContasPagarForm
+from .models import NotasFiscais, NotasFiscaisTable, ContasPagar, ContasPagarTable
+
+from pedidos.models import Pedidos
 
 # Create your views here.
-from .models import NotasFiscais, NotasFiscaisTable, ContasPagar, ContasPagarTable
 
 
 def notasfiscais_list(request):
@@ -57,7 +59,7 @@ def notafiscal_delete(request, pk):
     )
 
 
-def notafiscal_detail(request, pk):
+def notafiscal_detail(request, pk, view_name="list_contaspagar"):
     notafiscal = get_object_or_404(NotasFiscais, codnotafiscal=pk)
 
     error_message = ""
@@ -77,7 +79,7 @@ def notafiscal_detail(request, pk):
 
     context = {
         "notafiscal": notafiscal,
-        "view_name": "list_contaspagar",
+        "view_name": view_name,
         "error_message": error_message,
     }
 
@@ -206,6 +208,70 @@ def contapagar_delete(request, codcontapagar):
         "notafiscal": contapagar.notafiscal,
         "view_name": "delete_contapagar",
         "error_message": "",
+    }
+
+    return render(request, "notasfiscais/notafiscal_detail.html", context)
+
+
+def notaspedidos_edit(request, codnotafiscal):
+    if request.method == "POST":
+        codnotafiscal = request.POST["codnotafiscal"]
+        codpedidos = request.POST["pedidosrelacionados"]
+        submit = request.POST["submit"]
+
+        notafiscal = get_object_or_404(NotasFiscais, codnotafiscal=codnotafiscal)
+
+        pedidos = Pedidos.objects.filter(notafiscal=notafiscal)
+        for pedido in pedidos:
+            pedido.notafiscal = None
+            pedido.save()
+
+        if codpedidos != "":
+            codpedidos = codpedidos.split(",")
+            for codpedido in codpedidos:
+                pedido = get_object_or_404(Pedidos, codproduto=codpedido)
+                pedido.notafiscal = notafiscal
+                pedido.save()
+
+        return redirect("notafiscal_detail", codnotafiscal)
+
+    #  request.method == 'GET'
+    notafiscal = get_object_or_404(NotasFiscais, codnotafiscal=codnotafiscal)
+
+    pedidosdisponiveis = Pedidos.objects.filter(notafiscal_isnull=True).order_by(
+        "datapedido"
+    )
+
+    pedidosrelacionados = Pedidos.objects.filter(notafiscal=notafiscal).order_by(
+        "datapedido"
+    )
+
+    context = {
+        "notafiscal": notafiscal,
+        "view_name": "edit_contapagar",
+        "pedidosdisponiveis": pedidosdisponiveis,
+        "pedidosrelacionados": pedidosrelacionados,
+    }
+
+    return render(request, "notasfiscais/notafiscal_detail.html", context)
+
+    # -------
+
+    if request.method == "POST":
+        form = ContasPagarForm(request.POST, instance=contapagar)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("notafiscal_detail", contapagar.notafiscal.codnotafiscal)
+
+    else:
+        form = ContasPagarForm(instance=contapagar)
+
+    context = {
+        "form": form,
+        "notafiscal": notafiscal,
+        "view_name": "edit_contapagar",
     }
 
     return render(request, "notasfiscais/notafiscal_detail.html", context)

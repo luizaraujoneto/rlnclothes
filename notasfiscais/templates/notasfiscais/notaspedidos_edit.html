@@ -1,15 +1,13 @@
-<p><a class="btn btn-outline-primary btn-sm" href="{% url 'devolucoes_edit' pedido.codpedido %}" role="button"><i
-            class="bi bi-calendar-plus"></i>&nbsp;Alterar Lista de Produtos Devolvidos</a></p>
-<h5 class="text-left bg-dark text-light">Lista de produtos:</h5>
+<h5 class="text-left bg-dark text-light">Lista de Pedidos:</h5>
 
 
 <script>
-    function atualizarProdutosSelecionados() {
-        const produtosdevolvidosInput = document.getElementById('produtosdevolvidosInput');
-        const produtosdevolvidosList = document.getElementById('produtosdevolvidoslist');
-        const checked = produtosdevolvidosList.options;
+    function atualizarPedidosSelecionados() {
+        const pedidosrelacionadosInput = document.getElementById('pedidosrelacionadosInput');
+        const pedidosrelacionadosList = document.getElementById('pedidosrelacionadoslist');
+        const checked = pedidosrelacionadosList.options;
         const selectedIds = [...checked].map(option => option.value);
-        produtosdevolvidosInput.value = selectedIds; //JSON.stringify(selectedIds);
+        pedidosrelacionadosInput.value = selectedIds; //JSON.stringify(selectedIds);
     }
 
     function moveSelectedItems(fromListId, toListId) {
@@ -21,7 +19,7 @@
                 toList.add(item);
             }
         };
-        atualizarProdutosSelecionados();
+        atualizarPedidosSelecionados();
     }
 
 
@@ -31,32 +29,32 @@
 <div class="row align-items-center justify-content-center">
     <div class="col-lg-4">
 
-        <select name="produtosdisponiveislist" id="produtosdisponiveislist" class="form-control" size="13"
+        <select name="pedidosdisponiveislist" id="pedidosdisponiveislist" class="form-control" size="13"
             multiple="multiple">
-            {% for produto in produtosdisponiveis %}
-            <option value="{{ produto.codproduto }}">{{ produto }}</option>
+            {% for pedido in pedidosdisponiveis %}
+            <option value="{{ pedido.codpedido }}">{{ pedido }}</option>
             {% endfor %}
         </select>
 
     </div>
     <div class="col-lg-2">
         <button type="button" id="lstview_leftSelected" class="btn btn-default btn-block btn-info"
-            onclick="moveSelectedItems('produtosdisponiveislist', 'produtosdevolvidoslist')">
+            onclick="moveSelectedItems('pedidosdisponiveislist', 'pedidosrelacionadoslist')">
             <i class="bi bi-box-arrow-in-right"></i>
-            Devolver
+            Relacionar
         </button>
         <button type="button" id="lstview_rightSelected" class="btn btn-default btn-block btn-info"
-            onclick="moveSelectedItems('produtosdevolvidoslist', 'produtosdisponiveislist' )">
+            onclick="moveSelectedItems('pedidosrelacionadoslist', 'pedidosdisponiveislist' )">
             <i class="bi bi-box-arrow-in-left"></i>
-            Manter
+            Desassociar
         </button>
     </div>
 
     <div class="col-lg-4">
-        <select name="produtosdevolvidoslist" id="produtosdevolvidoslist" class="form-control" size="13"
+        <select name="pedidosrelacionadoslist" id="pedidosrelacionadoslist" class="form-control" size="13"
             multiple="multiple">
-            {% for produto in produtosdevolvidos %}
-            <option value="{{ produto.codproduto }}">{{ produto }}</option>
+            {% for pedido in pedidosrelacionados %}
+            <option value="{{ pedido.codpedido }}">{{ pedido }}</option>
             {% endfor %}
         </select>
 
@@ -65,12 +63,13 @@
 <div class="row justify-content-center">
     <form method="POST">
         {% csrf_token %}
-        <input type="hidden" name="codpedido" id="codpedido" value="{{pedido.codpedido}}">
-        <input type="hidden" name="produtosdevolvidosInput" id="produtosdevolvidosInput">
+        <input type="hidden" name="codnotafiscal" id="codnotafiscal" value="{{notafiscal.codnotafiscal}}">
+        <input type="hidden" name="pedidosrelacionadosInput" id="pedidosrelacionadosInput">
         <p>
             <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Save" name="submit" id="submit">
             <input class="btn btn-outline-danger my-2 my-sm-0" type="button"
-                onclick="location.href='{% url 'pedido_detail' pedido.codpedido %}'" name="cancel" value="Cancelar">
+                onclick="location.href='{% url 'notafiscal_detail' notafiscal.codnotafiscal %}'" name="cancel"
+                value="Cancelar">
 
         </p>
     </form>
