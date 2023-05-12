@@ -84,7 +84,7 @@
                         <i class="bi bi-currency-dollar"></i>
                         Nova Conta a Pagar</a>
                     <a class="btn btn-outline-info my-2 my-sm-0"
-                        href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'edit_notaspedidos' %}" role="button"
+                        href="{% url 'notaspedidos_edit' notafiscal.codnotafiscal %}" role="button"
                         title="Novo Pagamento">
                         <i class="bi bi-list-columns"></i>
                         Relacionar Pedidos</a>
@@ -112,7 +112,7 @@
                         <a class="nav-link {% if view_name == 'list_notaspedidos' %}active  bg-dark text-light {% endif %}"
                             href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_notaspedidos' %}">
                             <i class="bi bi-list-columns"></i>
-                            Pedidos</a>
+                            Pedidos Relacionados</a>
                     </li>
                 </ul>
 

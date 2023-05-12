@@ -216,7 +216,7 @@ def contapagar_delete(request, codcontapagar):
 def notaspedidos_edit(request, codnotafiscal):
     if request.method == "POST":
         codnotafiscal = request.POST["codnotafiscal"]
-        codpedidos = request.POST["pedidosrelacionados"]
+        codpedidos = request.POST["pedidosrelacionadosInput"]
         submit = request.POST["submit"]
 
         notafiscal = get_object_or_404(NotasFiscais, codnotafiscal=codnotafiscal)
@@ -229,7 +229,7 @@ def notaspedidos_edit(request, codnotafiscal):
         if codpedidos != "":
             codpedidos = codpedidos.split(",")
             for codpedido in codpedidos:
-                pedido = get_object_or_404(Pedidos, codproduto=codpedido)
+                pedido = get_object_or_404(Pedidos, codpedido=codpedido)
                 pedido.notafiscal = notafiscal
                 pedido.save()
 
@@ -238,7 +238,7 @@ def notaspedidos_edit(request, codnotafiscal):
     #  request.method == 'GET'
     notafiscal = get_object_or_404(NotasFiscais, codnotafiscal=codnotafiscal)
 
-    pedidosdisponiveis = Pedidos.objects.filter(notafiscal_isnull=True).order_by(
+    pedidosdisponiveis = Pedidos.objects.filter(notafiscal__isnull=True).order_by(
         "datapedido"
     )
 
@@ -248,7 +248,7 @@ def notaspedidos_edit(request, codnotafiscal):
 
     context = {
         "notafiscal": notafiscal,
-        "view_name": "edit_contapagar",
+        "view_name": "edit_notaspedidos",
         "pedidosdisponiveis": pedidosdisponiveis,
         "pedidosrelacionados": pedidosrelacionados,
     }
@@ -257,21 +257,21 @@ def notaspedidos_edit(request, codnotafiscal):
 
     # -------
 
-    if request.method == "POST":
-        form = ContasPagarForm(request.POST, instance=contapagar)
+    # if request.method == "POST":
+    #     form = ContasPagarForm(request.POST, instance=contapagar)
 
-        if form.is_valid():
-            form.save()
+    #     if form.is_valid():
+    #         form.save()
 
-            return redirect("notafiscal_detail", contapagar.notafiscal.codnotafiscal)
+    #         return redirect("notafiscal_detail", contapagar.notafiscal.codnotafiscal)
 
-    else:
-        form = ContasPagarForm(instance=contapagar)
+    # else:
+    #     form = ContasPagarForm(instance=contapagar)
 
-    context = {
-        "form": form,
-        "notafiscal": notafiscal,
-        "view_name": "edit_contapagar",
-    }
+    # context = {
+    #     "form": form,
+    #     "notafiscal": notafiscal,
+    #     "view_name": "edit_contapagar",
+    # }
 
-    return render(request, "notasfiscais/notafiscal_detail.html", context)
+    # return render(request, "notasfiscais/notafiscal_detail.html", context)

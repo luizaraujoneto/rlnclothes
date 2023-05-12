@@ -41,4 +41,9 @@ urlpatterns = [
         views.contapagar_delete,
         name="contapagar_delete",
     ),
+    path(
+        "<int:codnotafiscal>/notaspedidos_edit",
+        views.notaspedidos_edit,
+        name="notaspedidos_edit",
+    ),
 ]

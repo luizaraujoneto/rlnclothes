@@ -32,7 +32,12 @@
         <select name="pedidosdisponiveislist" id="pedidosdisponiveislist" class="form-control" size="13"
             multiple="multiple">
             {% for pedido in pedidosdisponiveis %}
-            <option value="{{ pedido.codpedido }}">{{ pedido }}</option>
+            <option value="{{ pedido.codpedido }}">
+                {{ pedido.numeropedido }}
+                | {{pedido.datapedido|date:'d/m/Y'}}
+                | {%if pedido.tipopedido == 'C' %} Compra {% else %} Devolução {% endif %}
+                | {{pedido.valorpedido|floatformat:2}}
+            </option>
             {% endfor %}
         </select>
 
@@ -54,7 +59,12 @@
         <select name="pedidosrelacionadoslist" id="pedidosrelacionadoslist" class="form-control" size="13"
             multiple="multiple">
             {% for pedido in pedidosrelacionados %}
-            <option value="{{ pedido.codpedido }}">{{ pedido }}</option>
+            <option value="{{ pedido.codpedido }}">
+                {{ pedido.numeropedido }}
+                | {{pedido.datapedido|date:'d/m/Y'}}
+                | {%if pedido.tipopedido == 'C' %} Compra {% else %} Devolução {% endif %}
+                | {{pedido.valorpedido|floatformat:2}}
+            </option>
             {% endfor %}
         </select>
 
