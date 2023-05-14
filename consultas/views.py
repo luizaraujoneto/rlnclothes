@@ -18,7 +18,7 @@ from django.db.models import Value, CharField, Sum
 
 # Create your views here.
 
-from pedidos.models import Produtos
+from pedidos.models import Produtos, Devolucoes
 from vendas.models import Vendas
 from clientes.models import Clientes
 from pagamentos.models import Pagamentos
@@ -26,9 +26,13 @@ from notasfiscais.models import NotasFiscais, ContasPagar
 
 
 def consulta_produtos_disponiveis(request):
-    produtos = Produtos.objects.exclude(
-        codproduto__in=Vendas.objects.all().values_list("produto")
-    ).order_by("pedido__datapedido", "descricao")
+    produtos = (
+        Produtos.objects.exclude(
+            codproduto__in=Vendas.objects.all().values_list("produto")
+        )
+        .exclude(codproduto__in=Devolucoes.objects.all().values_list("produto"))
+        .order_by("pedido__datapedido", "descricao")
+    )
 
     quantidade = produtos.count()
 
