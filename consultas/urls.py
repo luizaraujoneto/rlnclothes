@@ -47,6 +47,11 @@ urlpatterns = [
         views.consulta_saldonotafiscal,
         name="consulta_saldonotafiscal",
     ),
+    path(
+        "consulta_fluxocaixa",
+        views.consulta_fluxocaixa,
+        name="consulta_fluxocaixa",
+    ),
     # Total a receber e a pagar
     # Exibir Gráfico de barras com previsão de valores a receber por mês
     # Exibir Gráfico de barras com previsão de valores a pagar por mês

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load django_tables2 %}
+
+{% load humanize %}
+
+{% block content %}
+<main role="main"
+    onload="document.getElementById('tipoconsulta').value = '{{ tipoconsulta }}'; alert(document.getElementById('tipoconsulta').value)">
+    <div class="jumbotron">
+        <h1 class="display-4">
+            Fluxo de Caixa
+        </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Mês/Ano</th>
+                        <th>Creditos Confirmados</th>
+                        <th>Débitos Confirmados</th>
+                        <th>Saldo Confirmado</th>
+                        <th>Creditos Previstos</th>
+                        <th>Débitos Previstos</th>
+                        <th>Saldo Previsto</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for l in lancamentos %}
+                    <tr>
+                        <td>{{l.mesano}}</td>
+                        <td class="text-right">{{l.creditoconfirmado|floatformat:2}}</td>
+                        <td class="text-right">{{l.debitoconfirmado|floatformat:2}}</td>
+                        <td class="text-right">{{l.saldoconfirmado|floatformat:2}}</td>
+                        <td class="text-right">{{l.creditoprevisto|floatformat:2}}</td>
+                        <td class="text-right">{{l.debitoprevisto|floatformat:2}}</td>
+                        <td class="text-right">{{l.saldoprevisto|floatformat:2}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+                <tfoot>
+                    <tr class="text-right">
+                        <td colspan="5">&nbsp;</td>
+                    </tr>
+                    <tr class="text-left">
+                        <td colspan="5">
+                            <small>Data impressão: {{datareferencia|date:"d/m/Y H:i:s"}}</small>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div> <!-- /container -->
+    </div>
+</main>
+
+{% endblock content %}

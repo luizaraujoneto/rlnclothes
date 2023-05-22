@@ -8,6 +8,7 @@ from decimal import Decimal, getcontext
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat
 from django.db.models import Value, CharField, Sum
 
+from .models import FluxoCaixa
 
 # Matplotlib imports
 # import matplotlib.pyplot as plt
@@ -403,202 +404,14 @@ def consulta_saldonotafiscal(request):
     return render(request, "consultas/consulta_saldonotafiscal.html", context)
 
 
-# class DashboardTotalAreceberVsTotalAPagar(View):
-#     def get(self, request):
-#         valorAReceber = (
-#             Pagamentos.objects.filter(tipopagamento="P").aggregate(
-#                 totalcontasareceber=models.Sum("valorpagamento")
-#             )["totalcontasareceber"]
-#             or 0
-#         )
+def consulta_fluxocaixa(request):
+    lancamentos = FluxoCaixa.objects.all().values()
 
-#         valorAPagar = (
-#             ContasPagar.objects.filter(datapagamento__isnull=True).aggregate(
-#                 totalapagar=Sum("valorparcela")
-#             )["totalapagar"]
-#             or 0
-#         )
+    datareferencia = datetime.now()
 
-#         data = {"Valor a Receber": valorAReceber, "Valor a Pagar": valorAPagar}
+    context = {
+        "lancamentos": lancamentos,
+        "datareferencia": datareferencia,
+    }
 
-#         # Create a bar chart
-#         fig, ax = plt.subplots()
-#         ax.bar(data.keys(), data.values())
-
-#         # Save the chart to a PNG image
-#         chart_image = "dashboard.png"
-#         plt.savefig(chart_image)
-
-#         # Read the PNG image and return it as a response
-#         with open(chart_image, "rb") as f:
-#             response = HttpResponse(f.read(), content_type="image/png")
-#         response["Content-Disposition"] = "inline; filename=dashboard.png"
-
-#         # Delete the PNG image
-#         os.remove(chart_image)
-
-#         return response
-
-
-# class DashboardVendasView(View):
-#     def get(self, request):
-#         # Retrieve the 3 last sales data
-#         vendas = Vendas.objects.order_by("-datavenda")[:3]
-
-#         # Define the table headers
-#         headers = ["Data", "Cliente", "Produto", "Valor"]
-
-#         # Define the table cell text
-#         cell_text = []
-#         for venda in vendas:
-#             cell_text.append(
-#                 [
-#                     venda.datavenda.strftime("%d-%m-%Y"),
-#                     venda.cliente,
-#                     venda.produto,
-#                     venda.valorvenda,
-#                 ]
-#             )
-
-#         # Create the table
-#         fig, ax = plt.subplots(figsize=(9, 1.5))
-#         table = ax.table(cellText=cell_text, colLabels=headers, loc="center")
-
-#         # Set column widths
-#         table.auto_set_column_width([0, 1, 2, 3])
-
-#         # Format the table
-#         table.auto_set_font_size(False)
-#         table.set_fontsize(10)
-#         table.scale(1, 1.5)
-
-#         # Hide the axes
-#         ax.axis("off")
-
-#         # Save the figure
-#         plt.savefig("sales_table.png")
-
-#         # Return the image as a response
-#         with open("sales_table.png", "rb") as f:
-#             response = HttpResponse(f.read(), content_type="image/png")
-#         response["Content-Disposition"] = "inline; filename=sales_table.png"
-
-#         # Delete the temporary file
-#         os.remove("sales_table.png")
-
-#         return response
-
-
-# class DashboardPagamentosView(View):
-#     def get(self, request):
-#         # Retrieve the 3 last sales data
-#         pagamentos = Pagamentos.objects.filter(tipopagamento="C").order_by(
-#             "-datapagamento"
-#         )[:3]
-
-#         # Define the table headers
-#         headers = ["Data", "Cliente", "Forma Pagamento", "Valor"]
-
-#         # Define the table cell text
-#         cell_text = []
-#         for pagamento in pagamentos:
-#             cell_text.append(
-#                 [
-#                     pagamento.datapagamento.strftime("%d-%m-%Y"),
-#                     pagamento.cliente,
-#                     pagamento.formapagamento,
-#                     pagamento.valorpagamento,
-#                 ]
-#             )
-
-#         # Create the table
-#         fig, ax = plt.subplots(figsize=(9, 1.5))
-#         table = ax.table(cellText=cell_text, colLabels=headers, loc="center")
-
-#         # Set column widths
-#         table.auto_set_column_width([0, 1, 2, 3])
-
-#         # Format the table
-#         table.auto_set_font_size(False)
-#         table.set_fontsize(10)
-#         table.scale(1, 1.5)
-
-#         # Hide the axes
-#         ax.axis("off")
-
-#         # Save the figure
-#         plt.savefig("sales_table.png")
-
-#         # Return the image as a response
-#         with open("sales_table.png", "rb") as f:
-#             response = HttpResponse(f.read(), content_type="image/png")
-#         response["Content-Disposition"] = "inline; filename=sales_table.png"
-
-#         # Delete the temporary file
-#         os.remove("sales_table.png")
-
-#         return response
-
-
-# class DashboardTotalAreceberVsTotalAPagar(View):
-#     def get(self, request):
-#         valorAReceber = (
-#             Pagamentos.objects.filter(tipopagamento="P").aggregate(
-#                 totalcontasareceber=models.Sum("valorpagamento")
-#             )["totalcontasareceber"]
-#             or 0
-#         )
-
-#         valorAPagar = (
-#             ContasPagar.objects.filter(datapagamento__isnull=True).aggregate(
-#                 totalapagar=Sum("valorparcela")
-#             )["totalapagar"]
-#             or 0
-#         )
-
-#         data = {"Valor a Receber": valorAReceber, "Valor a Pagar": valorAPagar}
-
-#         # Create a bar chart
-#         fig, ax = plt.subplots()
-#         ax.bar(data.keys(), data.values())
-
-#         # Save the chart to a PNG image
-#         chart_image = "dashboard.png"
-#         plt.savefig(chart_image)
-
-#         # Read the PNG image and return it as a response
-#         with open(chart_image, "rb") as f:
-#             response = HttpResponse(f.read(), content_type="image/png")
-#         response["Content-Disposition"] = "inline; filename=dashboard.png"
-
-#         # Delete the PNG image
-#         os.remove(chart_image)
-
-#         return response
-
-
-# class DashboardValorAReceberPorMes(View):
-#     def get(self, request):
-#         context = consulta_pagamentos(tipopagamento="P")
-
-#         data = {}
-#         for mes in context["meses"]:
-#             data[mes["mesano"]] = mes["totalmes"]
-
-#         # Create a bar chart
-#         fig, ax = plt.subplots()
-#         ax.bar(data.keys(), data.values())
-
-#         # Save the chart to a PNG image
-#         chart_image = "dashboard.png"
-#         plt.savefig(chart_image)
-
-#         # Read the PNG image and return it as a response
-#         with open(chart_image, "rb") as f:
-#             response = HttpResponse(f.read(), content_type="image/png")
-#         response["Content-Disposition"] = "inline; filename=dashboard.png"
-
-#         # Delete the PNG image
-#         os.remove(chart_image)
-
-#         return response
+    return render(request, "consultas/consulta_fluxocaixa.html", context)
