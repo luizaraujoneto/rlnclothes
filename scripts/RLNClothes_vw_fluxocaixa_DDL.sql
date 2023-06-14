@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW public.vw_fluxocaixa
     sum(p.creditoconfirmado - p.debitoconfirmado) AS saldoconfirmado,
     sum(p.creditoprevisto) AS creditoprevisto,
     sum(p.debitoprevisto) AS debitoprevisto,
-    sum(p.creditoconfirmado - p.debitoconfirmado + p.creditoprevisto - p.debitoprevisto) AS saldoprevisto
+    sum(p.creditoprevisto - p.debitoprevisto) AS saldoprevisto
    FROM ( SELECT 'Crédito'::text AS tipolancamento,
             p_1.codpagamento,
             c.nomecliente AS nomepagador,

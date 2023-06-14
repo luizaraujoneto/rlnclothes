@@ -415,3 +415,29 @@ def consulta_fluxocaixa(request):
     }
 
     return render(request, "consultas/consulta_fluxocaixa.html", context)
+
+
+def consulta_movimentomensal(request):
+    mesano = "06/2023"
+    totalcompras = Decimal(0)
+    totalvendas = Decimal(0)
+    totalrecebido = Decimal(0)
+    totalpago = Decimal(0)
+
+    # produtos = Produtos.objects.filter()
+    # vendas
+    # pagamentos
+    # parcelas
+
+    datareferencia = datetime.now()
+
+    context = {
+        "mesano": mesano,
+        "totalcompras": totalcompras,
+        "totalvendas": totalvendas,
+        "totalrecebido": totalrecebido,
+        "totalpago": totalpago,
+        "datareferencia": datareferencia,
+    }
+
+    return render(request, "consultas/consulta_movimentomensal.html", context)
