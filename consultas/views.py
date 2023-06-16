@@ -19,7 +19,7 @@ from .models import FluxoCaixa
 
 # Create your views here.
 
-from pedidos.models import Produtos, Devolucoes
+from pedidos.models import Produtos, Devolucoes, Pedidos
 from vendas.models import Vendas
 from clientes.models import Clientes
 from pagamentos.models import Pagamentos
@@ -418,26 +418,68 @@ def consulta_fluxocaixa(request):
 
 
 def consulta_movimentomensal(request):
-    mesano = "06/2023"
-    totalcompras = Decimal(0)
-    totalvendas = Decimal(0)
-    totalrecebido = Decimal(0)
-    totalpago = Decimal(0)
+    mes, ano = "02/2023".split("/")
 
-    # produtos = Produtos.objects.filter()
-    # vendas
-    # pagamentos
-    # parcelas
+    pedidos = Pedidos.objects.filter(
+        datapedido__year=ano,
+        datapedido__month=mes,
+        # tipo pedido = compra
+    )
+
+    # devolucoes = Devolucoes. # não exibir produtos devolvidos
+
+    produtos = Produtos.objects.filter(pedido__in=pedidos).order_by("pedido")
+    totalprodutos = produtos.aggregate(total=Sum("valorcusto"))["total"] or Decimal(0)
+    quantidadeprodutos = produtos.count() or 0
+
+    vendas = Vendas.objects.filter(
+        datavenda__year=ano,
+        datavenda__month=mes,
+    ).order_by("datavenda")
+    totalvendas = vendas.aggregate(total=Sum("valorvenda"))["total"] or Decimal(0)
+    quantidadevendas = vendas.count() or 0
+
+    pagamentos = Pagamentos.objects.filter(
+        datapagamento__year=ano,
+        datapagamento__month=mes,
+    ).order_by("datapagamento")
+    totalpagamentos = pagamentos.aggregate(total=Sum("valorpagamento"))[
+        "total"
+    ] or Decimal(0)
+    quantidadepagamentos = pagamentos.count() or 0
+
+    notasfiscais = NotasFiscais.objects.filter(
+        datanotafiscal__year=ano,
+        datanotafiscal__month=mes,
+    )
+
+    contaspagas = ContasPagar.objects.filter(
+        datapagamento__year=ano,
+        datapagamento__month=mes,
+    ).order_by("datapagamento")
+    totalcontaspagas = contaspagas.aggregate(total=Sum("valorparcela"))[
+        "total"
+    ] or Decimal(0)
+    quantidadecontaspagas = contaspagas.count() or 0
 
     datareferencia = datetime.now()
 
     context = {
-        "mesano": mesano,
-        "totalcompras": totalcompras,
-        "totalvendas": totalvendas,
-        "totalrecebido": totalrecebido,
-        "totalpago": totalpago,
+        "mes": mes,
+        "ano": ano,
         "datareferencia": datareferencia,
+        "produtos": produtos,
+        "quantidadeprodutos": quantidadeprodutos,
+        "totalprodutos": totalprodutos,
+        "vendas": vendas,
+        "quantidadevendas": quantidadevendas,
+        "totalvendas": totalvendas,
+        "pagamentos": pagamentos,
+        "quantidadepagamentos": quantidadepagamentos,
+        "totalpagamentos": totalpagamentos,
+        "contaspagas": contaspagas,
+        "quantidadecontaspagas": quantidadecontaspagas,
+        "totalcontaspagas": totalcontaspagas,
     }
 
     return render(request, "consultas/consulta_movimentomensal.html", context)
