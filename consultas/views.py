@@ -10,11 +10,9 @@ from django.db.models import Value, CharField, Sum
 
 from .models import FluxoCaixa
 
-# Matplotlib imports
-# import matplotlib.pyplot as plt
-# from django.http import HttpResponse
-# from django.views import View
-# import os
+from dateutil.rrule import rrule, MONTHLY
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 # Create your views here.
@@ -417,18 +415,38 @@ def consulta_fluxocaixa(request):
     return render(request, "consultas/consulta_fluxocaixa.html", context)
 
 
+def generate_month_list(start_date, final_date):
+    month_list = []
+    for dt in rrule(
+        MONTHLY, dtstart=start_date, until=final_date
+    ):  # + relativedelta(months=1)):
+        month_list.append(dt.strftime("%m/%Y"))
+    return month_list[::-1]
+
+
 def consulta_movimentomensal(request):
-    mes, ano = "02/2023".split("/")
+    start_date = datetime(2021, 1, 1).date()
+    final_date = datetime.now()
+    meses = generate_month_list(start_date, final_date)
+
+    mesanoselecionado = request.POST.get("mesanoconsulta", meses[0])
+
+    mes, ano = mesanoselecionado.split("/")
 
     pedidos = Pedidos.objects.filter(
-        datapedido__year=ano,
-        datapedido__month=mes,
-        # tipo pedido = compra
+        datapedido__year=ano, datapedido__month=mes, tipopedido="C"
     )
 
-    # devolucoes = Devolucoes. # não exibir produtos devolvidos
+    # produtosdevolvidos = Produtos.objects.filter(
+    #    pedido__in=Devolucoes.objects.all()
+    # )  # não exibir produtos devolvidos
 
-    produtos = Produtos.objects.filter(pedido__in=pedidos).order_by("pedido")
+    produtos = (
+        Produtos.objects.filter(pedido__in=pedidos)
+        #   .exclude(produtosdevolvidos)
+        .order_by("pedido")
+    )
+
     totalprodutos = produtos.aggregate(total=Sum("valorcusto"))["total"] or Decimal(0)
     quantidadeprodutos = produtos.count() or 0
 
@@ -465,8 +483,8 @@ def consulta_movimentomensal(request):
     datareferencia = datetime.now()
 
     context = {
-        "mes": mes,
-        "ano": ano,
+        "mesanoselecionado": mesanoselecionado,
+        "meses": meses,
         "datareferencia": datareferencia,
         "produtos": produtos,
         "quantidadeprodutos": quantidadeprodutos,
