@@ -75,10 +75,10 @@ class Clientes(models.Model):
         )
 
     def saldocliente(self):
-        vendas = self.totalvendas()
-        pagamentos = self.totalpagamentos()
+        vendas = Decimal( self.totalvendas() )
+        pagamentos = Decimal( self.totalpagamentos() )
 
-        return Decimal(vendas - pagamentos)
+        return round(vendas - pagamentos, 2)
 
     def possuiParcelaEmAtraso(self):
         atraso = False

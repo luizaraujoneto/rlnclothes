@@ -105,6 +105,7 @@ def consulta_saldo_por_cliente(request):
                 }
             )
             saldoareceber = saldoareceber + areceber
+        print( cliente, saldo, areceber )
 
     datareferencia = datetime.now()
 
