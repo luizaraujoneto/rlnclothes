@@ -49,6 +49,14 @@
                                     class="btn btn-outline-danger px-2 py-1"><i class="bi bi-trash bi-sm"
                                         title="Apagar"></i> </a>
                             </div>
+                            <div class="btn-group"> 
+                                        <a href="{% url 'cliente_novavenda' row.record.codcliente %}"
+                                    class="btn btn-outline-primary px-2 py-1"><i class="bi bi-handbag bi-sm"
+                                        title="Nova Venda"></i> </a>                                
+                                <a href="{% url 'cliente_novopagamento' row.record.codcliente %}"
+                                    class="btn btn-outline-success px-2 py-1"><i class="bi bi-currency-dollar bi-sm"
+                                        title="Novo Pagamento"></i> </a>                            
+                            </div>
                         </td>
                     </tr>
                     {% endfor %}
