@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import date
 from django import forms
+from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
@@ -23,7 +24,18 @@ def pagamento_create(request, codcliente):
         form = PagamentosForm(request.POST)
 
         if form.is_valid():
-            form.save()
+
+            numparcelas = int(form.cleaned_data.get("numparcelas") )
+
+            descricao = form.cleaned_data.get("formapagamento") 
+            datapagamento = form.cleaned_data.get("datapagamento")
+
+            for i in range(0, numparcelas):
+                form.cleaned_data["formapagamento"] = descricao + " (" + str(i+1) + "/" + str( numparcelas ) + ")"
+                form.cleaned_data["datapagamento"] = datapagamento + relativedelta(months=i)
+
+                print(i + 1, form.cleaned_data.get("formapagamento"), form.cleaned_data.get("datapagamento"))
+                form.save()
 
         pagamento = form.instance
 
