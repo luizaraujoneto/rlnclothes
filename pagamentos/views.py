@@ -24,18 +24,7 @@ def pagamento_create(request, codcliente):
         form = PagamentosForm(request.POST)
 
         if form.is_valid():
-
-            numparcelas = int(form.cleaned_data.get("numparcelas") )
-
-            descricao = form.cleaned_data.get("formapagamento") 
-            datapagamento = form.cleaned_data.get("datapagamento")
-
-            for i in range(0, numparcelas):
-                form.cleaned_data["formapagamento"] = descricao + " (" + str(i+1) + "/" + str( numparcelas ) + ")"
-                form.cleaned_data["datapagamento"] = datapagamento + relativedelta(months=i)
-
-                print(i + 1, form.cleaned_data.get("formapagamento"), form.cleaned_data.get("datapagamento"))
-                form.save()
+            form.save()
 
         pagamento = form.instance
 

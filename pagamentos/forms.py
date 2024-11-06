@@ -26,14 +26,6 @@ class PagamentosForm(forms.ModelForm):
             "observacao": "Observação",
         }
 
-    NUM_PARCELAS_CHOICES = [(i, str(i)) for i in range(1, 6)]
-    
-    numparcelas = forms.ChoiceField(
-        choices=NUM_PARCELAS_CHOICES,
-        label="Número de Parcelas",
-        required=False
-    )
-    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["codpagamento"].widget = forms.HiddenInput()
@@ -58,13 +50,4 @@ class PagamentosForm(forms.ModelForm):
         }
 
         codpagamento = self.initial.get("codpagamento")
-
-        if codpagamento:
-            self.fields["numparcelas"].widget = forms.HiddenInput()
-        else:
-            self.fields["numparcelas"].widget.attrs = {
-                "class": "form-control",
-        }
-
-
 
