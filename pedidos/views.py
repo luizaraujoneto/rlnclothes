@@ -219,6 +219,9 @@ def devolucoes_edit(request, codpedido):
             devolucao.delete()
 
         if codprodutos != "":
+            print(codprodutos)
+            codprodutos = codprodutos.replace(".", "")
+            print(codprodutos)
             codprodutos = codprodutos.split(",")
             for codproduto in codprodutos:
                 produto = get_object_or_404(Produtos, codproduto=codproduto)
