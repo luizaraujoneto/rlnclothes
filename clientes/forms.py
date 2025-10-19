@@ -1,6 +1,9 @@
 from django import forms
 from clientes.models import Clientes
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Row, Column, Submit, Button, ButtonHolder
+
 
 class ClientesForm(forms.ModelForm):
     class Meta:
@@ -16,19 +19,21 @@ class ClientesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.label_class = "fw-bold"  # aplica negrito aos rótulos (opcional)
+        self.helper.form_show_labels = True
+
         codcliente = self.instance.codcliente
 
         if codcliente:
             self.fields["codcliente"].widget.attrs = {
                 "readonly": "readonly",
-                "size": "10",
-                "class": "form-control",
+                "class": "form-control-plaintext",
             }
         else:
             self.fields["codcliente"].widget = forms.HiddenInput()
 
-        # self.fields["codcliente"].widget.attrs["size"] = "10"
-        # self.fields["codcliente"].widget.attrs["readonly"] = "readonly"
         self.fields["nomecliente"].widget.attrs = {
             "size": "47",
             "class": "form-control",

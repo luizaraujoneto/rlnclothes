@@ -10,13 +10,18 @@ from django_tables2 import RequestConfig
 
 from .models import Clientes, ClienteTable, HistoricoCliente
 from .forms import ClientesForm
-
+from .filters import ClientesFilter
 
 def cliente_list(request):
-    table = ClienteTable(Clientes.objects.all().order_by("nomecliente"))
+
+    clienteset = Clientes.objects.all().order_by("nomecliente")
+
+    filter = ClientesFilter(request.GET, queryset=clienteset)
+
+    table = ClienteTable(filter.qs)
     # table.paginate(page=request.GET.get("page", 1), per_page=25)
     RequestConfig(request, paginate={"per_page": 25}).configure(table)
-    return render(request, "clientes\cliente_list.html", {"table": table})
+    return render(request, "clientes\cliente_list.html", {"table": table, "filter":filter})
 
 
 def cliente_create(request):

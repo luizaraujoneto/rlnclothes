@@ -2,9 +2,13 @@
 
 {% load django_tables2 %}
 
+{% load crispy_forms_tags %}
+
 {% load humanize %}
 
 {% load l10n %}
+
+{% block title%} Lista de Clientes {% endblock %}
 
 {% block content %}
 
@@ -16,7 +20,12 @@
 
     <div class="container">
         <div class="row">
+            <form method="get">
+                {% crispy filter.form filter.helper %}
+            </form>
+        </div>
 
+        <div class="row">
             <p><a class="btn btn-outline-primary" href="{% url 'cliente_create' %}" role="button"><i
                         class="bi bi-person-plus"></i>&nbsp;Novo Cliente</a></p>
 
