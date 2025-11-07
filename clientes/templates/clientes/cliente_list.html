@@ -75,7 +75,8 @@
                     <ul class="pagination justify-content-center mb-5">
                         {% block pagination.allpages %}
                         {% for p in table.paginator.page_range %}
-                        <li class="page-item"><a class="page-link"
+                        <li class="page-item {% if p == table.page.number %}active{% endif %}">
+                            <a class="page-link"
                                 href="{% querystring table.prefixed_page_field=p %}">{{ p }}</a></li>
                         {% endfor %}
                         {% endblock pagination.allpages %}

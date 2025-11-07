@@ -12,16 +12,25 @@ from .models import Clientes, ClienteTable, HistoricoCliente
 from .forms import ClientesForm
 from .filters import ClientesFilter
 
+from math import isclose
+
 def cliente_list(request):
+
+    data = request.GET.copy()
+
+    if not request.GET:
+        data['possuimovimentacao'] = True
+
+    if request.GET and 'possuimovimentacao' not in request.GET:
+         data['possuimovimentacao'] = False
 
     clienteset = Clientes.objects.all().order_by("nomecliente")
 
-    filter = ClientesFilter(request.GET, queryset=clienteset)
-
+    filter = ClientesFilter(data, queryset=clienteset)
     table = ClienteTable(filter.qs)
-    # table.paginate(page=request.GET.get("page", 1), per_page=25)
+   
     RequestConfig(request, paginate={"per_page": 25}).configure(table)
-    return render(request, "clientes\cliente_list.html", {"table": table, "filter":filter})
+    return render(request, "clientes/cliente_list.html", {"table": table, "filter":filter})
 
 
 def cliente_create(request):
@@ -38,7 +47,7 @@ def cliente_create(request):
 
     context = {"form": form}
 
-    return render(request, "clientes\cliente_create.html", context)
+    return render(request, "clientes/cliente_create.html", context)
 
 
 def cliente_delete(request, pk):
@@ -52,13 +61,13 @@ def cliente_delete(request, pk):
                 error_message = str(e)
                 return render(
                     request,
-                    "clientes\cliente_delete.html",
+                    "clientes/cliente_delete.html",
                     {"cliente": cliente, "error_message": error_message},
                 )
 
         return redirect("clientes")
 
-    return render(request, "clientes\cliente_delete.html", {"cliente": cliente})
+    return render(request, "clientes/cliente_delete.html", {"cliente": cliente})
 
 
 def cliente_detail(request, pk, subview="historico_cliente"):
@@ -76,7 +85,7 @@ def cliente_detail(request, pk, subview="historico_cliente"):
 
     error_message = ""
 
-    if cliente.totalcontasareceber() != cliente.saldocliente():
+    if not isclose( cliente.totalcontasareceber(), cliente.saldocliente()):
         error_message = "'Saldo do cliente' diferente do 'Total de Contas a Receber'. É necessário ajustar os lançamentos em Contas a Receber."
 
     context = {
@@ -87,7 +96,7 @@ def cliente_detail(request, pk, subview="historico_cliente"):
         "error_message": error_message,
     }
 
-    return render(request, "clientes\cliente_detail.html", context)
+    return render(request, "clientes/cliente_detail.html", context)
 
 
 def cliente_edit(request, pk):

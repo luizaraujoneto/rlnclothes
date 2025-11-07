@@ -1,8 +1,12 @@
 import django_filters
+from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Row, Column, Submit, HTML
+from crispy_forms.layout import Layout, Row, Column, Submit, HTML, Field, Fieldset, Div
 
-from .models import Clientes
+from .models import Clientes, HistoricoCliente
+
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 class ClientesFilter(django_filters.FilterSet):
     
@@ -12,34 +16,93 @@ class ClientesFilter(django_filters.FilterSet):
         widget=django_filters.widgets.forms.TextInput(
             attrs={'placeholder': 'Buscar por nome...'}
         )        
-    )  
- 
-    # possuiparcelascomatraso = django_filters.DateFilter(field_name='date_created', lookup_expr='gte')  # Example: filter by date
+    ) 
+
+    possuiparcelasematraso = django_filters.BooleanFilter(
+        label="Parcelas em atraso",
+        method="filter_possuiparcelasematraso",
+        widget=forms.CheckboxInput(),
+    )
+
+    possuisaldoemaberto = django_filters.BooleanFilter(
+        label="Saldo em aberto",
+        method="filter_possuisaldo",
+        widget=forms.CheckboxInput(),
+    )
+
+    possuimovimentacao = django_filters.BooleanFilter(
+        label="Movimentação nos últimos 6 meses",
+        method="filter_commovimentacao",
+        widget=forms.CheckboxInput(),
+    )
+
     # Com movimentação a menos de 6 meses
 
     class Meta:
         model = Clientes
-        fields = [ 'nomecliente']
-
+        fields = ["nomecliente", "possuiparcelasematraso", "possuisaldoemaberto", "possuimovimentacao" ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Configurando o helper do crispy
         self.helper = FormHelper()
-        self.helper.form_method = 'get'   # importante: GET para filtros
-        self.helper.form_class = 'form-inline'
+        self.helper.form_method = "get"
+        self.helper.form_class = "w-100"  # ocupa toda a linha
+        self.helper.label_class = "font-weight-bold"
 
-        # Layout customizado
         self.helper.layout = Layout(
-            Row(
-                Column('nomecliente', css_class='form-group col-md-9 mb-0'),
-                Column(
-                    Submit('submit', 'Filtrar', css_class='btn btn-primary mt-3'),
-                    HTML(
-                        '<a title="Limpar Filtros" class="btn btn-secondary mt-3" href="." role="button">Limpar</a>'
+            Fieldset( 
+                "Filtro",
+                Row(
+                    Column("nomecliente", css_class="col-md-8"),
+                    Column(
+                        Div(
+                            HTML( " <label>Exibir Clientes com: </label>"),
+                            Field("possuiparcelasematraso"),
+                            Field("possuisaldoemaberto" ),
+                            Field("possuimovimentacao"),
+                        ),
+                        css_class="col-md-4 d-flex align-items-center"
                     ),
-                    css_class='form-group col-md-3 mb-0 d-flex align-items-center'
                 ),
+                Row(                
+                    Column(
+                        Div( 
+                            Submit("submit", "Filtrar", css_class="btn btn-primary mr-2"),
+                            HTML('<a href="." class="btn btn-secondary" role="button">Limpar</a>'),
+                        ),
+                        css_class="col-md-4 d-flex align-items-center"
+                    ),
+                    css_class="align-items-end"
+                ),
+                css_class="border rounded p-3"
             )
-        )   
+        )
+
+    def filter_possuiparcelasematraso(self, queryset, name, value):
+        if value:
+            codclientes = [c.codcliente for c in queryset if c.possuiParcelaEmAtraso() == value]
+            return queryset.filter(codcliente__in=codclientes)
+        return queryset
+    
+    def filter_possuisaldo(self, queryset, name, value):
+        if value:
+            codclientes = [c.codcliente for c in queryset if c.saldocliente() != 0 ]
+            return queryset.filter(codcliente__in=codclientes)
+        return queryset
+    
+    def filter_commovimentacao(self, queryset, name, value):
+        if value:
+            data_limite = date.today() - relativedelta(months=6)
+
+            codclientes = (
+                HistoricoCliente
+                .objects
+                .filter(data__gt=data_limite)
+                .values_list('cliente__codcliente', flat=True)
+                .distinct()
+            )
+
+            return queryset.filter(codcliente__in=codclientes)
+        
+        return queryset

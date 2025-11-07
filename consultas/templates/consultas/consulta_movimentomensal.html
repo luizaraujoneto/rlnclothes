@@ -57,10 +57,10 @@
                 </div>
             </div>
             <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                <div class="card-header">Pagamentos Recebidos</div>
+                <div class="card-header">Pagamentos Confirmados</div>
                 <div class="card-body">
-                    <h6>Qtd: {{quantidadepagamentos}}</h6>
-                    <h6>Valor: R$ {{totalpagamentos|floatformat:2}}</h6>
+                    <h6>Qtd: {{quantidadepagamentosconfirmados}}</h6>
+                    <h6>Valor: R$ {{totalpagamentosconfirmados|floatformat:2}}</h6>
                 </div>
             </div>
             <div class="card text-black bg-warning mb-3" style="max-width: 18rem;">
@@ -154,7 +154,7 @@
             <table class="table table-striped table-sm" id="tbpagamentos">
                 <thead>
                     <tr class="text-left">
-                        <td colspan="8" class="h3"><b>Pagamentos Recebidos</b></td>
+                        <td colspan="8" class="h3"><b>Pagamentos Confirmados</b></td>
                     </tr>
                     <tr>
                         <th class="text-center">Data Pagamento</th>
@@ -164,7 +164,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pagamento in pagamentos %}
+                    {% for pagamento in pagamentosconfirmados %}
                     <tr>
                         <td class="text-center">{{pagamento.datapagamento|date:"d/m/Y"}}</td>
                         <td>{{pagamento.cliente.codcliente}} -
@@ -176,10 +176,46 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="text-right" colspan="2"> Quantidade de pagamentos recebidos:
-                            {{quantidadepagamentos}}</td>
-                        <td class="text-right" colspan="2"> Valor de pagamentos recebidos:
-                            {{totalpagamentos|floatformat:2}}</td>
+                        <td class="text-right" colspan="2"> Quantidade de pagamentos confirmados:
+                            {{quantidadepagamentosconfirmados}}</td>
+                        <td class="text-right" colspan="2"> Total de pagamentos confirmados:
+                            {{totalpagamentosconfirmados|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><a href="#topo">Voltar ao topo</a></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <table class="table table-striped table-sm" id="tbpagamentos">
+                <thead>
+                    <tr class="text-left">
+                        <td colspan="8" class="h3"><b>Pagamentos Previstos</b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Data Pagamento</th>
+                        <th>Nome Cliente</th>
+                        <th class="text-right">Valor Pagamento</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pagamento in pagamentosprevistos %}
+                    <tr>
+                        <td class="text-center">{{pagamento.datapagamento|date:"d/m/Y"}}</td>
+                        <td>{{pagamento.cliente.codcliente}} -
+                            {{pagamento.cliente.nomecliente}}</td>
+                        <td class="text-right">R$ {{pagamento.valorpagamento|floatformat:2}}</td>
+                        <td>{{pagamento.observacao|default_if_none:"---"}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="2"> Quantidade de pagamentos previstos:
+                            {{quantidadepagamentosprevistos}}</td>
+                        <td class="text-right" colspan="2"> Total de pagamentos previstos:
+                            {{totalpagamentosprevistos|floatformat:2}}</td>
                     </tr>
                     <tr>
                         <td colspan="10"><a href="#topo">Voltar ao topo</a></td>

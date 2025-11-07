@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+import django_tables2 as tables
 
 from decimal import Decimal
-
-import django_tables2 as tables
+from math import isclose
 
 # Forms
 from .forms import NotasFiscaisForm, ContasPagarForm
@@ -12,7 +12,6 @@ from .models import NotasFiscais, NotasFiscaisTable, ContasPagar, ContasPagarTab
 from pedidos.models import Pedidos
 
 # Create your views here.
-
 
 def notasfiscais_list(request):
     table = NotasFiscaisTable(NotasFiscais.objects.all().order_by("-datanotafiscal"))
@@ -25,9 +24,9 @@ def notafiscal_create(request):
         form = NotasFiscaisForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            notafiscal = form.save()
 
-        return redirect("notasfiscais")
+        return redirect("notafiscal_detail", notafiscal.codnotafiscal)
 
     else:
         form = NotasFiscaisForm(initial={})
@@ -68,7 +67,7 @@ def notafiscal_detail(request, pk, view_name="list_contaspagar"):
         totalcontaspagar=Sum("valorparcela")
     )["totalcontaspagar"] or Decimal("0.00")
 
-    if notafiscal.valornotafiscal != totalcontaspagar:
+    if not isclose( notafiscal.valornotafiscal, totalcontaspagar ):
         error_message = (
             "'Valor Nota Fiscal ("
             + "{:.2f}".format(notafiscal.valornotafiscal)

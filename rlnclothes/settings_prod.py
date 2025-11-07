@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_tables2",
     "django.contrib.humanize",
+    "django_filters",
+    "crispy_forms",
+    "crispy_bootstrap4",
     "clientes.apps.ClientesConfig",
     "pedidos.apps.PedidosConfig",
     "fornecedores.apps.FornecedoresConfig",
@@ -49,6 +52,9 @@ INSTALLED_APPS = [
     "pagamentos.apps.PagamentosConfig",
     "consultas.apps.ConsultasConfig",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

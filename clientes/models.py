@@ -9,7 +9,7 @@ from django.utils.html import format_html
 from django.utils import timezone
 import pytz
 
-from datetime import datetime
+from math import isclose
 
 from vendas.models import Vendas
 from pagamentos.models import Pagamentos
@@ -199,9 +199,10 @@ class ClienteTable(tables.Table):
         msg1 = ""
         msg2 = ""
 
-        if round(cliente.saldocliente() or 0, 2) != round(
-            cliente.totalcontasareceber() or 0, 2
-        ):
+        # if round( or 0, 2) != round(
+        #     cliente.totalcontasareceber() or 0, 2
+        # ):
+        if not isclose(cliente.saldocliente(), cliente.totalcontasareceber()):
             msg1 = "Inconsistência entre Saldo e Previsão de Pagamentos."
 
         if cliente.possuiParcelaEmAtraso():

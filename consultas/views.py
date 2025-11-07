@@ -457,14 +457,25 @@ def consulta_movimentomensal(request):
     totalvendas = vendas.aggregate(total=Sum("valorvenda"))["total"] or Decimal(0)
     quantidadevendas = vendas.count() or 0
 
-    pagamentos = Pagamentos.objects.filter(
+    pagamentosconfirmados = Pagamentos.objects.filter(
         datapagamento__year=ano,
         datapagamento__month=mes,
+        tipopagamento='C'
     ).order_by("datapagamento")
-    totalpagamentos = pagamentos.aggregate(total=Sum("valorpagamento"))[
+    totalpagamentosconfirmados = pagamentosconfirmados.aggregate(total=Sum("valorpagamento"))[
         "total"
     ] or Decimal(0)
-    quantidadepagamentos = pagamentos.count() or 0
+    quantidadepagamentosconfirmados = pagamentosconfirmados.count() or 0
+
+    pagamentosprevistos = Pagamentos.objects.filter(
+        datapagamento__year=ano,
+        datapagamento__month=mes,
+        tipopagamento='P'
+    ).order_by("datapagamento")
+    totalpagamentosprevistos = pagamentosprevistos.aggregate(total=Sum("valorpagamento"))[
+        "total"
+    ] or Decimal(0)
+    quantidadepagamentosprevistos = pagamentosprevistos.count() or 0
 
     notasfiscais = NotasFiscais.objects.filter(
         datanotafiscal__year=ano,
@@ -492,9 +503,12 @@ def consulta_movimentomensal(request):
         "vendas": vendas,
         "quantidadevendas": quantidadevendas,
         "totalvendas": totalvendas,
-        "pagamentos": pagamentos,
-        "quantidadepagamentos": quantidadepagamentos,
-        "totalpagamentos": totalpagamentos,
+        "pagamentosconfirmados": pagamentosconfirmados,
+        "quantidadepagamentosconfirmados": quantidadepagamentosconfirmados,
+        "totalpagamentosconfirmados": totalpagamentosconfirmados,
+        "pagamentosprevistos": pagamentosprevistos,
+        "quantidadepagamentosprevistos": quantidadepagamentosprevistos,
+        "totalpagamentosprevistos": totalpagamentosprevistos,
         "contaspagas": contaspagas,
         "quantidadecontaspagas": quantidadecontaspagas,
         "totalcontaspagas": totalcontaspagas,
