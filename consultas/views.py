@@ -40,7 +40,7 @@ def consulta_produtos_disponiveis(request):
         "quantidade": quantidade,
     }
 
-    return render(request, "consultas\consulta_produtos_disponiveis.html", context)
+    return render(request, "consultas/consulta_produtos_disponiveis.html", context)
 
 
 def consulta_detail_produto(request, codproduto):
@@ -433,17 +433,12 @@ def consulta_movimentomensal(request):
 
     mes, ano = mesanoselecionado.split("/")
 
-    pedidos = Pedidos.objects.filter(
+    pedidosdecompra = Pedidos.objects.filter(
         datapedido__year=ano, datapedido__month=mes, tipopedido="C"
     )
 
-    # produtosdevolvidos = Produtos.objects.filter(
-    #    pedido__in=Devolucoes.objects.all()
-    # )  # não exibir produtos devolvidos
-
     produtos = (
-        Produtos.objects.filter(pedido__in=pedidos)
-        #   .exclude(produtosdevolvidos)
+        Produtos.objects.filter(pedido__in=pedidosdecompra)
         .order_by("pedido")
     )
 
@@ -477,11 +472,6 @@ def consulta_movimentomensal(request):
     ] or Decimal(0)
     quantidadepagamentosprevistos = pagamentosprevistos.count() or 0
 
-    notasfiscais = NotasFiscais.objects.filter(
-        datanotafiscal__year=ano,
-        datanotafiscal__month=mes,
-    )
-
     contaspagas = ContasPagar.objects.filter(
         datapagamento__year=ano,
         datapagamento__month=mes,
@@ -490,6 +480,16 @@ def consulta_movimentomensal(request):
         "total"
     ] or Decimal(0)
     quantidadecontaspagas = contaspagas.count() or 0
+
+    contasapagar = ContasPagar.objects.filter(
+        datavencimento__year=ano,
+        datavencimento__month=mes,
+        datapagamento__isnull=True
+    ).order_by("datavencimento")
+    totalcontasapagar = contasapagar.aggregate(total=Sum("valorparcela"))[
+        "total"
+    ] or Decimal(0)
+    quantidadecontasapagar = contasapagar.count() or 0
 
     datareferencia = datetime.now()
 
@@ -512,6 +512,9 @@ def consulta_movimentomensal(request):
         "contaspagas": contaspagas,
         "quantidadecontaspagas": quantidadecontaspagas,
         "totalcontaspagas": totalcontaspagas,
+        "contasapagar": contasapagar,
+        "quantidadecontasapagar": quantidadecontasapagar,
+        "totalcontasapagar": totalcontasapagar,
     }
 
     return render(request, "consultas/consulta_movimentomensal.html", context)

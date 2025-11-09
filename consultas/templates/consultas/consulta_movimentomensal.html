@@ -6,8 +6,8 @@
 
 {% block content %}
 <a id="topo"></a>
-<main role="main"
-    onload="document.getElementById('tipoconsulta').value = '{{ tipoconsulta }}'; alert(document.getElementById('tipoconsulta').value)">
+<main role="main">
+
     <div class="jumbotron">
         <h1 class="display-4">
             Fluxo de Caixa e Mercadorias - Mês {{mesanoselecionado}}
@@ -16,62 +16,104 @@
 
     <div class="container">
 
-        <div class="row">
-            <form method="POST"> {% csrf_token %}
-                <table>
-                    <tr>
-                        <td colspan="2"><label for="mesanoconsulta">Selecione o período: </label></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="mesanoconsulta">
+        <div class="w-50 mx-auto">
+            <form method="POST" class="form">
+                {% csrf_token %}
+                
+                <div class="form-group border rounded">
+                    <label for="mesanoconsulta" class="font-weight-bold">Selecione o período:</label>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <select name="mesanoconsulta" id="mesanoconsulta" class="form-control mb-4 ml-4">
                                 {% for mes in meses %}
-                                {% if mesanoselecionado == mes %}
-                                <option value="{{mes}}" selected>{{mes}}</option>
-                                {% else %}
-                                <option value="{{mes}}">{{mes}}</option>
-                                {% endif %}
+                                    {% if mesanoselecionado == mes %}
+                                        <option value="{{mes}}" selected>{{mes}}</option>
+                                    {% else %}
+                                        <option value="{{mes}}">{{mes}}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
-                        </td>
-                        <td><input class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit" value="Filtrar">
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-md btn-outline-success btn-block mt-2 mt-md-0">
+                                Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </form>
         </div>
 
+        <hr/>
+
+    <div class="container">
         <div class="row text-center">
-            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                <div class="card-header">Produtos</div>
-                <div class="card-body">
-                    <h6>Qtd: {{quantidadeprodutos}}</h6>
-                    <h6>Valor: R$ {{totalprodutos|floatformat:2}}</h6>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-success h-100">
+                    <div class="card-header">Produtos</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadeprodutos}}</h6>
+                        <h6>Valor: R$ {{totalprodutos|floatformat:2}}</h6>
+                    </div>
                 </div>
             </div>
-            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">Vendas</div>
-                <div class="card-body">
-                    <h6>Qtd: {{quantidadevendas}}</h6>
-                    <h6>Valor: R$ {{totalvendas|floatformat:2}}</h6>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-info h-100">
+                    <div class="card-header">Vendas</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadevendas}}</h6>
+                        <h6>Valor: R$ {{totalvendas|floatformat:2}}</h6>
+                    </div>
                 </div>
             </div>
-            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                <div class="card-header">Pagamentos Confirmados</div>
-                <div class="card-body">
-                    <h6>Qtd: {{quantidadepagamentosconfirmados}}</h6>
-                    <h6>Valor: R$ {{totalpagamentosconfirmados|floatformat:2}}</h6>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-danger h-100">
+                    <div class="card-header">Pagamentos Confirmados</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadepagamentosconfirmados}}</h6>
+                        <h6>Valor: R$ {{totalpagamentosconfirmados|floatformat:2}}</h6>
+                    </div>
                 </div>
             </div>
-            <div class="card text-black bg-warning mb-3" style="max-width: 18rem;">
-                <div class="card-header">Contas Pagas</div>
-                <div class="card-body">
-                    <h6>Qtd: {{quantidadecontaspagas}}</h6>
-                    <h6>Valor: R$ {{totalcontaspagas|floatformat:2}}</h6>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-secondary h-100">
+                    <div class="card-header">Pagamentos a Receber</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadepagamentosprevistos}}</h6>
+                        <h6>Valor: R$ {{totalpagamentosprevistos|floatformat:2}}</h6>
+                    </div>
                 </div>
             </div>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-warning h-100">
+                    <div class="card-header">Contas Pagas</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadecontaspagas}}</h6>
+                        <h6>Valor: R$ {{totalcontaspagas|floatformat:2}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col mb-3">
+                <div class="card text-white bg-primary h-100">
+                    <div class="card-header">Contas a Pagar</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadecontasapagar}}</h6>
+                        <h6>Valor: R$ {{totalcontasapagar|floatformat:2}}</h6>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div> <!-- /container -->
+    </div>
+
 
     <div class="container">
         <div class="row">
@@ -190,7 +232,7 @@
             <table class="table table-striped table-sm" id="tbpagamentos">
                 <thead>
                     <tr class="text-left">
-                        <td colspan="8" class="h3"><b>Pagamentos Previstos</b></td>
+                        <td colspan="8" class="h3"><b>Pagamentos a Receber</b></td>
                     </tr>
                     <tr>
                         <th class="text-center">Data Pagamento</th>
@@ -241,7 +283,7 @@
                 <tbody>
                     {% for conta in contaspagas %}
                     <tr>
-                        <td>{{contapagar.notafiscal}} </td>
+                        <td>{{conta.notafiscal}} </td>
                         <td class="text-center">{{conta.parcela}} </td>
                         <td class="text-center">{{conta.datavencimento|date:"d/m/Y"}}</td>
                         <td class="text-right">R$ {{conta.valorparcela|floatformat:2}}</td>
@@ -258,6 +300,46 @@
                             {{quantidadecontaspagas}}</td>
                         <td class="text-right" colspan="4"> Total de Contas pagas:
                             {{totalcontaspagas|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><a href="#topo">Voltar ao topo</a></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <table class="table table-striped table-sm" id="tbconstaspagar">
+                <thead>
+                    <tr class="text-left">
+                        <td colspan="7" class="h3"><b>Notas Fiscais/Parcelas A Pagar</b></td>
+                    </tr>
+                    <tr>
+                        <th>Nota Fiscal</th>
+                        <th class="text-center">Parcela</th>
+                        <th class="text-center">Data Vencimento</th>
+                        <th class="text-right">Valor Parcela</th>
+                        <th>Forma Pagamento</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for conta in contasapagar %}
+                    <tr>
+                        <td>{{conta.notafiscal}} </td>
+                        <td class="text-center">{{conta.parcela}} </td>
+                        <td class="text-center">{{conta.datavencimento|date:"d/m/Y"}}</td>
+                        <td class="text-right">R$ {{conta.valorparcela|floatformat:2}}</td>
+                        <td>{{conta.notafiscal.formapagamento|default_if_none:"---"}}</td>
+                        <td>{{conta.observacao|default_if_none:"---"}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <tr>
+                        <td class="text-right" colspan="3"> Quantidade de contas a pagar:
+                            {{quantidadecontasapagar}}</td>
+                        <td class="text-right" colspan="4"> Total de Contas a pagar:
+                            {{totalcontasapagar|floatformat:2}}</td>
                     </tr>
                     <tr>
                         <td colspan="10"><a href="#topo">Voltar ao topo</a></td>
