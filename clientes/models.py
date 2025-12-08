@@ -91,7 +91,12 @@ class Clientes(models.Model):
         parcelas = Pagamentos.objects.filter(cliente=self).filter(tipopagamento="P")
 
         for p in parcelas:
-            if p.datapagamento < timezone.localdate():
+            # Garante que estamos comparando date com date
+            data_pgto = p.datapagamento
+            if hasattr(data_pgto, 'date'):
+                data_pgto = data_pgto.date()
+
+            if data_pgto < timezone.localdate():
                 atraso = True
 
         return atraso
