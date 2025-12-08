@@ -5,7 +5,8 @@ from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
-from .models import Pagamentos, PagamentoTable
+from .models import Pagamentos
+from .tables import PagamentoTable
 from .forms import PagamentosForm
 
 from clientes.models import Clientes

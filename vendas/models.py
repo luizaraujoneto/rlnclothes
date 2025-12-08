@@ -1,5 +1,5 @@
 from django.db import models
-import django_tables2 as tables
+# import django_tables2 as tables
 from django.db.models.functions import Concat
 from django.db.models import Value
 
@@ -13,6 +13,10 @@ from pedidos.models import Produtos
 
 
 class Vendas(models.Model):
+    """
+    Modelo representativo de Vendas.
+    Registra a venda de um produto para um cliente específico.
+    """
     codvenda = models.IntegerField(
         db_column="codvenda", blank=True, null=False, primary_key=True
     )
@@ -50,16 +54,14 @@ class Vendas(models.Model):
         managed = False
         db_table = "vendas"
 
-    def __str__(self):
-        return self.codvenda
+    def __str__(self) -> str:
+        return str(self.codvenda)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.codvenda:
-            max = Vendas.objects.aggregate(models.Max("codvenda"))["codvenda__max"]
+            max = Vendas.objects.aggregate(models.Max("codvenda"))["codvenda__max"] or 0
             self.codvenda = max + 1
         super().save(*args, **kwargs)
 
 
-class VendaTable(tables.Table):
-    class Meta:
-        model = Vendas
+# Table definition moved to tables.py

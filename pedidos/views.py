@@ -9,7 +9,8 @@ from .forms import PedidosForm, ProdutosForm
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Pedidos, PedidoTable, Produtos
+from .models import Pedidos, Produtos
+from .tables import PedidoTable
 
 from vendas.models import Vendas
 from pedidos.models import Devolucoes

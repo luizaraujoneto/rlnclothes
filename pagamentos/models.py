@@ -1,5 +1,5 @@
 from django.db import models
-import django_tables2 as tables
+# import django_tables2 as tables
 
 from django import forms
 
@@ -7,6 +7,10 @@ from django import forms
 
 
 class Pagamentos(models.Model):
+    """
+    Modelo representativo de Pagamentos.
+    Gerencia pagamentos recebidos ou previstos de clientes.
+    """
     codpagamento = models.IntegerField(
         db_column="codpagamento", blank=True, null=False, primary_key=True
     )
@@ -51,11 +55,14 @@ class Pagamentos(models.Model):
         db_column="observacao", max_length=255, blank=True, null=True
     )
 
-    def save(self, *args, **kwargs):
+    def __str__(self) -> str:
+        return str(self.codpagamento)
+
+    def save(self, *args, **kwargs) -> None:
         if not self.codpagamento:
             max = Pagamentos.objects.aggregate(models.Max("codpagamento"))[
                 "codpagamento__max"
-            ]
+            ] or 0
             self.codpagamento = max + 1
         super().save(*args, **kwargs)
 
@@ -64,6 +71,4 @@ class Pagamentos(models.Model):
         db_table = "pagamentos"
 
 
-class PagamentoTable(tables.Table):
-    class Meta:
-        model = Pagamentos
+# PagamentoTable moved to tables.py

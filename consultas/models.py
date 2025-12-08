@@ -6,6 +6,11 @@ from django.db import models
 
 
 class FluxoCaixa(models.Model):
+    """
+    Modelo de visualização de Fluxo de Caixa.
+    Agrega informações de créditos e débitos (confirmados e previstos) por mês/ano.
+    Esta é uma tabela gerenciada via view no banco de dados.
+    """
     anomes = models.CharField(
         db_column="anomes", blank=True, null=False, primary_key=True
     )

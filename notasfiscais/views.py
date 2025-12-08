@@ -7,8 +7,8 @@ from math import isclose
 
 # Forms
 from .forms import NotasFiscaisForm, ContasPagarForm
-from .models import NotasFiscais, NotasFiscaisTable, ContasPagar, ContasPagarTable
-
+from .models import NotasFiscais, ContasPagar
+from .tables import NotasFiscaisTable, ContasPagarTable
 from pedidos.models import Pedidos
 
 # Create your views here.

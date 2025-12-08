@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
-import django_tables2 as tables
+# import django_tables2 as tables
 
 from fornecedores.models import Fornecedores
 from notasfiscais.models import NotasFiscais
@@ -8,6 +8,10 @@ from notasfiscais.models import NotasFiscais
 
 # Create your models here.
 class Pedidos(models.Model):
+    """
+    Modelo representativo de Pedidos.
+    Gerencia pedidos de compra e devolução junto a fornecedores/notas fiscais.
+    """
     codpedido = models.IntegerField(
         db_column="codpedido", blank=True, null=False, primary_key=True
     )
@@ -54,13 +58,13 @@ class Pedidos(models.Model):
         db_column="observacao", max_length=255, blank=True, null=True
     )
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.codpedido:
-            max = Pedidos.objects.aggregate(models.Max("codpedido"))["codpedido__max"]
+            max = Pedidos.objects.aggregate(models.Max("codpedido"))["codpedido__max"] or 0
             self.codpedido = max + 1
         super().save(*args, **kwargs)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.numeropedido[:20]
 
     class Meta:
@@ -68,37 +72,14 @@ class Pedidos(models.Model):
         db_table = "pedidos"
 
 
-class PedidoTable(tables.Table):
-    codpedido = tables.Column(
-        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
-    )
-    numeropedido = tables.Column(verbose_name="Pedido")
-    fornecedor = tables.Column(verbose_name="Fornecedor")
-    notafiscal = tables.Column(verbose_name="Nota Fiscal")
-    datapedido = tables.Column(verbose_name="Data", localize=True)
-    valorpedido = tables.Column(
-        verbose_name="Valor", attrs={"th": {"class": "text-right"}}
-    )
-    observacao = tables.Column(
-        verbose_name="Obs.", attrs={"th": {"class": "text-center"}}, default=""
-    )
-
-    def render_valorpedido(self, value):
-        return "R$ {:0.2f}".format(value).replace(".", ",")
-
-    def render_datapedido(self, value):
-        return value.strftime("%d/%m/%Y")
-
-    def render_observacao(self, value):
-        html = "&nbsp;<span class='text-info' title='{}'><i class='bi bi-journal-text'></i>&nbsp; </span>"
-
-        return format_html(html, value)
-
-    class Meta:
-        model = Pedidos
+# PedidoTable moved to tables.py
 
 
 class Produtos(models.Model):
+    """
+    Modelo representativo de Produtos.
+    Armazena itens individuais associados a um pedido.
+    """
     codproduto = models.IntegerField(
         db_column="codproduto", blank=True, null=False, primary_key=True
     )
@@ -129,19 +110,23 @@ class Produtos(models.Model):
         managed = False
         db_table = "produtos"
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.codproduto:
             max = Produtos.objects.aggregate(models.Max("codproduto"))[
                 "codproduto__max"
-            ]
+            ] or 0
             self.codproduto = max + 1
         super().save(*args, **kwargs)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.descricao[:20] + " [Ref.:" + (self.referencia or "     ") + "]"
 
 
 class Devolucoes(models.Model):
+    """
+    Modelo representativo de Devoluções.
+    Registra a devolução de produtos de um pedido específico.
+    """
     coddevolucao = models.IntegerField(
         db_column="coddevolucao", blank=True, null=False, primary_key=True
     )
@@ -168,7 +153,7 @@ class Devolucoes(models.Model):
         managed = False
         db_table = "devolucoes"
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.coddevolucao:
             max = (
                 Devolucoes.objects.aggregate(models.Max("coddevolucao"))[

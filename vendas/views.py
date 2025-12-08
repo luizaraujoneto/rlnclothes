@@ -5,7 +5,8 @@ from django import forms
 
 from datetime import date
 
-from .models import Vendas, VendaTable  # , ItemVenda
+from .models import Vendas # , ItemVenda
+from .tables import VendaTable
 from .forms import VendasForm  # , ItemVendaForm
 
 from clientes.models import Clientes

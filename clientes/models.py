@@ -1,8 +1,9 @@
 from django.db import models
+from typing import Dict, List, Any
 from django.db.models.functions import Cast
 from django.db.models import Sum
 
-import django_tables2 as tables
+# import django_tables2 as tables
 
 from decimal import Decimal
 from django.utils.html import format_html
@@ -18,6 +19,10 @@ from pagamentos.models import Pagamentos
 
 
 class Clientes(models.Model):
+    """
+    Modelo representativo de Clientes.
+    Gerencia informações pessoais e financeiras básicas dos clientes.
+    """
     codcliente = models.IntegerField(
         db_column="codcliente", blank=True, null=False, primary_key=True
     )
@@ -38,15 +43,15 @@ class Clientes(models.Model):
     def __str__(self):
         return self.nomecliente[:50]
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if not self.codcliente:
             max = Clientes.objects.aggregate(models.Max("codcliente"))[
                 "codcliente__max"
-            ]
+            ] or 0
             self.codcliente = max + 1
         super().save(*args, **kwargs)
 
-    def totalvendas(self):
+    def totalvendas(self) -> Decimal:
         return Decimal(
             Vendas.objects.filter(cliente=self).aggregate(
                 totalvendas=models.Sum("valorvenda")
@@ -54,7 +59,7 @@ class Clientes(models.Model):
             or Decimal("0.00")
         )
 
-    def totalpagamentos(self):
+    def totalpagamentos(self) -> Decimal:
         return Decimal(
             Pagamentos.objects.filter(cliente=self)
             .filter(tipopagamento="C")
@@ -64,7 +69,7 @@ class Clientes(models.Model):
             or Decimal("0.00")
         )
 
-    def totalcontasareceber(self):
+    def totalcontasareceber(self) -> Decimal:
         return Decimal(
             Pagamentos.objects.filter(cliente=self)
             .filter(tipopagamento="P")
@@ -74,27 +79,24 @@ class Clientes(models.Model):
             or Decimal("0.00")
         )
 
-    def saldocliente(self):
+    def saldocliente(self) -> Decimal:
         vendas = Decimal( self.totalvendas() )
         pagamentos = Decimal( self.totalpagamentos() )
 
         return round(vendas - pagamentos, 2)
 
-    def possuiParcelaEmAtraso(self):
+    def possuiParcelaEmAtraso(self) -> bool:
         atraso = False
 
         parcelas = Pagamentos.objects.filter(cliente=self).filter(tipopagamento="P")
 
         for p in parcelas:
-            vencimento = p.datapagamento.replace(tzinfo=pytz.UTC)
-            agora = timezone.datetime.now().astimezone(vencimento.tzinfo)
-
-            if vencimento.__lt__(agora):
+            if p.datapagamento < timezone.localdate():
                 atraso = True
 
         return atraso
 
-    def historico(self):
+    def historico(self) -> Dict[str, Any]:
         colunas = []
         for f in HistoricoCliente()._meta.get_fields():
             colunas.append(f.name)
@@ -116,7 +118,7 @@ class Clientes(models.Model):
 
         return table
 
-    def vendas(self):
+    def vendas(self) -> Dict[str, Any]:
         colunas = ["codvenda", "datavenda", "descricao", "valorvenda", "observacao"]
 
         dados = (
@@ -134,7 +136,7 @@ class Clientes(models.Model):
 
         return table
 
-    def pagamentos(self, tipo):
+    def pagamentos(self, tipo: str) -> Dict[str, Any]:
         if tipo == "E":  # Pagamentos "E"fetivados
             colunas = ["Id", "Data Pgto.", "Forma Pgto.", "Valor Pago", "Observação"]
 
@@ -181,64 +183,18 @@ class Clientes(models.Model):
         return table
 
 
-class ClienteTable(tables.Table):
-    codcliente = tables.Column(
-        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
-    )
-    nomecliente = tables.Column(verbose_name="Nome", orderable="True")
-    telefone = tables.Column(verbose_name="Telefone")
-    observacao = tables.Column(
-        verbose_name="Obs.", attrs={"th": {"class": "text-center"}}, default=""
-    )
-    saldo = tables.Column(
-        verbose_name="Saldo", empty_values=(), attrs={"th": {"class": "text-right"}}
-    )
-
-    def render_codcliente(self, record):
-        cliente = record
-        msg1 = ""
-        msg2 = ""
-
-        # if round( or 0, 2) != round(
-        #     cliente.totalcontasareceber() or 0, 2
-        # ):
-        if not isclose(cliente.saldocliente(), cliente.totalcontasareceber()):
-            msg1 = "Inconsistência entre Saldo e Previsão de Pagamentos."
-
-        if cliente.possuiParcelaEmAtraso():
-            msg2 = "Cliente posui parcela em atraso."
-
-        html = "&nbsp;<span class='text-danger small' title='{}\n{}'><i class='bi bi-patch-exclamation'></i>&nbsp; </span>"
-
-        if msg1 != "" or msg2 != "":
-            return format_html(str(cliente.codcliente) + html, msg1, msg2)
-        else:
-            return cliente.codcliente
-
-    def render_saldo(self, record):
-        saldo = Decimal(record.saldocliente() or 0)
-        return "R$ {:0.2f}".format(saldo).replace(".", ",")
-
-    def render_observacao(self, value):
-        html = "&nbsp;<span class='text-info' title='{}'><i class='bi bi-journal-text'></i>&nbsp; </span>"
-
-        return format_html(html, value)
-
-    class Meta:
-        model = Clientes
-        fields = [
-            "codcliente",
-            "nomecliente",
-            "telefone",
-            "observacao",
-            "saldo",
-        ]
+# ClienteTable moved to tables.py
 
 
 # cliente, tipooperacao, codoperacao, data, descricao, valor, observacao
 
 
 class HistoricoCliente(models.Model):
+    """
+    Modelo de visualização do histórico do cliente.
+    Consolida operações de vendas e pagamentos para exibição.
+    Esta é uma tabela gerenciada via view no banco de dados.
+    """
     cliente = models.ForeignKey(
         Clientes,
         on_delete=models.DO_NOTHING,

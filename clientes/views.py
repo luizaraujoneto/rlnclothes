@@ -8,7 +8,8 @@ from django.urls import reverse_lazy
 
 from django_tables2 import RequestConfig
 
-from .models import Clientes, ClienteTable, HistoricoCliente
+from .models import Clientes, HistoricoCliente
+from .tables import ClienteTable
 from .forms import ClientesForm
 from .filters import ClientesFilter
 

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
-import django_tables2 as tables
+# import django_tables2 as tables
 
 from fornecedores.models import Fornecedores
 
@@ -8,6 +8,10 @@ from fornecedores.models import Fornecedores
 
 
 class NotasFiscais(models.Model):
+    """
+    Modelo representativo de Notas Fiscais.
+    Armazena informações sobre notas fiscais recebidas de fornecedores.
+    """
     codnotafiscal = models.IntegerField(
         db_column="codnotafiscal", blank=True, null=False, primary_key=True
     )
@@ -50,54 +54,24 @@ class NotasFiscais(models.Model):
         if not self.codnotafiscal:
             max = NotasFiscais.objects.aggregate(models.Max("codnotafiscal"))[
                 "codnotafiscal__max"
-            ]
+            ] or 0
             self.codnotafiscal = max + 1
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.numeronotafiscal[:20]
 
-class NotasFiscaisTable(tables.Table):
-    codnotafiscal = tables.Column(
-        verbose_name="Cód", attrs={"th": {"class": "text-center"}}
-    )
-    numeronotafiscal = tables.Column(verbose_name="Nota Fiscal")
-    fornecedor = tables.Column(verbose_name="Fornecedor")
-    datanotafiscal = tables.Column(verbose_name="Data", localize=True)
-    valornotafiscal = tables.Column(
-        verbose_name="Valor", attrs={"th": {"class": "text-right"}}
-    )
-    observacao = tables.Column(
-        verbose_name="Obs.", attrs={"th": {"class": "text-center"}}, default=""
-    )
-    formapagamento = tables.Column(verbose_name="Forma de Pagamento")
-
-    def render_valornotafiscal(self, value):
-        return "R$ {:0.2f}".format(value).replace(".", ",")
-
-    def render_datanotafiscal(self, value):
-        return value.strftime("%d/%m/%Y")
-
-    def render_observacao(self, value):
-        html = "&nbsp;<span class='text-info' title='{}'><i class='bi bi-journal-text'></i>&nbsp; </span>"
-
-        return format_html(html, value)
-
-    class Meta:
-        model = NotasFiscais
-        fields = [
-            "codnotafiscal",
-            "numeronotafiscal",
-            "fornecedor",
-            "datanotafiscal",
-            "valornotafiscal",
-            "observacao",
-            "formapagamento",
-        ]
+# NotasFiscaisTable moved to tables.py
 
 
 # codcontapagar, codnotafiscal, parcela, datavencimento, valorparcela, datapagamento, formapagamento, observacao
 
 
 class ContasPagar(models.Model):
+    """
+    Modelo representativo de Contas a Pagar.
+    Gerencia parcelas e pagamentos associados a notas fiscais.
+    """
     codcontapagar = models.IntegerField(
         db_column="codcontapagar", blank=True, null=False, primary_key=True
     )
@@ -132,6 +106,9 @@ class ContasPagar(models.Model):
     formapagamento = models.CharField(
         db_column="formapagamento", max_length=255, blank=True, null=True
     )
+    def __str__(self):
+        return str(self.codcontapagar)
+
     observacao = models.CharField(
         db_column="observacao", max_length=255, blank=True, null=True
     )
@@ -140,7 +117,7 @@ class ContasPagar(models.Model):
         if not self.codcontapagar:
             max = ContasPagar.objects.aggregate(models.Max("codcontapagar"))[
                 "codcontapagar__max"
-            ]
+            ] or 0
             self.codcontapagar = max + 1
         super().save(*args, **kwargs)
 
@@ -149,6 +126,4 @@ class ContasPagar(models.Model):
         db_table = "contaspagar"
 
 
-class ContasPagarTable(tables.Table):
-    class Meta:
-        model = ContasPagar
+# ContasPagarTable moved to tables.py

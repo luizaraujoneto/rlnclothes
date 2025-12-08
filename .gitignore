@@ -3,3 +3,13 @@ report.pdf
 **/__pycache__
 __pycache__
 .vscode
+.env
+.env.example
+.gitignore
+.gitmodules
+.gitattributes
+.gitconfig
+.gitconfig.local
+.gitconfig.user
+.gitconfig.work
+

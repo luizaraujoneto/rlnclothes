@@ -472,6 +472,15 @@ def consulta_movimentomensal(request):
     ] or Decimal(0)
     quantidadepagamentosprevistos = pagamentosprevistos.count() or 0
 
+    pagamentosatrasados = Pagamentos.objects.filter(
+        datapagamento__lte=datetime.now(),
+        tipopagamento='P'
+    ).order_by("datapagamento")
+    totalpagamentosatrasados = pagamentosatrasados.aggregate(total=Sum("valorpagamento"))[
+        "total"
+    ] or Decimal(0)
+    quantidadepagamentosatrasados = pagamentosatrasados.count() or 0
+
     contaspagas = ContasPagar.objects.filter(
         datapagamento__year=ano,
         datapagamento__month=mes,
@@ -509,6 +518,9 @@ def consulta_movimentomensal(request):
         "pagamentosprevistos": pagamentosprevistos,
         "quantidadepagamentosprevistos": quantidadepagamentosprevistos,
         "totalpagamentosprevistos": totalpagamentosprevistos,
+        "pagamentosatrasados": pagamentosatrasados,
+        "quantidadepagamentosatrasados": quantidadepagamentosatrasados,
+        "totalpagamentosatrasados": totalpagamentosatrasados,
         "contaspagas": contaspagas,
         "quantidadecontaspagas": quantidadecontaspagas,
         "totalcontaspagas": totalcontaspagas,

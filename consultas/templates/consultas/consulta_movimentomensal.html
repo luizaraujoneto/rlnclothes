@@ -5,6 +5,21 @@
 {% load humanize %}
 
 {% block content %}
+
+<style>
+
+.card-hover:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
+table.table{
+    scroll-margin-top: 75px;
+}
+
+</style>
+
 <a id="topo"></a>
 <main role="main">
 
@@ -14,44 +29,42 @@
         </h1>
     </div>
 
-    <div class="container">
+    <div class="w-50 mx-auto">
+        <form method="POST" class="form">
+            {% csrf_token %}
+            
+            <div class="form-group border rounded">
+                <label for="mesanoconsulta" class="font-weight-bold">Selecione o período:</label>
+                <div class="row">
+                    <div class="col-md-8">
+                        <select name="mesanoconsulta" id="mesanoconsulta" class="form-control mb-4 ml-4">
+                            {% for mes in meses %}
+                                {% if mesanoselecionado == mes %}
+                                    <option value="{{mes}}" selected>{{mes}}</option>
+                                {% else %}
+                                    <option value="{{mes}}">{{mes}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
 
-        <div class="w-50 mx-auto">
-            <form method="POST" class="form">
-                {% csrf_token %}
-                
-                <div class="form-group border rounded">
-                    <label for="mesanoconsulta" class="font-weight-bold">Selecione o período:</label>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <select name="mesanoconsulta" id="mesanoconsulta" class="form-control mb-4 ml-4">
-                                {% for mes in meses %}
-                                    {% if mesanoselecionado == mes %}
-                                        <option value="{{mes}}" selected>{{mes}}</option>
-                                    {% else %}
-                                        <option value="{{mes}}">{{mes}}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-md btn-outline-success btn-block mt-2 mt-md-0">
-                                Filtrar
-                            </button>
-                        </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-md btn-outline-success btn-block mt-2 mt-md-0">
+                            Filtrar
+                        </button>
                     </div>
                 </div>
+            </div>
 
-            </form>
-        </div>
+        </form>
+    </div>
 
-        <hr/>
+    <hr/>
 
-    <div class="container">
-        <div class="row text-center">
+    <div class="row text-center">
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbprodutos" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-success h-100">
                     <div class="card-header">Produtos</div>
                     <div class="card-body">
@@ -59,9 +72,11 @@
                         <h6>Valor: R$ {{totalprodutos|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
+                </a>
+        </div>
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbvendas" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-info h-100">
                     <div class="card-header">Vendas</div>
                     <div class="card-body">
@@ -69,19 +84,35 @@
                         <h6>Valor: R$ {{totalvendas|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbpagamentosatrasados" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-danger h-100">
-                    <div class="card-header">Pagamentos Confirmados</div>
+                    <div class="card-header">Pagamentos Atrasados</div>
+                    <div class="card-body">
+                        <h6>Qtd: {{quantidadepagamentosatrasados}}</h6>
+                        <h6>Valor: R$ {{totalpagamentosatrasados|floatformat:2}}</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col mb-3">
+            <a href="#tbpagamentosconfirmados" class="text-decoration-none text-reset d-block card-hover">
+                <div class="card text-white bg-success h-100">
+                    <div class="card-header">Pagamentos Recebidos</div>
                     <div class="card-body">
                         <h6>Qtd: {{quantidadepagamentosconfirmados}}</h6>
                         <h6>Valor: R$ {{totalpagamentosconfirmados|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbpagamentosareceber" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-secondary h-100">
                     <div class="card-header">Pagamentos a Receber</div>
                     <div class="card-body">
@@ -89,9 +120,11 @@
                         <h6>Valor: R$ {{totalpagamentosprevistos|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbcontaspagas" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-warning h-100">
                     <div class="card-header">Contas Pagas</div>
                     <div class="card-body">
@@ -99,9 +132,11 @@
                         <h6>Valor: R$ {{totalcontaspagas|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
+            </a>
+        </div>
 
-            <div class="col mb-3">
+        <div class="col mb-3">
+            <a href="#tbcontasapagar" class="text-decoration-none text-reset d-block card-hover">
                 <div class="card text-white bg-primary h-100">
                     <div class="card-header">Contas a Pagar</div>
                     <div class="card-body">
@@ -109,11 +144,10 @@
                         <h6>Valor: R$ {{totalcontasapagar|floatformat:2}}</h6>
                     </div>
                 </div>
-            </div>
-
+            </a>
         </div>
-    </div>
 
+    </div>
 
     <div class="container">
         <div class="row">
@@ -193,10 +227,46 @@
                 </tfoot>
             </table>
 
-            <table class="table table-striped table-sm" id="tbpagamentos">
+            <table class="table table-striped table-sm" id="tbpagamentosatrasados">
                 <thead>
                     <tr class="text-left">
-                        <td colspan="8" class="h3"><b>Pagamentos Confirmados</b></td>
+                        <td colspan="8" class="h3"><b>Pagamentos em Atraso</b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Data Pagamento</th>
+                        <th>Nome Cliente</th>
+                        <th class="text-right">Valor Pagamento</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pagamento in pagamentosatrasados %}
+                    <tr>
+                        <td class="text-center">{{pagamento.datapagamento|date:"d/m/Y"}}</td>
+                        <td>{{pagamento.cliente.codcliente}} -
+                            {{pagamento.cliente.nomecliente}}</td>
+                        <td class="text-right">R$ {{pagamento.valorpagamento|floatformat:2}}</td>
+                        <td>{{pagamento.observacao|default_if_none:"---"}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="2"> Quantidade de pagamentos atrasados:
+                            {{quantidadepagamentosatrasados}}</td>
+                        <td class="text-right" colspan="2"> Total de pagamentos atrasados:
+                            {{totalpagamentosatrasados|floatformat:2}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10"><a href="#topo">Voltar ao topo</a></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <table class="table table-striped table-sm" id="tbpagamentosconfirmados">
+                <thead>
+                    <tr class="text-left">
+                        <td colspan="8" class="h3"><b>Pagamentos Recebidos</b></td>
                     </tr>
                     <tr>
                         <th class="text-center">Data Pagamento</th>
@@ -218,9 +288,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="text-right" colspan="2"> Quantidade de pagamentos confirmados:
+                        <td class="text-right" colspan="2"> Quantidade de pagamentos artasados:
                             {{quantidadepagamentosconfirmados}}</td>
-                        <td class="text-right" colspan="2"> Total de pagamentos confirmados:
+                        <td class="text-right" colspan="2"> Total de pagamentos atrasados:
                             {{totalpagamentosconfirmados|floatformat:2}}</td>
                     </tr>
                     <tr>
@@ -229,7 +299,7 @@
                 </tfoot>
             </table>
 
-            <table class="table table-striped table-sm" id="tbpagamentos">
+            <table class="table table-striped table-sm" id="tbpagamentosareceber">
                 <thead>
                     <tr class="text-left">
                         <td colspan="8" class="h3"><b>Pagamentos a Receber</b></td>
@@ -254,9 +324,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="text-right" colspan="2"> Quantidade de pagamentos previstos:
+                        <td class="text-right" colspan="2"> Quantidade de pagamentos a receber:
                             {{quantidadepagamentosprevistos}}</td>
-                        <td class="text-right" colspan="2"> Total de pagamentos previstos:
+                        <td class="text-right" colspan="2"> Total de pagamentos a receber:
                             {{totalpagamentosprevistos|floatformat:2}}</td>
                     </tr>
                     <tr>
@@ -265,7 +335,7 @@
                 </tfoot>
             </table>
 
-            <table class="table table-striped table-sm" id="tbconstaspagar">
+            <table class="table table-striped table-sm" id="tbcontaspagas">
                 <thead>
                     <tr class="text-left">
                         <td colspan="7" class="h3"><b>Notas Fiscais/Parcelas Pagas</b></td>
@@ -307,7 +377,7 @@
                 </tfoot>
             </table>
 
-            <table class="table table-striped table-sm" id="tbconstaspagar">
+            <table class="table table-striped table-sm" id="tbcontasapagar">
                 <thead>
                     <tr class="text-left">
                         <td colspan="7" class="h3"><b>Notas Fiscais/Parcelas A Pagar</b></td>
