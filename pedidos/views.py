@@ -19,7 +19,7 @@ from pedidos.models import Devolucoes
 def pedido_list(request):
     table = PedidoTable(Pedidos.objects.all().order_by("-datapedido"))
     table.paginate(page=request.GET.get("page", 1), per_page=25)
-    return render(request, "pedidos\pedido_list.html", {"table": table})
+    return render(request, "pedidos/pedido_list.html", {"table": table})
 
 
 def pedido_create(request):
@@ -38,7 +38,7 @@ def pedido_create(request):
 
     context = {"form": form}
 
-    return render(request, "pedidos\pedido_create.html", context)
+    return render(request, "pedidos/pedido_create.html", context)
 
 
 def pedido_delete(request, pk):
@@ -52,13 +52,13 @@ def pedido_delete(request, pk):
                 error_message = str(e)
                 return render(
                     request,
-                    "pedidos\pedido_delete.html",
+                    "pedidos/pedido_delete.html",
                     {"pedido": pedido, "error_message": error_message},
                 )
 
         return redirect("pedidos")
 
-    return render(request, "pedidos\pedido_delete.html", {"pedido": pedido})
+    return render(request, "pedidos/pedido_delete.html", {"pedido": pedido})
 
 
 def pedido_detail(request, pk):
@@ -71,7 +71,7 @@ def pedido_detail(request, pk):
 
     context = {"pedido": pedido, "view_name": viewname}
 
-    return render(request, "pedidos\pedido_detail.html", context)
+    return render(request, "pedidos/pedido_detail.html", context)
 
 
 def pedido_edit(request, pk):
@@ -94,7 +94,6 @@ def pedido_edit(request, pk):
                 "tipopedido": pedido.tipopedido,
                 "notafiscal": pedido.notafiscal,
                 "datapedido": pedido.datapedido,
-                "valorpedido": "{:.2f}".format(pedido.valorpedido),
                 "observacao": pedido.observacao,
             }
         )
@@ -172,7 +171,7 @@ def produto_create(request, codpedido):
         "view_name": "create_produto",
     }
 
-    return render(request, "pedidos\pedido_detail.html", context)
+    return render(request, "pedidos/pedido_detail.html", context)
 
 
 def produto_delete(request, codproduto):
@@ -186,7 +185,7 @@ def produto_delete(request, codproduto):
                 error_message = str(e)
                 return render(
                     request,
-                    "pedidos\pedido_detail.html",
+                    "pedidos/pedido_detail.html",
                     {
                         "pedido": produto.pedido,
                         "produto": produto,
@@ -204,7 +203,7 @@ def produto_delete(request, codproduto):
         "error_message": "",
     }
 
-    return render(request, "pedidos\pedido_detail.html", context)
+    return render(request, "pedidos/pedido_detail.html", context)
 
 
 def devolucoes_edit(request, codpedido):
@@ -220,9 +219,7 @@ def devolucoes_edit(request, codpedido):
             devolucao.delete()
 
         if codprodutos != "":
-            print(codprodutos)
             codprodutos = codprodutos.replace(".", "")
-            print(codprodutos)
             codprodutos = codprodutos.split(",")
             for codproduto in codprodutos:
                 produto = get_object_or_404(Produtos, codproduto=codproduto)
