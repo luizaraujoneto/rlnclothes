@@ -51,3 +51,60 @@ class PagamentosForm(forms.ModelForm):
 
         codpagamento = self.initial.get("codpagamento")
 
+
+class GerarParcelasForm(forms.Form):
+    """
+    Formulário para geração automática de parcelas de pagamento.
+    """
+    TIPO_CHOICES = [
+        ('completo', 'Saldo Completo'),
+        ('saldo_nao_previsto', 'Saldo ainda não parcelado'),
+    ]
+    
+    tipopgto = forms.ChoiceField(
+        label='Tipo Pgto.',
+        choices=TIPO_CHOICES,
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        initial='saldo_nao_previsto'
+    )
+    
+    descricao = forms.CharField(
+        label='Descrição',
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ex: Pagamento de compras'
+        })
+    )
+    
+    data_primeira_parcela = forms.DateField(
+        label='Data 1ª Parcela',
+        required=True,
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'form-control'
+        })
+    )
+    
+    num_parcelas = forms.IntegerField(
+        label='Nº Parcelas',
+        min_value=1,
+        max_value=120,
+        required=True,
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ex: 12'
+        })
+    )
+    
+    observacao = forms.CharField(
+        label='Observação',
+        max_length=255,
+        required=False,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 4,
+            'placeholder': 'Observações adicionais (opcional)'
+        })
+    )
