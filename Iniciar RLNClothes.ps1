@@ -1,4 +1,2 @@
-cd C:\projetos\RLNClothes\
-.\.venv\Scripts\Activate.ps1
-python.exe .\manage.py runserver --settings=rlnclothes.settings_prod
-
+cd C:\projetos\RLNClothes2\
+& .\.venv\Scripts\python.exe run_waitress.py
