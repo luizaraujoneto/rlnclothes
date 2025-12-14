@@ -52,6 +52,9 @@ class PagamentosForm(forms.ModelForm):
         codpagamento = self.initial.get("codpagamento")
 
 
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column, Submit, Button, Div
+
 class GerarParcelasForm(forms.Form):
     """
     Formulário para geração automática de parcelas de pagamento.
@@ -108,3 +111,23 @@ class GerarParcelasForm(forms.Form):
             'placeholder': 'Observações adicionais (opcional)'
         })
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            'tipopgto',
+            'descricao',
+            Row(
+                Column('data_primeira_parcela', css_class='form-group col-md-6 mb-0'),
+                Column('num_parcelas', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            'observacao',
+            Div(
+                Submit('submit', 'Salvar', css_class='btn btn-success'),
+                Button('cancel', 'Cancelar', css_class='btn btn-outline-danger', onclick="window.history.back()"),
+                css_class='text-right mt-4'
+            )
+        )

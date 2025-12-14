@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
+{% block title %} RLNCLothes :: Gerar Parcelas de Pagamento {% endblock %}
+
 {% block content %}
 
 <main role="main">
@@ -48,73 +52,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="" method="post"> {% csrf_token %}
-                    
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">{{ form.tipopgto.label }}</label>
-                        <div class="mt-2">
-                            {% for radio in form.tipopgto %}
-                                <div class="form-check">
-                                    {{ radio.tag }}
-                                    <label class="form-check-label" for="{{ radio.id_for_label }}">
-                                        {{ radio.choice_label }}
-                                    </label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        {% if form.tipopgto.errors %}
-                            <div class="text-danger">{{ form.tipopgto.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="{{ form.descricao.id_for_label }}" class="fw-bold">{{ form.descricao.label }}</label>
-                        {{ form.descricao }}
-                        {% if form.descricao.errors %}
-                            <div class="text-danger">{{ form.descricao.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label for="{{ form.data_primeira_parcela.id_for_label }}" class="fw-bold">{{ form.data_primeira_parcela.label }}</label>
-                                {{ form.data_primeira_parcela }}
-                                {% if form.data_primeira_parcela.errors %}
-                                    <div class="text-danger">{{ form.data_primeira_parcela.errors }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label for="{{ form.num_parcelas.id_for_label }}" class="fw-bold">{{ form.num_parcelas.label }}</label>
-                                {{ form.num_parcelas }}
-                                {% if form.num_parcelas.errors %}
-                                    <div class="text-danger">{{ form.num_parcelas.errors }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="{{ form.observacao.id_for_label }}" class="fw-bold">{{ form.observacao.label }}</label>
-                        {{ form.observacao }}
-                        {% if form.observacao.errors %}
-                            <div class="text-danger">{{ form.observacao.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="text-right mt-4">
-                        <button type="submit" class="btn btn-success">
-                            <i class="bi bi-check-circle"></i> Salvar
-                        </button>
-                        <a href="{% url 'cliente_detail' cliente.codcliente 'areceber_cliente' %}" 
-                           class="btn btn-outline-danger">
-                            <i class="bi bi-x-circle"></i> Cancelar
-                        </a>
-                    </div>
-
-                </form>
+                {% crispy form form.helper %}
             </div>
         </div>
 

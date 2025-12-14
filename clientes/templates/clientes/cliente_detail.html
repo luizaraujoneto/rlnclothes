@@ -2,6 +2,8 @@
 
 {% load l10n %}
 
+{% block title %} RLNCLothes :: Detalhes do Cliente {% endblock %}
+
 {% block content %}
 
 <main role="main">
@@ -18,6 +20,17 @@
                 Clientes
             </a>
         </p>
+ 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <div class="card" style="align-items: center;">
             <div class="card-body" style="align-items: center;width:80%;">
