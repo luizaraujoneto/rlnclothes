@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} RLNClothes :: Gerar Parcelas NF {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-info text-white">
+            <h4><i class="bi bi-calculator"></i> Gerar Parcelas Automáticas - Conta a Pagar</h4>
+        </div>
+        <div class="card-body">
+            
+            <div class="alert alert-light border shadow-sm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Nota Fiscal:</strong> {{ notafiscal.numeronotafiscal }}<br>
+                        <strong>Fornecedor:</strong> {{ notafiscal.fornecedor }}
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <strong>Valor Total da NF:</strong> 
+                        <span class="h4 text-danger">R$ {{ notafiscal.valornotafiscal|floatformat:2 }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {% crispy form %}
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

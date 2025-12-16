@@ -46,4 +46,9 @@ urlpatterns = [
         views.notaspedidos_edit,
         name="notaspedidos_edit",
     ),
+    path(
+        "<int:codnotafiscal>/gerar_parcelas",
+        views.gerar_parcelas_nfe,
+        name="gerar_parcelas_nfe",
+    ),
 ]

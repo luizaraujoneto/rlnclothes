@@ -2,3 +2,2067 @@
 2025-12-14 19:41:24,368 - waitress - INFO - Serving on http://0.0.0.0:8000
 2025-12-14 19:45:08,490 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
 2025-12-14 19:45:08,498 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 21:49:56,343 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 21:49:56,354 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 21:50:06,268 - django.request - WARNING - Not Found: /static/favicon.ico
+2025-12-15 22:02:26,648 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:02:26,652 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 22:02:33,869 - waitress - ERROR - Exception while serving /notasfiscais/179/detail/
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\channel.py", line 430, in service
+    task.service()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 167, in service
+    self.execute()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 435, in execute
+    app_iter = self.channel.server.application(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\proxy_headers.py", line 64, in translate_proxy_headers
+    return app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+2025-12-15 22:02:34,285 - waitress - ERROR - Exception while serving /favicon.ico
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\channel.py", line 430, in service
+    task.service()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 167, in service
+    self.execute()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 435, in execute
+    app_iter = self.channel.server.application(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\proxy_headers.py", line 64, in translate_proxy_headers
+    return app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+2025-12-15 22:02:36,429 - waitress - ERROR - Exception while serving /notasfiscais/179/detail/
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\channel.py", line 430, in service
+    task.service()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 167, in service
+    self.execute()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 435, in execute
+    app_iter = self.channel.server.application(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\proxy_headers.py", line 64, in translate_proxy_headers
+    return app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+2025-12-15 22:02:36,502 - waitress - ERROR - Exception while serving /favicon.ico
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 666, in resolve
+    for pattern in self.url_patterns:
+                   ^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\deprecation.py", line 120, in __call__
+    response = response or self.get_response(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\channel.py", line 430, in service
+    task.service()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 167, in service
+    self.execute()
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\task.py", line 435, in execute
+    app_iter = self.channel.server.application(environ, start_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\waitress\proxy_headers.py", line 64, in translate_proxy_headers
+    return app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\wsgi.py", line 124, in __call__
+    response = self.get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 140, in get_response
+    response = self._middleware_chain(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 57, in inner
+    response = response_for_exception(request, exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 141, in response_for_exception
+    response = handle_uncaught_exception(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 185, in handle_uncaught_exception
+    callback = resolver.resolve_error_handler(500)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 732, in resolve_error_handler
+    callback = getattr(self.urlconf_module, "handler%s" % view_type, None)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\rlnclothes\urls.py", line 30, in <module>
+    path("notasfiscais/", include("notasfiscais.urls")),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\urls\conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\luiza\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\projetos\RLNClothes2\notasfiscais\urls.py", line 44, in <module>
+    path(
+TypeError: _path() missing 1 required positional argument: 'view'
+2025-12-15 22:05:13,487 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:05:13,494 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 22:06:27,672 - django.request - ERROR - Internal Server Error: /notasfiscais/179/gerar_parcelas
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\notasfiscais\views.py", line 311, in gerar_parcelas_nfe
+    valor_parcela = valor_total / Decimal(num_parcelas)
+                    ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for /: 'float' and 'decimal.Decimal'
+2025-12-15 22:06:27,735 - django.request - WARNING - Not Found: /favicon.ico
+2025-12-15 22:10:04,633 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:10:04,637 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 22:10:50,944 - django.request - ERROR - Internal Server Error: /notasfiscais/179/gerar_parcelas
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\notasfiscais\views.py", line 316, in gerar_parcelas_nfe
+    diferenca = valor_total - total_calculado
+                ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'decimal.Decimal'
+2025-12-15 22:10:54,141 - django.request - ERROR - Internal Server Error: /notasfiscais/179/gerar_parcelas
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\notasfiscais\views.py", line 316, in gerar_parcelas_nfe
+    diferenca = valor_total - total_calculado
+                ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'float' and 'decimal.Decimal'
+2025-12-15 22:12:56,884 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:12:56,887 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 22:15:46,465 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:15:46,465 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-15 22:17:19,096 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-15 22:17:19,100 - waitress - INFO - Serving on http://0.0.0.0:8000

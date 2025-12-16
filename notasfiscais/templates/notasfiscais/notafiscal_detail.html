@@ -49,7 +49,7 @@
                         <td>Forma de Pagamento</td>
                         <td>{{notafiscal.formapagamento|default_if_none:"---"}}</td>
                     </tr>
-                    {% if view_name == "list_contaspagar" %}
+                    {% if view_name == "list_notaspedidos" %}
                     <tr>
                         <td> &nbsp;</td>
                         <td class="text-right">
@@ -81,15 +81,23 @@
                 {% endif %}
 
                 <div>
-                    <a class="btn btn-outline-info my-2 my-sm-0 "
-                        href="{% url 'contapagar_create' notafiscal.codnotafiscal %}" role="button" title="Nova Venda">
-                        <i class="bi bi-currency-dollar"></i>
-                        Nova Conta a Pagar</a>
                     <a class="btn btn-outline-info my-2 my-sm-0"
                         href="{% url 'notaspedidos_edit' notafiscal.codnotafiscal %}" role="button"
                         title="Novo Pagamento">
                         <i class="bi bi-list-columns"></i>
                         Relacionar Pedidos</a>
+                    <a class="btn btn-outline-info my-2 my-sm-0 "
+                        href="{% url 'contapagar_create' notafiscal.codnotafiscal %}" role="button" title="Nova Venda">
+                        <i class="bi bi-currency-dollar"></i>
+                        Nova Conta a Pagar</a>
+                    
+                    {% if not tem_parcelas %}
+                    <a class="btn btn-outline-info my-2 my-sm-0"
+                        href="{% url 'gerar_parcelas_nfe' notafiscal.codnotafiscal %}" role="button"
+                        title="Gerar Parcelas Automáticas">
+                        <i class="bi bi-calculator"></i>
+                        Gerar Parcelas</a>
+                    {% endif %}
                 </div>
 
                 {% endif %}
@@ -104,17 +112,17 @@
 
                 <ul class="nav nav-tabs nav-justified">
                     <li class="nav-item">
+                        <a class="nav-link {% if view_name == 'list_notaspedidos' %}active  bg-dark text-light {% endif %}"
+                            href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_notaspedidos' %}">
+                            <i class="bi bi-list-columns"></i>
+                            Pedidos Relacionados</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if view_name == 'list_contaspagar' %} active  bg-dark text-light {% endif %}"
                             aria-current="page"
                             href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_contaspagar' %}">
                             <i class="bi bi-currency-dollar"></i>
                             Contas a Pagar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if view_name == 'list_notaspedidos' %}active  bg-dark text-light {% endif %}"
-                            href="{% url 'notafiscal_detail' notafiscal.codnotafiscal 'list_notaspedidos' %}">
-                            <i class="bi bi-list-columns"></i>
-                            Pedidos Relacionados</a>
                     </li>
                 </ul>
 
