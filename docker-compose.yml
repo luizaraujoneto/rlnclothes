@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: rlnclothes_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-rlnclothesdb}
+      POSTGRES_USER: ${DB_USER:-rlnclothesuser}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-rlnclothes}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER:-rlnclothesuser} -d ${DB_NAME:-rlnclothesdb}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: rlnclothes_web
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python run_waitress.py"
+    volumes:
+      - .:/app
+    ports:
+      - "8010:8000"
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DEBUG=False
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

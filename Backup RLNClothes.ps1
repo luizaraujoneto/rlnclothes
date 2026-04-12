@@ -1,6 +1,19 @@
-Echo "Inicio Backup: $(Get-Date -UFormat '%Y-%m-%d_%H-%M-%S')"
+$DateStr = Get-Date -UFormat '%Y-%m-%d_%H-%M-%S'
+$BackupPath = "G:\Meu Drive\RLNClothes\Backup\backup-$DateStr.sql"
+
+Echo "Inicio Backup: $DateStr"
 Echo --------------------------------------------------------------------------------
-C:\PostgreSQL\15\bin\pg_dump.exe --dbname=postgresql://postgres:346954kg@127.0.0.1:5432/rlnclothesdb --format=c --blobs="rlnclothesdb"  --file="G:\\Meu Drive\\RLNClothes\\Backup\\backup-$(Get-Date -UFormat '%Y-%m-%d_%H-%M-%S').sql" --verbose 
+
+Echo "Executando dump no container do banco de dados..."
+docker exec rlnclothes_db pg_dump -U rlnclothesuser -d rlnclothesdb -F c --verbose -f /tmp/backup_temp.sql
+
+Echo "Copiando arquivo de backup para o destino local..."
+docker cp rlnclothes_db:/tmp/backup_temp.sql "$BackupPath"
+
+Echo "Limpando arquivo temporário do container..."
+docker exec rlnclothes_db rm /tmp/backup_temp.sql
+
 Echo --------------------------------------------------------------------------------
-Echo "Fim Backup: $(Get-Date -UFormat '%Y-%m-%d_%H-%M-%S')" 
+$DateStrFim = Get-Date -UFormat '%Y-%m-%d_%H-%M-%S'
+Echo "Fim Backup: $DateStrFim" 
 Pause

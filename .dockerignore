@@ -1,1 +1,15 @@
+.git
+.vscode
+.agent
+.gemini
+.pytest_cache
+.venv
+__pycache__
+*.pyc
+db.sqlite3
+waitress.log
+staticfiles/
+node_modules/
+*.ps1
 fly.toml
+Procfile

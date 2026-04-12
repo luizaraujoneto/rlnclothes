@@ -2066,3 +2066,196 @@ TypeError: unsupported operand type(s) for -: 'float' and 'decimal.Decimal'
 2025-12-15 22:15:46,465 - waitress - INFO - Serving on http://0.0.0.0:8000
 2025-12-15 22:17:19,096 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
 2025-12-15 22:17:19,100 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-20 22:06:56,462 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-20 22:06:56,479 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-20 22:07:10,400 - django.request - WARNING - Not Found: /static/favicon.ico
+2025-12-20 22:09:34,196 - django.request - WARNING - Not Found: /vendas/produto//
+2025-12-23 22:29:43,478 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-23 22:29:43,484 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-23 22:29:55,466 - django.request - WARNING - Not Found: /sgo/login/
+2025-12-23 22:29:55,521 - django.request - WARNING - Not Found: /favicon.ico
+2025-12-23 22:30:06,980 - django.request - WARNING - Not Found: /sgo/
+2025-12-23 22:30:47,530 - django.request - WARNING - Not Found: /static/favicon.ico
+2025-12-23 22:41:55,291 - django.request - WARNING - Not Found: /vendas/produto//
+2025-12-23 22:45:18,441 - django.request - WARNING - Not Found: /vendas/produto//
+2025-12-23 22:46:55,626 - django.request - WARNING - Not Found: /vendas/produto//
+2025-12-27 21:36:22,422 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-27 21:36:22,440 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-27 21:36:31,444 - django.request - WARNING - Not Found: /static/favicon.ico
+2025-12-27 21:38:18,247 - django.request - WARNING - Not Found: /vendas/produto//
+2025-12-30 21:50:22,820 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2025-12-30 21:50:22,829 - waitress - INFO - Serving on http://0.0.0.0:8000
+2025-12-30 21:50:33,422 - django.request - WARNING - Not Found: /static/favicon.ico
+2025-12-30 21:56:42,130 - django.request - ERROR - Internal Server Error: /notasfiscais/create
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.NotNullViolation: ERRO:  o valor nulo na coluna "valornotafiscal" da relação "notasfiscais" viola a restrição de não-nulo
+DETAIL:  Registro que falhou contém (180, SN-30-12-2025, 2, 2025-12-30 00:00:00+00, null, null, NUBANK 8336 - 3X).
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\notasfiscais\views.py", line 32, in notafiscal_create
+    notafiscal = form.save()
+                 ^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\forms\models.py", line 554, in save
+    self.instance.save()
+  File "C:\projetos\RLNClothes2\notasfiscais\models.py", line 59, in save
+    super().save(*args, **kwargs)
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\base.py", line 902, in save
+    self.save_base(
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\query.py", line 1873, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\projetos\RLNClothes2\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: ERRO:  o valor nulo na coluna "valornotafiscal" da relação "notasfiscais" viola a restrição de não-nulo
+DETAIL:  Registro que falhou contém (180, SN-30-12-2025, 2, 2025-12-30 00:00:00+00, null, null, NUBANK 8336 - 3X).
+
+2025-12-30 21:56:42,386 - django.request - WARNING - Not Found: /favicon.ico
+2026-01-05 23:12:40,853 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-05 23:12:40,856 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-05 23:12:56,837 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-06 16:16:19,779 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-06 16:16:19,790 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-06 16:16:33,251 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-06 16:43:52,949 - django.request - WARNING - Not Found: /.well-known/appspecific/com.chrome.devtools.json
+2026-01-08 19:59:13,831 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-08 19:59:13,831 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-08 19:59:28,391 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-11 16:28:22,546 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-11 16:28:22,562 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-11 16:28:28,849 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-12 07:05:39,940 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-12 07:05:40,075 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-12 07:05:45,965 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-17 23:04:12,754 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-17 23:04:12,754 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-17 23:04:22,446 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-17 23:06:16,093 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 20:46:06,959 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-21 20:46:06,962 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-21 20:46:29,952 - django.request - WARNING - Not Found: /static/favicon.ico
+2026-01-21 21:03:31,770 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 21:05:58,620 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 21:06:17,215 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 21:06:39,015 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 21:08:53,086 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-21 21:09:04,405 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-22 01:54:15,584 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-22 01:54:15,590 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-22 02:04:02,219 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-22 02:04:02,225 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-22 21:49:00,118 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-22 21:49:00,135 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-22 21:53:23,422 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-22 21:53:38,119 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-24 16:52:38,294 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-24 16:52:38,307 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-24 16:56:59,147 - django.request - WARNING - Not Found: /vendas/produto//
+2026-01-25 20:06:17,191 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-25 20:06:17,207 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-28 00:53:59,507 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-01-28 00:53:59,515 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-01-28 00:55:08,829 - django.request - WARNING - Not Found: /vendas/produto//
+2026-02-01 02:09:02,071 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-01 02:09:02,077 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-02-03 01:49:58,258 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-03 01:49:58,271 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-02-05 00:49:20,404 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-05 00:49:20,416 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-02-05 00:49:44,987 - django.request - WARNING - Not Found: /vendas/produto//
+2026-02-05 00:50:28,280 - django.request - WARNING - Not Found: /vendas/produto//
+2026-02-07 00:52:54,704 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-07 00:52:54,717 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-02-07 00:56:01,637 - django.request - WARNING - Not Found: /vendas/produto//
+2026-02-07 00:56:58,686 - django.request - WARNING - Not Found: /vendas/produto//
+2026-02-11 00:43:25,377 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-11 00:43:25,384 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-02-28 17:14:53,227 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-02-28 17:14:53,234 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-04 00:42:57,937 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-04 00:42:57,945 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-04 00:44:37,541 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-04 00:44:52,716 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-04 00:45:27,104 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-04 11:41:42,467 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-04 11:41:42,479 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-10 11:34:55,892 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-10 11:34:55,906 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-12 23:54:47,182 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-12 23:54:47,190 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-13 00:05:24,264 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-13 00:06:53,878 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-13 00:08:06,285 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:21:11,561 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-22 00:21:11,570 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-22 00:35:12,625 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:35:30,466 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:36:14,728 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:36:28,714 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:37:24,834 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:37:42,728 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:39:00,125 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-22 00:40:19,350 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-25 00:43:11,675 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-25 00:43:11,687 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-28 13:38:23,657 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-28 13:38:23,676 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-28 13:46:59,357 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-28 13:46:59,373 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-28 14:27:59,121 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-28 14:27:59,145 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-30 23:12:58,356 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-30 23:12:58,367 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-03-30 23:21:26,277 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-30 23:39:59,693 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-30 23:40:20,200 - django.request - WARNING - Not Found: /vendas/produto//
+2026-03-31 23:24:40,028 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-03-31 23:24:40,044 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-04-04 23:39:06,655 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-04-04 23:39:06,664 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-04-04 23:40:51,196 - django.request - WARNING - Not Found: /vendas/produto//
+2026-04-04 23:43:21,612 - django.request - WARNING - Not Found: /vendas/produto//
+2026-04-05 00:12:54,040 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-04-05 00:12:54,051 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-04-12 23:20:31,822 - waitress - INFO - Iniciando servidor Waitress na porta 8000...
+2026-04-12 23:20:31,834 - waitress - INFO - Serving on http://0.0.0.0:8000
+2026-04-12 23:30:51,580 - django.request - WARNING - Not Found: /vendas/produto//
+2026-04-12 23:32:03,265 - django.request - WARNING - Not Found: /vendas/produto//
+2026-04-12 23:32:49,430 - django.request - WARNING - Not Found: /vendas/produto//
