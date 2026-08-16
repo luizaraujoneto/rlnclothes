@@ -35,3 +35,54 @@
         </p>
     </div> <!-- card-body -->
 </div> <!-- card -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const codFornecedorInput = document.getElementById("id_codprodutofornecedor");
+    const referenciaInput = document.getElementById("id_referencia");
+    const descricaoInput = document.getElementById("id_descricao");
+    const valorcustoInput = document.getElementById("id_valorcusto");
+    const pedidoInput = document.getElementById("id_pedido");
+
+    if (!codFornecedorInput) return;
+
+    // Criar elemento de notificação visual abaixo do código do fornecedor
+    const alertDiv = document.createElement("div");
+    alertDiv.id = "autofill-alert";
+    alertDiv.className = "text-success font-weight-bold small mt-1";
+    alertDiv.style.display = "none";
+    alertDiv.innerHTML = '<i class="bi bi-check-circle-fill"></i> Dados preenchidos com base no último produto cadastrado!';
+    codFornecedorInput.parentNode.appendChild(alertDiv);
+
+    function buscarUltimoProduto() {
+        const codigo = codFornecedorInput.value.trim();
+        if (!codigo) {
+            alertDiv.style.display = "none";
+            return;
+        }
+
+        const codpedido = pedidoInput ? pedidoInput.value : "{{ pedido.codpedido }}";
+        const url = "{% url 'api_buscar_ultimo_produto' %}?codigo=" + encodeURIComponent(codigo) + "&codpedido=" + encodeURIComponent(codpedido);
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.found) {
+                    if (referenciaInput) referenciaInput.value = data.referencia;
+                    if (descricaoInput) descricaoInput.value = data.descricao;
+                    if (valorcustoInput) valorcustoInput.value = data.valorcusto;
+                    alertDiv.style.display = "block";
+                } else {
+                    alertDiv.style.display = "none";
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao buscar dados do produto:", error);
+                alertDiv.style.display = "none";
+            });
+    }
+
+    codFornecedorInput.addEventListener("blur", buscarUltimoProduto);
+    codFornecedorInput.addEventListener("change", buscarUltimoProduto);
+});
+</script>

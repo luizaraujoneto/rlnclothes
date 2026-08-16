@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django import forms
 import django_tables2 as tables
 
@@ -251,3 +252,40 @@ def devolucoes_edit(request, codpedido):
     }
 
     return render(request, "pedidos/pedido_detail.html", context)
+
+
+def api_buscar_ultimo_produto(request):
+    """
+    Retorna os dados do último produto cadastrado com o mesmo codprodutofornecedor
+    e para o mesmo fornecedor do pedido informado.
+    """
+    codigo = request.GET.get("codigo", "").strip()
+    codpedido = request.GET.get("codpedido")
+
+    if not codigo:
+        return JsonResponse({"found": False})
+
+    produtos_qs = Produtos.objects.filter(codprodutofornecedor=codigo)
+
+    if codpedido:
+        try:
+            pedido = Pedidos.objects.get(codpedido=codpedido)
+            if pedido.fornecedor:
+                produtos_qs = produtos_qs.filter(pedido__fornecedor=pedido.fornecedor)
+        except Pedidos.DoesNotExist:
+            pass
+
+    ultimo_produto = produtos_qs.order_by("-codproduto").first()
+
+    if ultimo_produto:
+        return JsonResponse(
+            {
+                "found": True,
+                "referencia": ultimo_produto.referencia or "",
+                "descricao": ultimo_produto.descricao or "",
+                "valorcusto": str(ultimo_produto.valorcusto) if ultimo_produto.valorcusto is not None else "",
+            }
+        )
+
+    return JsonResponse({"found": False})
+

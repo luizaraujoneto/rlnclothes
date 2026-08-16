@@ -21,6 +21,11 @@ urlpatterns = [
     path(
         "<int:codpedido>/devolucoes_edit", views.devolucoes_edit, name="devolucoes_edit"
     ),
+    path(
+        "api/buscar-ultimo-produto/",
+        views.api_buscar_ultimo_produto,
+        name="api_buscar_ultimo_produto",
+    ),
 ]
 
 """

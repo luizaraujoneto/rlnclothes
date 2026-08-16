@@ -35,3 +35,32 @@ class PedidosModelTest(TestCase):
             produto=prod
         )
         self.assertIsNotNone(devolucao.coddevolucao)
+
+    def test_api_buscar_ultimo_produto(self):
+        produto = Produtos.objects.create(
+            pedido=self.pedido,
+            codprodutofornecedor="FORN-100",
+            descricao="Produto Antigo",
+            referencia="REF-100",
+            valorcusto=Decimal("45.00")
+        )
+        response = self.client.get(
+            "/pedidos/api/buscar-ultimo-produto/",
+            {"codigo": "FORN-100", "codpedido": self.pedido.codpedido}
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data["found"])
+        self.assertEqual(data["referencia"], "REF-100")
+        self.assertEqual(data["descricao"], "Produto Antigo")
+        self.assertEqual(data["valorcusto"], "45.00")
+
+    def test_api_buscar_ultimo_produto_nao_encontrado(self):
+        response = self.client.get(
+            "/pedidos/api/buscar-ultimo-produto/",
+            {"codigo": "CODIGO_INEXISTENTE"}
+        )
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertFalse(data["found"])
+
